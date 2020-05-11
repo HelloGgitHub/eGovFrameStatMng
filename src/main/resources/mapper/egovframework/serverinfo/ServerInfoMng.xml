@@ -48,4 +48,41 @@
 
 	</select>
 
+	<insert id="insertServerDetailInfo" parameterType="hashMap">
+	INSERT INTO COMTNSERVERINFO (
+		SERVER_ID
+		,SERVER_NM
+		,SERVER_KND
+		,HOSTNAME
+		,RGSDE
+		,OPERSYSM_INFO
+		,CPU_INFO
+		,MORY_INFO
+		,HDDISK
+		,ETC_INFO
+		,CHARGER_NM
+		,SERVER_DC
+		,FRST_REGISTER_ID
+		,FRST_REGIST_PNTTM
+		,LAST_UPDUSR_ID
+		,LAST_UPDT_PNTTM
+	) VALUES (
+		  #{SERVER_ID}
+		, #{SERVER_NM}
+		, #{SERVER_KND}
+		, #{HOSTNAME}
+		, #{RGSDE}
+		, #{OPERSYSM_INFO}
+		, #{CPU_INFO}
+		, #{MORY_INFO}
+		, #{HDDISK}
+		, #{ETC_INFO}
+		, #{CHARGER_NM}
+		, #{SERVER_DC}
+		, #{FRST_REGISTER_ID}
+		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		, #{LAST_UPDUSR_ID}
+		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+	)
+
 </mapper> 

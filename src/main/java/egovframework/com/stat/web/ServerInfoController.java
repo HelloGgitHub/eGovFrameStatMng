@@ -5,15 +5,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import egovframework.com.stat.dao.ServerInfoService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import egovframework.com.stat.dao.ServerInfoVo;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -79,6 +74,66 @@ public class ServerInfoController {
         }
 
         return rtn;
+    }
+
+    @ApiOperation(value = "서버정보 등록", notes = "서버정보 등록")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK !!"),
+            @ApiResponse(code = 500, message = "Internal Server Error !!"),
+            @ApiResponse(code = 404, message = "Not Found !!")
+    })
+    @PostMapping(path = "/arovRequest")
+    public String UserAprovRequest(@RequestBody ServerInfoVo param) throws Exception {
+
+        String rtn = "";
+        String data = URLDecoder.decode(rtn,"UTF-8");
+
+        //입력값 파라미터 정의
+        Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+
+        sqlInpt.put("SERVER_ID", param.getServerId());
+        sqlInpt.put("SERVER_NM", param.getServerNm());
+        sqlInpt.put("SERVER_KND", param.getServerKnd());
+        sqlInpt.put("HOSTNAME", param.getHostName());
+        sqlInpt.put("RGSDE", param.getRgsDe());
+        sqlInpt.put("OPERSYSM_INFO", param.getOperSysmInfo());
+
+        sqlInpt.put("CPU_INFO", param.getCpuInfo());
+        sqlInpt.put("MORY_INFO", param.getMoryInfo());
+        sqlInpt.put("HDDISK", param.getHdDisk());
+        sqlInpt.put("ETC_INFO", param.getEtcInfo());
+        sqlInpt.put("CHARGER_NM", param.getChargerNm());
+        sqlInpt.put("SERVER_DC", param.getServerDc());
+
+        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
+        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
+
+
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+        lst = serverInfoService.selectServerDetailInfo(sqlInpt);
+        int usrCnt = lst.size();
+
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+        if(usrCnt == 0) {
+            int inputCnt = serverInfoService.insertServerDetailInfo(sqlInpt);
+            if (inputCnt > 0) {
+                rtnMap.put("RESULTCD", "0");
+                rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+            } else {
+                rtnMap.put("RESULTCD", "1");
+                rtnMap.put("RESULTMSG", "서버 정보 등록에 실패 하였습니다.");
+            }
+        }else{
+            rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "동일한 서버정보가 존재 합니다.");
+        }
+
+        rtn = om.writeValueAsString(rtnMap);
+        System.out.println(rtnMap);
+
+        return rtn;
+
     }
 
 }
