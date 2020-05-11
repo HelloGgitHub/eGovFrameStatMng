@@ -5,7 +5,7 @@
 	<!-- Maria -->
     <select id="selectUserPwCkMaria"  parameterType="Map" resultType="int">
 		SELECT COUNT(*) CNT
-		  FROM USER_MNG
+		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${USRID}'
 		   AND PASSWORD  = '${USRPW}'
     </select>
@@ -24,7 +24,7 @@
 		       -- GROUP_ID              as "groupId",
 		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe"
-		  FROM USER_MNG
+		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${USRID}'
     </select>
     

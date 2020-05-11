@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <bean id="htmlEscapingObjectMapper" class="kr.pe.lahuman.HtmlEscapingObjectMapperFactory" /> -->
+<!-- <mvc:annotation-driven> -->
+<!--     <mvc:message-converters> -->
+<!--         <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" > -->
+<!--         	<property name="objectMapper" ref="htmlEscapingObjectMapper"></property> -->
+<!--         </bean> -->
+<!--     </mvc:message-converters> -->
+<!-- </mvc:annotation-driven> -->
