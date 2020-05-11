@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.com.stat.dao.ServerInfoDao">
+
+	<!-- Maria -->
+    <select id="selectServerInfoList"  parameterType="Map" resultType="hashMap">
+
+		SELECT 	SERVER_ID as "serverId",
+			   	SERVER_NM as "serverNm",
+			 	SERVER_KND as "serverKnd",
+				HOSTNAME as "hostName",
+				RGSDE as "rgsDe",
+				OPERSYSM_INFO as "opersysmInfo",
+				CPU_INFO as "cpuInfo",
+				MORY_INFO as "moryInfo",
+				HDDISK as "hdDisk",
+				ETC_INFO as "etcInfo",
+				CHARGER_NM as "chargerNm",
+				SERVER_DC as "serverDc",
+				FRST_REGISTER_ID as "frstRegisterId",
+				FRST_REGIST_PNTTM as "frstRegistPnttm",
+				LAST_UPDUSR_ID as "lastUpdusrId",
+				LAST_UPDT_PNTTM  as "lastUpdtPnttm"
+		FROM COMTNSERVERINFO
+
+	</select>
+
+</mapper> 
