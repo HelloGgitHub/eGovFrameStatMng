@@ -17,8 +17,14 @@ public class ServerInfoService {
     @Autowired
     private ServerInfoDao mapper;
 
-    //회원목록 조회
+    //서버목록 조회
     public List<HashMap<Object, Object>> selectServerInfoList(Map<Object, Object> param) {
         return mapper.selectServerInfoList(param);
     }
+
+    //서버 조회
+    public List<HashMap<Object, Object>> selectServerDetailInfo(Map<Object, Object> param) {
+        return mapper.selectServerDetailInfo(param);
+    }
+
 }

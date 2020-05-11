@@ -12,4 +12,6 @@ import java.util.Map;
 public interface ServerInfoDao {
 
     List<HashMap<Object, Object>> selectServerInfoList(Map<Object, Object> param);
+
+    List<HashMap<Object, Object>> selectServerDetailInfo(Map<Object, Object> param);
 }
