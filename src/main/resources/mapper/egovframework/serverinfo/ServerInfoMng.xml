@@ -71,7 +71,7 @@
 		, #{SERVER_NM}
 		, #{SERVER_KND}
 		, #{HOSTNAME}
-		, #{RGSDE}
+		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 		, #{OPERSYSM_INFO}
 		, #{CPU_INFO}
 		, #{MORY_INFO}
@@ -84,5 +84,20 @@
 		, #{LAST_UPDUSR_ID}
 		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 	)
+	</insert>
 
+	<update id="updateServerDetailInfo" parameterType="hashMap">
+	UPDATE COMTNSERVERINFO
+		SET LAST_UPDT_PNTTM = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		<if test='SERVER_NM != null'> , SERVER_NM               = '${SERVER_NM}' </if>
+		<if test='SERVER_KND != null'> , SERVER_KND             = '${SERVER_KND}' </if>
+		<if test='HOSTNAME != null'> , HOSTNAME              	= '${HOSTNAME}' </if>
+		<if test='OPERSYSM_INFO != null'> , OPERSYSM_INFO       = '${OPERSYSM_INFO}' </if>
+		<if test='CPU_INFO != null'> , CPU_INFO            		= '${CPU_INFO}' </if>
+		<if test='MORY_INFO != null'> , MORY_INFO              	= '${MORY_INFO}' </if>
+		<if test='HDDISK != null'> , HDDISK              		= '${HDDISK}' </if>
+		<if test='ETC_INFO != null'> , ETC_INFO              	= '${ETC_INFO}' </if>
+		<if test='CHARGER_NM != null'> , CHARGER_NM             = '${CHARGER_NM}' </if>
+		WHERE SERVER_ID           = '${SERVER_ID}'
+	</update>
 </mapper> 
