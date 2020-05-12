@@ -4,7 +4,6 @@
 
 	<!-- Maria -->
     <select id="selectJobFncList"  parameterType="Map" resultType="hashMap">
-
 		SELECT 	SERVER_ID as "serverId"
 				, HOSTNAME as "hostName"
 				, LFNC_NM as "lFncNm"
@@ -14,14 +13,12 @@
 				, METHOD_NM as "methodNm"
 				, FRST_REGISTER_ID as "frstRegisterId"
 				, FRST_REGIST_PNTTM as "frstRegistPnttm"
-				, LAST_UPDUSR_ID as lastUpdUsr"
-				, LAST_UPDT_PNTTM as lastUpdtPnttm"
+				, LAST_UPDUSR_ID as "lastUpdUsr"
+				, LAST_UPDT_PNTTM as "lastUpdtPnttm"
 		FROM COMTJOBFNCLIST
-
 	</select>
 
 	<select id="selectJobFncDetail"  parameterType="Map" resultType="hashMap">
-
 		SELECT 	SERVER_ID as "serverId"
 				, HOSTNAME as "hostName"
 				, LFNC_NM as "lFncNm"
@@ -31,11 +28,26 @@
 				, METHOD_NM as "methodNm"
 				, FRST_REGISTER_ID as "frstRegisterId"
 				, FRST_REGIST_PNTTM as "frstRegistPnttm"
-				, LAST_UPDUSR_ID as lastUpdUsr"
-				, LAST_UPDT_PNTTM as lastUpdtPnttm"
+				, LAST_UPDUSR_ID as "lastUpdUsr"
+				, LAST_UPDT_PNTTM as "lastUpdtPnttm"
 		FROM COMTJOBFNCLIST
 		WHERE SERVER_ID = '${SERVER_ID}'
+	</select>
 
+	<select id="selectJobFncMethod"  parameterType="Map" resultType="hashMap">
+		SELECT 	SERVER_ID as "serverId"
+		, HOSTNAME as "hostName"
+		, LFNC_NM as "lFncNm"
+		, MFNC_NM as "mFncNm"
+		, SFNC_NM as "sFncNm"
+		, DETAIL_FNC_NM as "detailFncNm"
+		, METHOD_NM as "methodNm"
+		, FRST_REGISTER_ID as "frstRegisterId"
+		, FRST_REGIST_PNTTM as "frstRegistPnttm"
+		, LAST_UPDUSR_ID as "lastUpdUsr"
+		, LAST_UPDT_PNTTM as "lastUpdtPnttm"
+		FROM COMTJOBFNCLIST
+		WHERE METHOD_NM = '${METHOD_NM}'
 	</select>
 
 	<insert id="insertJobFncDetail" parameterType="hashMap">

@@ -12,4 +12,17 @@ import java.util.Map;
 public interface JobFncDao {
 
     List<HashMap<Object, Object>> selectJobFncList(Map<Object, Object> param);
+
+    List<HashMap<Object, Object>> selectJobFncDetail(Map<Object, Object> param);
+
+    List<HashMap<Object, Object>> selectJobFncMethod(Map<Object, Object> param);
+
+
+    int insertJobFncDetail(Map<Object, Object> param);
+
+    int deleteJobFnc(Map<Object, Object> param);
+
+    int updateJobFncDetail(Map<Object, Object> param);
+
+
 }

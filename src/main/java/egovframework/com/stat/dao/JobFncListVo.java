@@ -9,9 +9,9 @@ public class JobFncListVo {
 
     private String serverId;
     private String hostName;
-    private String lFncLm;
-    private String mFncLm;
-    private String sFncLm;
+    private String lFncNm;
+    private String mFncNm;
+    private String sFncNm;
     private String detailFncNm;
     private String methodNm;
     private String frstRegisterId;

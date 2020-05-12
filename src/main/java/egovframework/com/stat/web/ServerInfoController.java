@@ -83,7 +83,7 @@ public class ServerInfoController {
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
             @ApiResponse(code = 404, message = "Not Found !!")
     })
-    @PostMapping(path = "/arovRequest")
+    @PostMapping(path = "/aprovRequest")
     public String ServerAprovRequest(@RequestBody ServerInfoVo param) throws Exception {
 
         String rtn = "";
