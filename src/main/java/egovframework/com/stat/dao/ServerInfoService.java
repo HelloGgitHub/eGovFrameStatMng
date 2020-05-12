@@ -33,6 +33,12 @@ public class ServerInfoService {
     public int updateServerDetailInfo(Map<Object, Object> param) {
         return mapper.updateServerDetailInfo(param);
     }
+    //시스템정보 삭제
+    public int deleteServerInfo(Map<Object, Object> param) {
+        return mapper.deleteServerInfo(param);
+    }
+
+
 
 
 }

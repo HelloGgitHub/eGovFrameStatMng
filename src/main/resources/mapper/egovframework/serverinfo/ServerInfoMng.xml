@@ -100,4 +100,11 @@
 		<if test='CHARGER_NM != null'> , CHARGER_NM             = '${CHARGER_NM}' </if>
 		WHERE SERVER_ID           = '${SERVER_ID}'
 	</update>
+
+
+	<delete id="deleteServerInfo" parameterType="hashMap">
+		DELETE FROM COMTNSERVERINFO
+		WHERE SERVER_ID           = '${SERVER_ID}'
+	</delete>
+
 </mapper> 

@@ -27,7 +27,7 @@ public class ServerInfoController {
 
     @ApiOperation(value = "시스템정보 목록조회")
     @GetMapping(path = "/list")
-    public String ServerLnfoList() {
+    public String ServerInfoList() {
 
         String rtn = "";
 
@@ -181,5 +181,40 @@ public class ServerInfoController {
         return rtn;
 
     }
+
+    @ApiOperation(value = "시스템 정보 삭제", notes = "시스템정보를 삭제한다")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "serverId"	, value = "서버ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK !!"),
+            @ApiResponse(code = 500, message = "Internal Server Error !!"),
+            @ApiResponse(code = 404, message = "Not Found !!")
+    })
+    @DeleteMapping(path = "/deleteServerInfo")
+    public String ServerDeleteInfo(@RequestParam(value = "serverId") String serverId) throws Exception {
+        String rtn = "";
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+
+        //입력값 파라미터 정의
+        Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        sqlInpt.put("SERVER_ID", URLDecoder.decode(serverId		,"UTF-8"));
+
+        int inputCnt = serverInfoService.deleteServerInfo(sqlInpt);
+        if(inputCnt > 0) {
+            rtnMap.put("RESULTCD", "0");
+            rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+        }else {
+            rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "삭제에 실패 하였습니다.");
+        }
+
+        rtn = om.writeValueAsString(rtnMap);
+        System.out.println(rtnMap);
+        return rtn;
+
+    }
+
 
 }

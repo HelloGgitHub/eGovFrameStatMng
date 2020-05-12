@@ -19,4 +19,7 @@ public interface ServerInfoDao {
 
     int updateServerDetailInfo(Map<Object, Object> param);
 
+    int deleteServerInfo(Map<Object, Object> param);
+
+
 }
