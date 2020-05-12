@@ -16,4 +16,7 @@ public interface ServerInfoDao {
     List<HashMap<Object, Object>> selectServerDetailInfo(Map<Object, Object> param);
 
     int insertServerDetailInfo(Map<Object, Object> param);
+
+    int updateServerDetailInfo(Map<Object, Object> param);
+
 }

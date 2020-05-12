@@ -17,19 +17,22 @@ public class ServerInfoService {
     @Autowired
     private ServerInfoDao mapper;
 
-    //서버목록 조회
+    //시스템정보 목록 조회
     public List<HashMap<Object, Object>> selectServerInfoList(Map<Object, Object> param) {
         return mapper.selectServerInfoList(param);
     }
-
-    //서버 조회
+    //시스템정보 조회
     public List<HashMap<Object, Object>> selectServerDetailInfo(Map<Object, Object> param) {
         return mapper.selectServerDetailInfo(param);
     }
-    
-    //서버등록
+    //시스템정보 등록
     public int insertServerDetailInfo(Map<Object, Object> param) {
         return mapper.insertServerDetailInfo(param);
     }
+    //시스템정보 수정
+    public int updateServerDetailInfo(Map<Object, Object> param) {
+        return mapper.updateServerDetailInfo(param);
+    }
+
 
 }
