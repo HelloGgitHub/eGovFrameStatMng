@@ -27,7 +27,7 @@ public class SysLogController {
 
     @ApiOperation(value = "시스템 로그 목록조회")
     @GetMapping(path = "/list")
-    public String ServerInfoList() {
+    public String SysLogList() {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
