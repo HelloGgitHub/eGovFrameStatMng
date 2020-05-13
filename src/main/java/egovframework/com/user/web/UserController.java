@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(value = "UserController", description = "사용자 정보 관리 REST API")
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	@Value("${server.port}")

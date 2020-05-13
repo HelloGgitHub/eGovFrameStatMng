@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(value = "UserLoginController", description = "사용자 로그인 REST API")
-@RequestMapping("/login")
+@RequestMapping("/api/login")
 public class UserLoginController {
 	
 	@Value("${server.port}")

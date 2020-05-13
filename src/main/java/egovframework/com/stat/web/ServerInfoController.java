@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @Api(value = "ServerInfoController", description = "업무시스템관리 REST API")
-@RequestMapping("/serverInfo")
+@RequestMapping("/api/serverInfo")
 public class ServerInfoController {
 
     @Autowired
@@ -83,8 +83,8 @@ public class ServerInfoController {
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
             @ApiResponse(code = 404, message = "Not Found !!")
     })
-    @PostMapping(path = "/aprovRequest")
-    public String ServerAprovRequest(@RequestBody ServerInfoVo param) throws Exception {
+    @PostMapping(path = "/createServerInfo")
+    public String ServerInfoCreate(@RequestBody ServerInfoVo param) throws Exception {
 
         String rtn = "";
         String data = URLDecoder.decode(rtn,"UTF-8");

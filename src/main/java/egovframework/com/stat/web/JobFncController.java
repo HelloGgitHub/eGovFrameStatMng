@@ -18,7 +18,7 @@ import java.util.Map;
 
 @RestController
 @Api(value = "JobFncController", description = "업무기능관리 REST API")
-@RequestMapping("/jobFnc")
+@RequestMapping("/api/jobFnc")
 public class JobFncController {
 
     @Autowired
@@ -81,8 +81,8 @@ public class JobFncController {
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
             @ApiResponse(code = 404, message = "Not Found !!")
     })
-    @PostMapping(path = "/aprovRequest")
-    public String JobFncAprovRequest(@RequestBody JobFncListVo param) throws Exception {
+    @PostMapping(path = "/createJobFnc")
+    public String JobFncCreate(@RequestBody JobFncListVo param) throws Exception {
 
         String rtn = "";
         String data = URLDecoder.decode(rtn,"UTF-8");

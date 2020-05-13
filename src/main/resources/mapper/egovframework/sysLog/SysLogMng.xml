@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.com.stat.dao.SysLogDao">
+
+	<!-- Maria -->
+    <select id="selectSysLogList"  parameterType="Map" resultType="hashMap">
+
+		SELECT 	REQUST_ID as "requstId"
+				, HOSTNAME as "hoatName"
+				, OCCRRNC_DE as "occrrncDe"
+				, RQESTER_ID as "rqesterId"
+				, RQESTER_IP as "rqesterIP"
+				, SVC_NM as "svcNm"
+				, METHOD_NM as "methosNm"
+				, PROCESS_SE_CODE as "processSeCode"
+				, PROCESS_TIME as "processTime"
+				, ERROR_SE as "errorSe"
+				, ERROR_CO as "errorCo"
+				, ERROR_CODE as "errorCode"
+		FROM COMTNSYSLOG
+
+	</select>
+
+	<insert id="insertSysLog" parameterType="hashMap">
+	INSERT INTO COMTNSYSLOG (
+		REQUST_ID
+		, HOSTNAME
+		, OCCRRNC_DE
+		, RQESTER_ID
+		, RQESTER_IP
+		, SVC_NM
+		, METHOD_NM
+		, PROCESS_SE_CODE
+		, PROCESS_TIME
+		, ERROR_SE
+		, ERROR_CO
+		, ERROR_CODE
+	) VALUES (
+		NEXT VALUE FOR Seq_SysLog
+		, #{HOSTNAME}
+		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		, #{RQESTER_ID}
+		, #{RQESTER_IP}
+		, #{SVC_NM}
+		, #{METHOD_NM}
+		, #{PROCESS_SE_CODE}
+		, #{PROCESS_TIME}
+		, #{ERROR_SE}
+		, #{ERROR_CO}
+		, #{ERROR_CODE}
+	)
+	</insert>
+
+</mapper> 

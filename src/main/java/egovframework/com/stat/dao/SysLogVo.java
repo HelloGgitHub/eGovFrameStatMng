@@ -19,7 +19,7 @@ public class SysLogVo {
     private String processSeCode;
     private String processTime;
     private String errorSe;
-    private String errorCo;
+    private int errorCo;
     private String errorCode;
 
 
