@@ -62,7 +62,7 @@ public class SysLogController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-        sqlInpt.put("REQUST_ID", param.getRequestId());
+        sqlInpt.put("ID", param.getId());
 
         sqlInpt.put("HOSTNAME", param.getHostname());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());

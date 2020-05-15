@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class ServerInfoVo {
 
-    private String serverId;
+    private String id;
     private String serverNm;
     private String serverKnd;
     private String hostName;

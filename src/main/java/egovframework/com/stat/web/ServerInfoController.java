@@ -92,7 +92,7 @@ public class ServerInfoController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-        sqlInpt.put("SERVER_ID", param.getServerId());
+        sqlInpt.put("ID", param.getId());
         sqlInpt.put("SERVER_NM", param.getServerNm());
         sqlInpt.put("SERVER_KND", param.getServerKnd());
         sqlInpt.put("HOSTNAME", param.getHostName());
@@ -147,7 +147,7 @@ public class ServerInfoController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-        sqlInpt.put("SERVER_ID", param.getServerId());
+        sqlInpt.put("ID", param.getId());
         sqlInpt.put("SERVER_NM", param.getServerNm());
         sqlInpt.put("SERVER_KND", param.getServerKnd());
         sqlInpt.put("HOSTNAME", param.getHostName());

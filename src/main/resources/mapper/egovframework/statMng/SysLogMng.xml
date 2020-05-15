@@ -5,7 +5,7 @@
 	<!-- Maria -->
     <select id="selectSysLogList"  parameterType="Map" resultType="hashMap">
 
-		SELECT 	REQUST_ID as "requstId"
+		SELECT 	ID as "id"
 				, HOSTNAME as "hoatName"
 				, OCCRRNC_DE as "occrrncDe"
 				, RQESTER_ID as "rqesterId"
@@ -23,7 +23,7 @@
 
 	<insert id="insertSysLog" parameterType="hashMap">
 	INSERT INTO COMTNSYSLOG (
-		REQUST_ID
+		ID
 		, HOSTNAME
 		, OCCRRNC_DE
 		, RQESTER_ID

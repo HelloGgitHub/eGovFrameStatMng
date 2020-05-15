@@ -5,7 +5,7 @@
 	<!-- Maria -->
     <select id="selectServerInfoList"  parameterType="Map" resultType="hashMap">
 
-		SELECT 	SERVER_ID as "serverId",
+		SELECT 	ID as "id",
 			   	SERVER_NM as "serverNm",
 			 	SERVER_KND as "serverKnd",
 				HOSTNAME as "hostName",
@@ -27,7 +27,7 @@
 
 	<select id="selectServerDetailInfo"  parameterType="Map" resultType="hashMap">
 
-		SELECT 	SERVER_ID as "serverId",
+		SELECT 	ID as "id",
 				SERVER_NM as "serverNm",
 				SERVER_KND as "serverKnd",
 				HOSTNAME as "hostName",
@@ -44,13 +44,13 @@
 				LAST_UPDUSR_ID as "lastUpdusrId",
 				LAST_UPDT_PNTTM  as "lastUpdtPnttm"
 		FROM COMTNSERVERINFO
-		WHERE SERVER_ID = '${SERVER_ID}'
+		WHERE ID = '${ID}'
 
 	</select>
 
 	<insert id="insertServerDetailInfo" parameterType="hashMap">
 	INSERT INTO COMTNSERVERINFO (
-		SERVER_ID
+		ID
 		,SERVER_NM
 		,SERVER_KND
 		,HOSTNAME
@@ -67,7 +67,7 @@
 		,LAST_UPDUSR_ID
 		,LAST_UPDT_PNTTM
 	) VALUES (
-		  #{SERVER_ID}
+		  #{ID}
 		, #{SERVER_NM}
 		, #{SERVER_KND}
 		, #{HOSTNAME}
@@ -104,7 +104,7 @@
 
 	<delete id="deleteServerInfo" parameterType="hashMap">
 		DELETE FROM COMTNSERVERINFO
-		WHERE SERVER_ID           = '${SERVER_ID}'
+		WHERE ID           = '${ID}'
 	</delete>
 
 </mapper> 

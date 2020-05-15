@@ -5,7 +5,7 @@
 	<!-- Maria -->
     <select id="selectWebLogList"  parameterType="Map" resultType="hashMap">
 
-		SELECT 	REQUST_ID as "requstId"
+		SELECT 	ID as "id"
 				, HOSTNAME as "hoatName"
 				, OCCRRNC_DE as "occrrncDe"
 				, URL as "url"
@@ -17,7 +17,7 @@
 
 	<insert id="insertWebLog" parameterType="hashMap">
 	INSERT INTO COMTNWEBLOG (
-		REQUST_ID
+		ID
 		, HOSTNAME
 		, OCCRRNC_DE
 		, URL

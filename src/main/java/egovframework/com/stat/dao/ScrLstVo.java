@@ -6,12 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class WebLogVo {
+public class ScrLstVo {
 
     private String id;
-    private String hostname;
-    private String occrrncDe;
+    private String scrNm;
+    private String scrDc;
     private String url;
-    private String rqesterId;
-    private String rqesterIp;
+
 }
