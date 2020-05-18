@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class JobFncListVo {
 
-    private String serverId;
+    private String id;
     private String hostName;
     private String lFncNm;
     private String mFncNm;

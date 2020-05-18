@@ -4,7 +4,7 @@
 
 	<!-- Maria -->
     <select id="selectJobFncList"  parameterType="Map" resultType="hashMap">
-		SELECT 	SERVER_ID as "serverId"
+		SELECT 	ID as "id"
 				, HOSTNAME as "hostName"
 				, LFNC_NM as "lFncNm"
 				, MFNC_NM as "mFncNm"
@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="selectJobFncDetail"  parameterType="Map" resultType="hashMap">
-		SELECT 	SERVER_ID as "serverId"
+		SELECT 	ID as "id"
 				, HOSTNAME as "hostName"
 				, LFNC_NM as "lFncNm"
 				, MFNC_NM as "mFncNm"
@@ -31,11 +31,11 @@
 				, LAST_UPDUSR_ID as "lastUpdUsr"
 				, LAST_UPDT_PNTTM as "lastUpdtPnttm"
 		FROM COMTJOBFNCLIST
-		WHERE SERVER_ID = '${SERVER_ID}'
+		WHERE ID = '${ID}'
 	</select>
 
 	<select id="selectJobFncMethod"  parameterType="Map" resultType="hashMap">
-		SELECT 	SERVER_ID as "serverId"
+		SELECT 	ID as "id"
 		, HOSTNAME as "hostName"
 		, LFNC_NM as "lFncNm"
 		, MFNC_NM as "mFncNm"
@@ -47,12 +47,14 @@
 		, LAST_UPDUSR_ID as "lastUpdUsr"
 		, LAST_UPDT_PNTTM as "lastUpdtPnttm"
 		FROM COMTJOBFNCLIST
-		WHERE METHOD_NM = '${METHOD_NM}'
+		WHERE 1=1
+		AND METHOD_NM = '${METHOD_NM}'
+		AND HOSTNAME = '${HOSTNAME}'
 	</select>
 
 	<insert id="insertJobFncDetail" parameterType="hashMap">
 	INSERT INTO COMTJOBFNCLIST (
-		SERVER_ID
+		ID
 		, HOSTNAME
 		, LFNC_NM
 		, MFNC_NM
@@ -64,7 +66,7 @@
 		, LAST_UPDUSR_ID
 		, LAST_UPDT_PNTTM
 		) VALUES (
-		  #{SERVER_ID}
+		NEXT VALUE FOR Seq_JobFnc
 		, #{HOSTNAME}
 		, #{LFNC_NM}
 		, #{MFNC_NM}
@@ -87,13 +89,13 @@
 		<if test='SFNC_NM != null'> , SFNC_NM              	= '${SFNC_NM}' </if>
 		<if test='DETAIL_FNC_NM != null'> , DETAIL_FNC_NM              		= '${DETAIL_FNC_NM}' </if>
 		<if test='METHOD_NM != null'> , METHOD_NM              	= '${METHOD_NM}' </if>
-		WHERE SERVER_ID           = '${SERVER_ID}'
+		WHERE ID           = '${ID}'
 	</update>
 
 
 	<delete id="deleteJobFnc" parameterType="hashMap">
 		DELETE FROM COMTJOBFNCLIST
-		WHERE SERVER_ID           = '${SERVER_ID}'
+		WHERE ID           = '${ID}'
 	</delete>
 
 </mapper> 

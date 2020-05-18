@@ -35,7 +35,6 @@ public class JobFncService {
     public int updateJobFncDetail(Map<Object, Object> param) {
         return mapper.updateJobFncDetail(param);
     }
-    
     //업무기능 삭제
     public int deleteJobFnc(Map<Object, Object> param) {
         return mapper.deleteJobFnc(param);

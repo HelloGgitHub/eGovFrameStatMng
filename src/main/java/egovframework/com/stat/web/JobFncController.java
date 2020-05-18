@@ -48,10 +48,10 @@ public class JobFncController {
 
     @ApiOperation(value = "업무기능 조회")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serverId", value = "서버ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
+            @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
-    @GetMapping(path = "/detail/{serverId}")
-    public String JobFncDetail(@PathVariable("serverId") String serverId) throws Exception {
+    @GetMapping(path = "/detail/{id}")
+    public String JobFncDetail(@PathVariable("id") String id) throws Exception {
 
         String rtn = "";
 
@@ -59,7 +59,7 @@ public class JobFncController {
 
 
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-        sqlInpt.put("SERVER_ID", URLDecoder.decode(serverId		,"UTF-8"));
+        sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
         //System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
 
         lst = jobFncService.selectJobFncDetail(sqlInpt);
@@ -90,7 +90,7 @@ public class JobFncController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-        sqlInpt.put("SERVER_ID", param.getServerId());
+        sqlInpt.put("ID", param.getId());
 
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("LFNC_NM", param.getLFncNm());
@@ -102,7 +102,7 @@ public class JobFncController {
         sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
 
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-        lst = jobFncService.selectJobFncDetail(sqlInpt);
+        lst = jobFncService.selectJobFncMethod(sqlInpt);
         int tCnt = lst.size();
 
         ObjectMapper om = new ObjectMapper();
@@ -130,7 +130,7 @@ public class JobFncController {
 
     @ApiOperation(value = "업무기능 정보수정")
     @PutMapping(path = "/modifyJobFnc")
-    public String ServerChangeInfo(@RequestBody JobFncListVo param) throws Exception {
+    public String JobFncChangeInfo(@RequestBody JobFncListVo param) throws Exception {
         String rtn = "";
         ObjectMapper om = new ObjectMapper();
         Map<Object, Object> rtnMap = new HashMap<Object, Object>();
@@ -138,7 +138,7 @@ public class JobFncController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-        sqlInpt.put("SERVER_ID", param.getServerId());
+        sqlInpt.put("ID", param.getId());
 
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("LFNC_NM", param.getLFncNm());
@@ -169,7 +169,7 @@ public class JobFncController {
 
     @ApiOperation(value = "업무기능 삭제", notes = "업무기능를 삭제한다")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serverId"	, value = "서버ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+            @ApiImplicitParam(name = "id"	, value = "ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -177,14 +177,14 @@ public class JobFncController {
             @ApiResponse(code = 404, message = "Not Found !!")
     })
     @DeleteMapping(path = "/deleteJobFnc")
-    public String JobFncDelete(@RequestParam(value = "serverId") String serverId) throws Exception {
+    public String JobFncDelete(@RequestParam(value = "id") String id) throws Exception {
         String rtn = "";
         ObjectMapper om = new ObjectMapper();
         Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-        sqlInpt.put("SERVER_ID", URLDecoder.decode(serverId		,"UTF-8"));
+        sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
 
         int inputCnt = jobFncService.deleteJobFnc(sqlInpt);
         if(inputCnt > 0) {

@@ -67,7 +67,7 @@
 		,LAST_UPDUSR_ID
 		,LAST_UPDT_PNTTM
 	) VALUES (
-		  #{ID}
+		NEXT VALUE FOR Seq_SerInfo
 		, #{SERVER_NM}
 		, #{SERVER_KND}
 		, #{HOSTNAME}
@@ -98,7 +98,8 @@
 		<if test='HDDISK != null'> , HDDISK              		= '${HDDISK}' </if>
 		<if test='ETC_INFO != null'> , ETC_INFO              	= '${ETC_INFO}' </if>
 		<if test='CHARGER_NM != null'> , CHARGER_NM             = '${CHARGER_NM}' </if>
-		WHERE SERVER_ID           = '${SERVER_ID}'
+		<if test='SERVER_DC != null'> , SERVER_DC             = '${SERVER_DC}' </if>
+		WHERE ID           = '${ID}'
 	</update>
 
 

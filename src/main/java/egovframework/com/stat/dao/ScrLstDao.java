@@ -12,4 +12,14 @@ import java.util.Map;
 public interface ScrLstDao {
 
     List<HashMap<Object, Object>> selectScrList(Map<Object, Object> param);
+
+    List<HashMap<Object, Object>> selectScrDetail(Map<Object, Object> param);
+
+    List<HashMap<Object, Object>> selectScrUrl(Map<Object, Object> param);
+
+    int insertScrDetail(Map<Object, Object> param);
+
+    int updateScrDetail(Map<Object, Object> param);
+
+    int deleteScrDetail(Map<Object, Object> param);
 }

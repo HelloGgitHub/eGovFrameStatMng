@@ -50,10 +50,10 @@ public class ServerInfoController {
 
     @ApiOperation(value = "시스템정보 조회")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serverId", value = "서버ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
+            @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
-    @GetMapping(path = "/detailInfo/{serverId}")
-    public String ServerDetailInfo(@PathVariable("serverId") String serverId) throws Exception {
+    @GetMapping(path = "/detailInfo/{id}")
+    public String ServerDetailInfo(@PathVariable("id") String id) throws Exception {
 
         String rtn = "";
 
@@ -61,7 +61,7 @@ public class ServerInfoController {
 
 
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-        sqlInpt.put("SERVER_ID", URLDecoder.decode(serverId		,"UTF-8"));
+        sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
         //System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
 
         lst = serverInfoService.selectServerDetailInfo(sqlInpt);
@@ -192,14 +192,14 @@ public class ServerInfoController {
             @ApiResponse(code = 404, message = "Not Found !!")
     })
     @DeleteMapping(path = "/deleteServerInfo")
-    public String ServerDeleteInfo(@RequestParam(value = "serverId") String serverId) throws Exception {
+    public String ServerDeleteInfo(@RequestParam(value = "id") String id) throws Exception {
         String rtn = "";
         ObjectMapper om = new ObjectMapper();
         Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-        sqlInpt.put("SERVER_ID", URLDecoder.decode(serverId		,"UTF-8"));
+        sqlInpt.put("iD", URLDecoder.decode(id		,"UTF-8"));
 
         int inputCnt = serverInfoService.deleteServerInfo(sqlInpt);
         if(inputCnt > 0) {

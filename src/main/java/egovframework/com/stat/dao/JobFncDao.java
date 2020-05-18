@@ -17,7 +17,6 @@ public interface JobFncDao {
 
     List<HashMap<Object, Object>> selectJobFncMethod(Map<Object, Object> param);
 
-
     int insertJobFncDetail(Map<Object, Object> param);
 
     int deleteJobFnc(Map<Object, Object> param);
