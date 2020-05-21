@@ -28,7 +28,19 @@ public class TestScheduler {
 //        Trigger trigger = TriggerBuilder.newTrigger().startAt(startDateTime).endAt(EndDateTime)
 //                .withSchedule(CronScheduleBuilder.cronSchedule("*/1 * * * *")).build();
 
-        scheduler.scheduleJob(job, trigger);
+        //scheduler.scheduleJob(job, trigger);
+
+        //job 지정
+        JobDetail job1 = JobBuilder.newJob(SysLogSummaryJob.class).withIdentity("sysLogSummaryJob").build();
+
+        //trigger 생성
+        Trigger trigger1 = TriggerBuilder.newTrigger().
+                withSchedule(CronScheduleBuilder.cronSchedule("15 * * * * ?")).build();
+
+        //scheduler.scheduleJob(job1, trigger1);
+
+
+
 
     }
 }

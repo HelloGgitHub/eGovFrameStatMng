@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.com.stat.dao.ResultMngDao">
+
+	<insert id="insertSysLogSum" parameterType="hashMap">
+		INSERT INTO COMTSSYSLOGSUMMARY
+		SELECT DATE_FORMAT(b.OCCRRNC_DE, '%Y%m%d' )
+		, b.SVC_NM
+		, b.METHOD_NM
+		, SUM(CASE WHEN b.PROCESS_SE_CODE = 'C' THEN 1 ELSE 0 END) AS CREAT_CO
+		, SUM(CASE WHEN b.PROCESS_SE_CODE = 'U' THEN 1 ELSE 0 END) AS UPDT_CO
+		, SUM(CASE WHEN b.PROCESS_SE_CODE = 'R' THEN 1 ELSE 0 END) AS RDCNT
+		, SUM(CASE WHEN b.PROCESS_SE_CODE = 'D' THEN 1 ELSE 0 END) AS DELETE_CO
+		, 0 AS ERROR_CO
+		FROM COMTNSYSLOG b
+		WHERE NOT EXISTS (SELECT DATE_FORMAT(c.OCCRRNC_DE, '%Y-%m-%d' )
+		FROM COMTSSYSLOGSUMMARY c
+		WHERE DATE_FORMAT(c.OCCRRNC_DE, '%Y%m%d') = DATE_FORMAT(ADDDATE(SYSDATE(), -1), '%Y%m%d')
+		)
+		AND DATE_FORMAT(b.OCCRRNC_DE, '%Y%m%d' ) = DATE_FORMAT(ADDDATE(SYSDATE(), -1), '%Y%m%d')
+		GROUP BY DATE_FORMAT(b.OCCRRNC_DE, '%Y%m%d' )
+		, b.SVC_NM
+		, b.METHOD_NM
+	</insert>
+
+</mapper> 

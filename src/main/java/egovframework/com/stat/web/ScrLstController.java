@@ -16,14 +16,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@Api(value = "JobFncController", description = "화면목록관리 REST API")
+@Api(value = "JobFncController", description = "화면정보관리 REST API")
 @RequestMapping("/api/scrLst")
 public class ScrLstController {
 
     @Autowired
     ScrLstService scrLstService;
 
-    @ApiOperation(value = "화면 목록조회")
+    @ApiOperation(value = "화면정보 목록조회")
     @GetMapping(path = "/list")
     public String ScrList() {
 
@@ -45,7 +45,7 @@ public class ScrLstController {
         return rtn;
     }
 
-    @ApiOperation(value = "화면 상세조회")
+    @ApiOperation(value = "화면정보 상세조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
@@ -74,7 +74,7 @@ public class ScrLstController {
         return rtn;
     }
 
-    @ApiOperation(value = "화면 등록", notes = "업무기능 등록")
+    @ApiOperation(value = "화면정보 등록", notes = "화면정보 등록")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
@@ -111,7 +111,7 @@ public class ScrLstController {
                 rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
             } else {
                 rtnMap.put("RESULTCD", "1");
-                rtnMap.put("RESULTMSG", "화면 등록에 실패 하였습니다.");
+                rtnMap.put("RESULTMSG", "화면정보 등록에 실패 하였습니다.");
             }
         }else{
             rtnMap.put("RESULTCD", "1");
@@ -125,7 +125,7 @@ public class ScrLstController {
 
     }
 
-    @ApiOperation(value = "화면 정보수정")
+    @ApiOperation(value = "화면정보 수정")
     @PutMapping(path = "/modifySrc")
     public String SrcChangeInfo(@RequestBody ScrLstVo param) throws Exception {
         String rtn = "";
@@ -151,7 +151,7 @@ public class ScrLstController {
             rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
         }else {
             rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "시스템 정보 변경에 실패 하였습니다.");
+            rtnMap.put("RESULTMSG", "화면정보 변경에 실패 하였습니다.");
         }
 
 
@@ -162,7 +162,7 @@ public class ScrLstController {
 
     }
 
-    @ApiOperation(value = "화면 삭제", notes = "화면을 삭제한다")
+    @ApiOperation(value = "화면정보 삭제", notes = "화면정보를 삭제한다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id"	, value = "ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
@@ -187,7 +187,7 @@ public class ScrLstController {
             rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
         }else {
             rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "삭제에 실패 하였습니다.");
+            rtnMap.put("RESULTMSG", "화면정보 삭제에 실패 하였습니다.");
         }
 
         rtn = om.writeValueAsString(rtnMap);
@@ -195,4 +195,7 @@ public class ScrLstController {
         return rtn;
 
     }
+
+
+    //화면 조회 통계(기간별)
 }

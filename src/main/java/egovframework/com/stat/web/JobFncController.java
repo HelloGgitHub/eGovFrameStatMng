@@ -46,7 +46,7 @@ public class JobFncController {
         return rtn;
     }
 
-    @ApiOperation(value = "업무기능 조회")
+    @ApiOperation(value = "업무기능 상세조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
@@ -200,5 +200,11 @@ public class JobFncController {
         return rtn;
 
     }
+
+    //업무기능목록 엑셀 업로드
+    //업무기능목록 엑셀다운로드
+
+    //업무기능목록별 사용량 조회
+    //기능별 사용량 조회(CRUD)
 
 }

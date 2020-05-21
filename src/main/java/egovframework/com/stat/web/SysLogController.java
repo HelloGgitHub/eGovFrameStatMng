@@ -47,14 +47,14 @@ public class SysLogController {
         return rtn;
     }
 
-    @ApiOperation(value = "시스템로그 등록", notes = "시스템로그 등록")
+    @ApiOperation(value = "입력 기능 호출 횟수 측정(C)", notes = "입력 기능 호출 횟수 측정(C)")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
             @ApiResponse(code = 404, message = "Not Found !!")
     })
     @PostMapping(path = "/createSysLog")
-    public String SysLogCreate(@RequestBody SysLogVo param) throws Exception {
+    public String CreateSysLogCreate(@RequestBody SysLogVo param) throws Exception {
 
         String rtn = "";
         String data = URLDecoder.decode(rtn,"UTF-8");
@@ -70,7 +70,7 @@ public class SysLogController {
         sqlInpt.put("RQESTER_IP", param.getRqesterIp());
         sqlInpt.put("SVC_NM", param.getSvcNm());
         sqlInpt.put("METHOD_NM", param.getMethodNm());
-        sqlInpt.put("PROCESS_SE_CODE", param.getProcessSeCode());
+        sqlInpt.put("PROCESS_SE_CODE", "C");
         sqlInpt.put("PROCESS_TIME", param.getProcessTime());
 
         sqlInpt.put("ERROR_SE", param.getErrorSe());
@@ -97,4 +97,156 @@ public class SysLogController {
         return rtn;
 
     }
+
+    @ApiOperation(value = "조회 기능 호출 횟수 측정(R)", notes = "조회 기능 호출 횟수 측정(R)")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK !!"),
+            @ApiResponse(code = 500, message = "Internal Server Error !!"),
+            @ApiResponse(code = 404, message = "Not Found !!")
+    })
+    @PostMapping(path = "/readSysLog")
+    public String ReadSysLogCreate(@RequestBody SysLogVo param) throws Exception {
+
+        String rtn = "";
+        String data = URLDecoder.decode(rtn,"UTF-8");
+
+        //입력값 파라미터 정의
+        Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+
+        sqlInpt.put("ID", param.getId());
+
+        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
+        sqlInpt.put("RQESTER_ID", param.getRqesterId());
+        sqlInpt.put("RQESTER_IP", param.getRqesterIp());
+        sqlInpt.put("SVC_NM", param.getSvcNm());
+        sqlInpt.put("METHOD_NM", param.getMethodNm());
+        sqlInpt.put("PROCESS_SE_CODE", "R");
+        sqlInpt.put("PROCESS_TIME", param.getProcessTime());
+
+        sqlInpt.put("ERROR_SE", param.getErrorSe());
+        sqlInpt.put("ERROR_CO", param.getErrorCo());
+        sqlInpt.put("ERROR_CODE", param.getErrorCode());
+
+
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+
+        int inputCnt = sysLogService.insertSysLog(sqlInpt);
+        if (inputCnt > 0) {
+            rtnMap.put("RESULTCD", "0");
+            rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+        } else {
+            rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "업무기능 등록에 실패 하였습니다.");
+        }
+
+
+        rtn = om.writeValueAsString(rtnMap);
+        System.out.println(rtnMap);
+
+        return rtn;
+    }
+
+    @ApiOperation(value = "업데이트기능 호출 횟수 측정(U)", notes = "업데이트기능 호출 횟수 측정(U)")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK !!"),
+            @ApiResponse(code = 500, message = "Internal Server Error !!"),
+            @ApiResponse(code = 404, message = "Not Found !!")
+    })
+    @PostMapping(path = "/updateSysLog")
+    public String UpdateSysLogCreate(@RequestBody SysLogVo param) throws Exception {
+
+        String rtn = "";
+        String data = URLDecoder.decode(rtn,"UTF-8");
+
+        //입력값 파라미터 정의
+        Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+
+        sqlInpt.put("ID", param.getId());
+
+        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
+        sqlInpt.put("RQESTER_ID", param.getRqesterId());
+        sqlInpt.put("RQESTER_IP", param.getRqesterIp());
+        sqlInpt.put("SVC_NM", param.getSvcNm());
+        sqlInpt.put("METHOD_NM", param.getMethodNm());
+        sqlInpt.put("PROCESS_SE_CODE", "U");
+        sqlInpt.put("PROCESS_TIME", param.getProcessTime());
+
+        sqlInpt.put("ERROR_SE", param.getErrorSe());
+        sqlInpt.put("ERROR_CO", param.getErrorCo());
+        sqlInpt.put("ERROR_CODE", param.getErrorCode());
+
+
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+
+        int inputCnt = sysLogService.insertSysLog(sqlInpt);
+        if (inputCnt > 0) {
+            rtnMap.put("RESULTCD", "0");
+            rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+        } else {
+            rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "업무기능 등록에 실패 하였습니다.");
+        }
+
+
+        rtn = om.writeValueAsString(rtnMap);
+        System.out.println(rtnMap);
+
+        return rtn;
+    }
+
+    @ApiOperation(value = "업데이트기능 호출 횟수 측정(D)", notes = "업데이트기능 호출 횟수 측정(U)")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK !!"),
+            @ApiResponse(code = 500, message = "Internal Server Error !!"),
+            @ApiResponse(code = 404, message = "Not Found !!")
+    })
+    @PostMapping(path = "/deleteSysLog")
+    public String DeleteSysLogCreate(@RequestBody SysLogVo param) throws Exception {
+
+        String rtn = "";
+        String data = URLDecoder.decode(rtn,"UTF-8");
+
+        //입력값 파라미터 정의
+        Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+
+        sqlInpt.put("ID", param.getId());
+
+        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
+        sqlInpt.put("RQESTER_ID", param.getRqesterId());
+        sqlInpt.put("RQESTER_IP", param.getRqesterIp());
+        sqlInpt.put("SVC_NM", param.getSvcNm());
+        sqlInpt.put("METHOD_NM", param.getMethodNm());
+        sqlInpt.put("PROCESS_SE_CODE", "D");
+        sqlInpt.put("PROCESS_TIME", param.getProcessTime());
+
+        sqlInpt.put("ERROR_SE", param.getErrorSe());
+        sqlInpt.put("ERROR_CO", param.getErrorCo());
+        sqlInpt.put("ERROR_CODE", param.getErrorCode());
+
+
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+
+        int inputCnt = sysLogService.insertSysLog(sqlInpt);
+        if (inputCnt > 0) {
+            rtnMap.put("RESULTCD", "0");
+            rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+        } else {
+            rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "업무기능 등록에 실패 하였습니다.");
+        }
+
+
+        rtn = om.writeValueAsString(rtnMap);
+        System.out.println(rtnMap);
+
+        return rtn;
+    }
+
+    //기능별 호출 횟수 목록 조회
 }

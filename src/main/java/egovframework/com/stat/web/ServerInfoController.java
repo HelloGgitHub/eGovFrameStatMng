@@ -25,7 +25,7 @@ public class ServerInfoController {
     @Autowired
     ServerInfoService serverInfoService;
 
-    @ApiOperation(value = "시스템정보 목록조회")
+    @ApiOperation(value = "업무시스템정보 목록조회")
     @GetMapping(path = "/list")
     public String ServerInfoList() {
 
@@ -48,7 +48,7 @@ public class ServerInfoController {
         return rtn;
     }
 
-    @ApiOperation(value = "시스템정보 조회")
+    @ApiOperation(value = "업무시스템정보 상세조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
@@ -77,7 +77,7 @@ public class ServerInfoController {
         return rtn;
     }
 
-    @ApiOperation(value = "시스템정보 등록", notes = "시스템정보 등록")
+    @ApiOperation(value = "업무시스템정보 등록", notes = "업무시스템정보 등록")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
@@ -137,7 +137,7 @@ public class ServerInfoController {
 
     }
 
-    @ApiOperation(value = "시스템 정보수정")
+    @ApiOperation(value = "업무시스템 정보수정")
     @PutMapping(path = "/modifyInfo")
     public String ServerChangeInfo(@RequestBody ServerInfoVo param) throws Exception {
         String rtn = "";
@@ -182,7 +182,7 @@ public class ServerInfoController {
 
     }
 
-    @ApiOperation(value = "시스템 정보 삭제", notes = "시스템정보를 삭제한다")
+    @ApiOperation(value = "업무시스템 정보 삭제", notes = "업무시스템정보를 삭제한다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "serverId"	, value = "서버ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })

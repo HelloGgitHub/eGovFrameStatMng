@@ -27,7 +27,7 @@ public class WebLogController {
     @Autowired
     WebLogService webLogService;
 
-    @ApiOperation(value = "웹 로그 목록조회")
+    @ApiOperation(value = "화면 접근 횟수 목록 조회")
     @GetMapping(path = "/list")
     public String WebLogList() {
 
@@ -49,7 +49,7 @@ public class WebLogController {
         return rtn;
     }
 
-    @ApiOperation(value = "웹로그 등록", notes = "웹로그 등록")
+    @ApiOperation(value = "화면 접근 횟수 측정", notes = "화면 접근 횟수 측정")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
