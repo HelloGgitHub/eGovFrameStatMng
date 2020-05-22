@@ -51,4 +51,21 @@
 	)
 	</insert>
 
+
+	<select id="selectFncReqList"  parameterType="Map" resultType="hashMap">
+
+		SELECT
+			OCCRRNC_DE as "occrrncDe"
+			, HOSTNAME as "hostname"
+			, SVC_NM as "svcNm"
+			, METHOD_NM as "methodNm"
+			, CREAT_CO as "creatCo"
+			, UPDT_CO as "updtCo"
+			, RDCNT as "rdCnt"
+			, DELETE_CO as "deleteCo"
+			, ERROR_CO as "errorCo"
+		FROM COMTSSYSLOGSUMMARY
+
+	</select>
+
 </mapper> 

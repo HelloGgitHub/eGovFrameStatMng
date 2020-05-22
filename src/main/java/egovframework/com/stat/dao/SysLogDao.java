@@ -14,4 +14,6 @@ public interface SysLogDao {
     List<HashMap<Object, Object>> selectSysLogList(Map<Object, Object> param);
 
     int insertSysLog(Map<Object, Object> param);
+
+    List<HashMap<Object, Object>> selectFncReqList(Map<Object, Object> param);
 }

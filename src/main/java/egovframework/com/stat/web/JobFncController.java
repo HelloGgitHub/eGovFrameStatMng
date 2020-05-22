@@ -204,7 +204,48 @@ public class JobFncController {
     //업무기능목록 엑셀 업로드
     //업무기능목록 엑셀다운로드
 
-    //업무기능목록별 사용량 조회
+    @ApiOperation(value = "업무기능목록별 사용량 조회")
+    @GetMapping(path = "/jobFncStatList")
+    public String SelectJobFncStatList() {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        lst = jobFncService.selectJobFncStatList(param);
+
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            rtn = om.writeValueAsString(lst);
+        } catch (JsonProcessingException e) {
+            rtn = "json Mapper Error.";
+            e.printStackTrace();
+        }
+
+        return rtn;
+    }
     //기능별 사용량 조회(CRUD)
+    @ApiOperation(value = "기능별 사용량 조회")
+    @GetMapping(path = "/jobFncUseList")
+    public String SelectJobFncUseList() {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        lst = jobFncService.selectJobFncUseList(param);
+
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            rtn = om.writeValueAsString(lst);
+        } catch (JsonProcessingException e) {
+            rtn = "json Mapper Error.";
+            e.printStackTrace();
+        }
+
+        return rtn;
+    }
 
 }

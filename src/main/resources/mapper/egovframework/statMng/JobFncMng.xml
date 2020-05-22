@@ -98,4 +98,47 @@
 		WHERE ID           = '${ID}'
 	</delete>
 
+
+	<select id="selectJobFncStatList"  parameterType="Map" resultType="hashMap">
+		SELECT
+			B.OCCRRNC_DE as "occrrncDe"
+			, A.HOSTNAME as "hostname"
+			, A.LFNC_NM as "lfncNm"
+			, A.MFNC_NM as "mfncNm"
+			, A.SFNC_NM as "sfncNm"
+			, A.DETAIL_FNC_NM as "detailFncNm"
+			, A.METHOD_NM as "methodNm"
+			, B.CREAT_CO as "creatCo"
+			, B.UPDT_CO as "updtCo"
+			, B.RDCNT as "rdCnt"
+			, B.DELETE_CO as "deleteCo"
+			, B.ERROR_CO as "errorCo"
+		FROM COMTJOBFNCLIST A,
+		COMTSSYSLOGSUMMARY B
+		WHERE 1=1
+		AND A.HOSTNAME = B.HOSTNAME
+		AND A.METHOD_NM = B.METHOD_NM
+		ORDER BY B.OCCRRNC_DE DESC
+
+	</select>
+
+	<select id="selectJobFncUseList"  parameterType="Map" resultType="hashMap">
+		SELECT
+		B.OCCRRNC_DE as "occrrncDe"
+		, A.HOSTNAME as "hostname"
+		, SUM(B.CREAT_CO) as "creatCo"
+		, SUM(B.UPDT_CO) as "updtCo"
+		, SUM(B.RDCNT) as "rdCnt"
+		, SUM(B.DELETE_CO) as "deleteCo"
+		, SUM(B.ERROR_CO) as "errorCo"
+		FROM COMTJOBFNCLIST A,
+		COMTSSYSLOGSUMMARY B
+		WHERE 1=1
+		AND A.HOSTNAME = B.HOSTNAME
+		AND A.METHOD_NM = B.METHOD_NM
+		GROUP BY B.OCCRRNC_DE, A.HOSTNAME
+		ORDER BY B.OCCRRNC_DE DESC
+
+	</select>
+
 </mapper> 

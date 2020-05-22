@@ -24,4 +24,10 @@ public class SysLogService {
     public int insertSysLog(Map<Object, Object> param) {
         return mapper.insertSysLog(param);
     }
+    //기능별 호출 횟수 목록 조회
+    public List<HashMap<Object, Object>> selectFncReqList(Map<Object, Object> param) {
+        return mapper.selectFncReqList(param);
+    }
+
+
 }

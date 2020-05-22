@@ -249,4 +249,26 @@ public class SysLogController {
     }
 
     //기능별 호출 횟수 목록 조회
+
+    @ApiOperation(value = "기능별 호출 횟수 목록 조회")
+    @GetMapping(path = "/fncReqlist")
+    public String FncReqList() {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        lst = sysLogService.selectFncReqList(param);
+
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            rtn = om.writeValueAsString(lst);
+        } catch (JsonProcessingException e) {
+            rtn = "json Mapper Error.";
+            e.printStackTrace();
+        }
+
+        return rtn;
+    }
 }

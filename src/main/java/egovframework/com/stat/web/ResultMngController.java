@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value = "ResultMngController", description = "통계조회 REST API")
+@Api(value = "ResultMngController", description = "성과관리 REST API")
 @RequestMapping("/api/resultMng")
 public class ResultMngController {
 

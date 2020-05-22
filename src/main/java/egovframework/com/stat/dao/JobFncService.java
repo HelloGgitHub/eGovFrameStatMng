@@ -39,9 +39,12 @@ public class JobFncService {
     public int deleteJobFnc(Map<Object, Object> param) {
         return mapper.deleteJobFnc(param);
     }
-
-    
-
-
-
+    //업무기능목록별 사용량 조회
+    public List<HashMap<Object, Object>> selectJobFncStatList(Map<Object, Object> param) {
+        return mapper.selectJobFncStatList(param);
+    }
+    //기능별 사용량 조회(CRUD)
+    public List<HashMap<Object, Object>> selectJobFncUseList(Map<Object, Object> param) {
+        return mapper.selectJobFncUseList(param);
+    }
 }

@@ -198,4 +198,25 @@ public class ScrLstController {
 
 
     //화면 조회 통계(기간별)
+    @ApiOperation(value = "화면 조회 통계(기간별)")
+    @GetMapping(path = "/scrStatlist")
+    public String ScrStatList() {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        lst = scrLstService.selectScrStatlist(param);
+
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            rtn = om.writeValueAsString(lst);
+        } catch (JsonProcessingException e) {
+            rtn = "json Mapper Error.";
+            e.printStackTrace();
+        }
+
+        return rtn;
+    }
 }

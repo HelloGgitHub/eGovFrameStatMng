@@ -86,4 +86,19 @@
 		WHERE ID           = '${ID}'
 	</delete>
 
+
+	<select id="selectScrStatlist"  parameterType="Map" resultType="hashMap">
+		SELECT
+			B.HOSTNAME as "hostname"
+			, A.SCR_NM as "scrNm"
+			, B.URL as "url"
+			, B.RDCNT as "rdCnt"
+		FROM COMTNSCRLIST A,
+			COMTSWEBLOGSUMMARY B
+		WHERE 1=1
+		AND A.HOSTNAME = B.HOSTNAME
+		AND A.URL = B.URL
+
+	</select>
+
 </mapper> 
