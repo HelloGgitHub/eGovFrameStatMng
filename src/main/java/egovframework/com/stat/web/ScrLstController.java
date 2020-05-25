@@ -9,6 +9,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -199,11 +200,23 @@ public class ScrLstController {
 
     //화면 조회 통계(기간별)
     @ApiOperation(value = "화면 조회 통계(기간별)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "startDt"	, value = "STARTDT"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
+            @ApiImplicitParam(name = "endDt"	, value = "ENDDT"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+    })
     @GetMapping(path = "/scrStatlist")
-    public String ScrStatList() {
+    public String ScrStatList(@RequestParam(value = "startDt") String startDt
+                            ,@RequestParam(value = "endDt") String endDt) throws UnsupportedEncodingException {
 
         String rtn = "";
+
+        String tmpStartDt 		= URLDecoder.decode(startDt		,"UTF-8");
+        String tmpEndDt 	= URLDecoder.decode(endDt	,"UTF-8");
+
         Map<Object, Object> param = new HashMap<Object, Object>();
+        param.put("STARTDT",tmpStartDt);
+        param.put("ENDDT",tmpEndDt);
+
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
         lst = scrLstService.selectScrStatlist(param);

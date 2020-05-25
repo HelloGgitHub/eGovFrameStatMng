@@ -9,11 +9,11 @@ import java.util.Map;
 
 @Repository
 @Mapper
-public interface WebLogDao {
+public interface UserStatDao {
 
-    List<HashMap<Object, Object>> selectWebLogList(Map<Object, Object> param);
+    List<HashMap<Object, Object>> selectUserStatList(Map<Object, Object> param);
 
-    int insertWebLog(Map<Object, Object> param);
+    List<HashMap<Object, Object>> selectActiveUserList(Map<Object, Object> param);
 
     int insertUserStat(Map<Object, Object> param);
 }

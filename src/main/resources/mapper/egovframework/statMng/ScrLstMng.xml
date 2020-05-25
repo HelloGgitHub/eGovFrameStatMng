@@ -88,17 +88,19 @@
 
 
 	<select id="selectScrStatlist"  parameterType="Map" resultType="hashMap">
-		SELECT
-			B.HOSTNAME as "hostname"
-			, A.SCR_NM as "scrNm"
-			, B.URL as "url"
-			, B.RDCNT as "rdCnt"
-		FROM COMTNSCRLIST A,
-			COMTSWEBLOGSUMMARY B
+		SELECT A.OCCRRNC_DE AS "occrrncDe"
+			, A.HOSTNAME AS "hostname"
+			, B.SCR_NM AS "scrNm"
+			, A.URL AS "url"
+			, A.RDCNT AS "rdCnt"
+		FROM (SELECT OCCRRNC_DE, HOSTNAME, URL, SUM(RDCNT) AS RDCNT
+		FROM COMTSWEBLOGSUMMARY
+		WHERE 1=1
+		GROUP BY OCCRRNC_DE, HOSTNAME, URL) A, COMTNSCRLIST B
 		WHERE 1=1
 		AND A.HOSTNAME = B.HOSTNAME
 		AND A.URL = B.URL
-
+		AND A.OCCRRNC_DE BETWEEN '${STARTDT}' AND '${ENDDT}'
 	</select>
 
 </mapper> 

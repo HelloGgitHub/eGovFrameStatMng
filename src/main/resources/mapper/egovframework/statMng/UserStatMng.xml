@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.com.stat.dao.UserStatDao">
+
+	<!-- Maria -->
+    <select id="selectUserStatList"  parameterType="Map" resultType="hashMap">
+
+		SELECT 	ID as "id"
+				, OCCRRNC_DE as "occrrncDe"
+				, HOSTNAME as "hoatName"
+				, USER_ID as "userId"
+		FROM COMTSUSERSTAT
+
+	</select>
+
+	<select id="selectActiveUserList"  parameterType="Map" resultType="hashMap">
+
+		SELECT OCCRRNC_DE as "occrrncDe"
+		, HOSTNAME as "hostname"
+		, COUNT(USER_ID) as "userCnt"
+		FROM COMTSUSERSTAT
+		WHERE 1=1
+		AND OCCRRNC_DE BETWEEN '${STARTDT}' AND '${ENDDT}'
+		GROUP BY OCCRRNC_DE, HOSTNAME
+
+	</select>
+
+	<insert id="insertUserStat" parameterType="hashMap">
+		INSERT INTO COMTSUSERSTAT (
+			ID
+			, OCCRRNC_DE
+			, HOSTNAME
+			, USER_ID
+		) VALUES (
+			NEXT VALUE FOR Seq_UserStat
+			, #{OCCRRNC_DE}
+			, #{HOSTNAME}
+			, #{USER_ID}
+		)
+	</insert>
+
+</mapper> 
