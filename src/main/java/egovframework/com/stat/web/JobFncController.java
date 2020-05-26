@@ -156,7 +156,7 @@ public class JobFncController {
             rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
         }else {
             rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "시스템 정보 변경에 실패 하였습니다.");
+            rtnMap.put("RESULTMSG", "업무기능 정보 변경에 실패 하였습니다.");
         }
 
 
@@ -192,7 +192,7 @@ public class JobFncController {
             rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
         }else {
             rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "삭제에 실패 하였습니다.");
+            rtnMap.put("RESULTMSG", "업무기능 삭제에 실패 하였습니다.");
         }
 
         rtn = om.writeValueAsString(rtnMap);

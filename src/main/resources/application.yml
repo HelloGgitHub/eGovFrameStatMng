@@ -17,7 +17,7 @@ spring:
         force: true
 ---
 logging:
-  file: /home/vagrant/memberMng/log/egovStatMng.log
+  file: /home/vagrant/statMng/log/egovStatMng.log
 #    path: /home/vagrant/memberMng/log/egovGrpMng.log  # 로그 메세지가 저장되는 로그 디렉터리
 #    path: C:\work\log\  # 로그 메세지가 저장되는 로그 디렉터리
 #    name: egovGrpMng.log
