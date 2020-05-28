@@ -16,16 +16,16 @@ public class BatchScheduler {
     @Autowired
     SummaryService service;
 
-    @Scheduled(cron ="* 15 * * * *")
+    @Scheduled(cron ="00 15 * * * *")
     public void SysLogSummary(){
-        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
+        log.info("SysLogSummary    " +DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
         service.insertSysLogSummary();
         log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
     }
 
-    @Scheduled(cron ="15 * * * * *")
+    @Scheduled(cron ="00 20 * * * *")
     public void WebLogSummary() {
-        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
+        log.info( "WebLogSummary    " + DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
         service.insertWebLogSummary();
         log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
     }

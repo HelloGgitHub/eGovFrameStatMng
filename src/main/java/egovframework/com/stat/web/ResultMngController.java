@@ -189,7 +189,7 @@ public class ResultMngController {
         return rtn;
 
     }
-    // 시스템 별 자원 사용률 조회(일평균)
+    //시스템 별 자원 사용률 조회(일평균)
     //시스템 별 자원 사용률 조회(분기,년)
 
 
