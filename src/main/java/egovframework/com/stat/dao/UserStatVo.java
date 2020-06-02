@@ -10,7 +10,7 @@ public class UserStatVo {
 
     private String id;
     private String occrrncDe;
-    private String hostname;
+    private String hostName;
     private String userId;
 
 }

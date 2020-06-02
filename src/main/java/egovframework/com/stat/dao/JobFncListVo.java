@@ -16,5 +16,4 @@ public class JobFncListVo {
     private String methodNm;
     private String frstRegisterId;
     private String lastUpdusrId;
-
 }

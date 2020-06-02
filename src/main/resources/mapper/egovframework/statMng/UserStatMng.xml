@@ -7,7 +7,7 @@
 
 		SELECT 	ID as "id"
 				, OCCRRNC_DE as "occrrncDe"
-				, HOSTNAME as "hoatName"
+				, HOSTNAME as "hostName"
 				, USER_ID as "userId"
 		FROM COMTSUSERSTAT
 

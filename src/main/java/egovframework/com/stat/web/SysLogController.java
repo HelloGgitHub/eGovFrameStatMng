@@ -64,7 +64,7 @@ public class SysLogController {
 
         sqlInpt.put("ID", param.getId());
 
-        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());
         sqlInpt.put("RQESTER_IP", param.getRqesterIp());
@@ -115,7 +115,7 @@ public class SysLogController {
 
         sqlInpt.put("ID", param.getId());
 
-        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());
         sqlInpt.put("RQESTER_IP", param.getRqesterIp());
@@ -165,7 +165,7 @@ public class SysLogController {
 
         sqlInpt.put("ID", param.getId());
 
-        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());
         sqlInpt.put("RQESTER_IP", param.getRqesterIp());
@@ -198,7 +198,7 @@ public class SysLogController {
         return rtn;
     }
 
-    @ApiOperation(value = "업데이트기능 호출 횟수 측정(D)", notes = "업데이트기능 호출 횟수 측정(U)")
+    @ApiOperation(value = "삭제기능 호출 횟수 측정(D)", notes = "삭제기능 호출 횟수 측정(U)")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
@@ -215,7 +215,7 @@ public class SysLogController {
 
         sqlInpt.put("ID", param.getId());
 
-        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());
         sqlInpt.put("RQESTER_IP", param.getRqesterIp());

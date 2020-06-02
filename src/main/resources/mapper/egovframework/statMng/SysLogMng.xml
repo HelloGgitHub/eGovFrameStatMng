@@ -6,12 +6,12 @@
     <select id="selectSysLogList"  parameterType="Map" resultType="hashMap">
 
 		SELECT 	ID as "id"
-				, HOSTNAME as "hoatName"
+				, HOSTNAME as "hostName"
 				, OCCRRNC_DE as "occrrncDe"
 				, RQESTER_ID as "rqesterId"
-				, RQESTER_IP as "rqesterIP"
+				, RQESTER_IP as "rqesterIp"
 				, SVC_NM as "svcNm"
-				, METHOD_NM as "methosNm"
+				, METHOD_NM as "methodNm"
 				, PROCESS_SE_CODE as "processSeCode"
 				, PROCESS_TIME as "processTime"
 				, ERROR_SE as "errorSe"

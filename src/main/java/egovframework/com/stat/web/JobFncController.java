@@ -101,6 +101,7 @@ public class JobFncController {
         sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
         sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
 
+        System.out.println(sqlInpt);
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
         lst = jobFncService.selectJobFncMethod(sqlInpt);
         int tCnt = lst.size();

@@ -40,7 +40,7 @@ public class UserStatController {
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
-        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("USER_ID", param.getUserId());
 
         ObjectMapper om = new ObjectMapper();

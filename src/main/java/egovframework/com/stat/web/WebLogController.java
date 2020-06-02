@@ -66,7 +66,7 @@ public class WebLogController {
 
         sqlInpt.put("ID", param.getId());
 
-        sqlInpt.put("HOSTNAME", param.getHostname());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());
         sqlInpt.put("RQESTER_IP", param.getRqesterIp());

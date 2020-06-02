@@ -6,7 +6,7 @@
     <select id="selectWebLogList"  parameterType="Map" resultType="hashMap">
 
 		SELECT 	ID as "id"
-				, HOSTNAME as "hoatName"
+				, HOSTNAME as "hostName"
 				, OCCRRNC_DE as "occrrncDe"
 				, URL as "url"
 				, RQESTER_ID as "rqesterId"

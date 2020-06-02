@@ -11,7 +11,7 @@
 			, URL as "url"
 			, FRST_REGISTER_ID as "frstRegisterId"
 			, FRST_REGIST_PNTTM as "frstRegistPnttm"
-			, LAST_UPDUSR_ID as "lastUpdUsr"
+			, LAST_UPDUSR_ID as "lastUpdUsrId"
 			, LAST_UPDT_PNTTM as "lastUpdtPnttm"
 		FROM COMTNSCRLIST
 	</select>
@@ -24,7 +24,7 @@
 			, URL as "url"
 			, FRST_REGISTER_ID as "frstRegisterId"
 			, FRST_REGIST_PNTTM as "frstRegistPnttm"
-			, LAST_UPDUSR_ID as "lastUpdUsr"
+			, LAST_UPDUSR_ID as "lastUpdUsrId"
 			, LAST_UPDT_PNTTM as "lastUpdtPnttm"
 		FROM COMTNSCRLIST
 		WHERE ID = '${ID}'
@@ -38,7 +38,7 @@
 			, URL as "url"
 			, FRST_REGISTER_ID as "frstRegisterId"
 			, FRST_REGIST_PNTTM as "frstRegistPnttm"
-			, LAST_UPDUSR_ID as "lastUpdUsr"
+			, LAST_UPDUSR_ID as "lastUpdUsrId"
 			, LAST_UPDT_PNTTM as "lastUpdtPnttm"
 		FROM COMTNSCRLIST
 		WHERE 1=1

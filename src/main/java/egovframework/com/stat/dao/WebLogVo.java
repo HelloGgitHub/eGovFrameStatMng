@@ -9,7 +9,7 @@ import lombok.Setter;
 public class WebLogVo {
 
     private String id;
-    private String hostname;
+    private String hostName;
     private String occrrncDe;
     private String url;
     private String rqesterId;

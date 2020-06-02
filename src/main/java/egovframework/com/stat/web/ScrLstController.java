@@ -51,7 +51,7 @@ public class ScrLstController {
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/detail/{id}")
-    public String JobFncDetail(@PathVariable("id") String id) throws Exception {
+    public String ScrDetail(@PathVariable("id") String id) throws Exception {
 
         String rtn = "";
 
@@ -81,8 +81,8 @@ public class ScrLstController {
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
             @ApiResponse(code = 404, message = "Not Found !!")
     })
-    @PostMapping(path = "/createSrc")
-    public String SrcCreate(@RequestBody ScrLstVo param) throws Exception {
+    @PostMapping(path = "/createScr")
+    public String ScrCreate(@RequestBody ScrLstVo param) throws Exception {
 
         String rtn = "";
         String data = URLDecoder.decode(rtn,"UTF-8");
@@ -127,8 +127,8 @@ public class ScrLstController {
     }
 
     @ApiOperation(value = "화면정보 수정")
-    @PutMapping(path = "/modifySrc")
-    public String SrcChangeInfo(@RequestBody ScrLstVo param) throws Exception {
+    @PutMapping(path = "/modifyScr")
+    public String ScrChangeInfo(@RequestBody ScrLstVo param) throws Exception {
         String rtn = "";
         ObjectMapper om = new ObjectMapper();
         Map<Object, Object> rtnMap = new HashMap<Object, Object>();
@@ -172,8 +172,8 @@ public class ScrLstController {
             @ApiResponse(code = 500, message = "Internal Server Error !!"),
             @ApiResponse(code = 404, message = "Not Found !!")
     })
-    @DeleteMapping(path = "/deleteSrc")
-    public String SrcDelete(@RequestParam(value = "id") String id) throws Exception {
+    @DeleteMapping(path = "/deleteScr")
+    public String ScrDelete(@RequestParam(value = "id") String id) throws Exception {
         String rtn = "";
         ObjectMapper om = new ObjectMapper();
         Map<Object, Object> rtnMap = new HashMap<Object, Object>();

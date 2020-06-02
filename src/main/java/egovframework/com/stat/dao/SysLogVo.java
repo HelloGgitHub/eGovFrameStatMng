@@ -10,7 +10,7 @@ import lombok.Setter;
 public class SysLogVo {
 
     private String id;
-    private String hostname;
+    private String hostName;
     private String occrrncDe;
     private String rqesterId;
     private String rqesterIp;
