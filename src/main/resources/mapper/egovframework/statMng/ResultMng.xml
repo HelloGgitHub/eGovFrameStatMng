@@ -6,7 +6,7 @@
 		SELECT
 		ID as "id"
 		, RESULT_INDEX_NM as "resultIndexNm"
-		, DC as "dc"
+		, RESULT_INDEX_DC as "resultIndexDc"
 		FROM COMTSRESULTINDEXMNG
 	</select>
 
@@ -14,7 +14,7 @@
 		SELECT
 		ID as "id"
 		, RESULT_INDEX_NM as "resultIndexNm"
-		, DC as "dc"
+		, RESULT_INDEX_DC as "resultIndexDc"
 		FROM COMTSRESULTINDEXMNG
 		WHERE ID = '${ID}'
 	</select>
@@ -23,7 +23,7 @@
 		SELECT
 		ID as "id"
 		, RESULT_INDEX_NM as "resultIndexNm"
-		, DC as "dc"
+		, RESULT_INDEX_DC as "resultIndexDc"
 		FROM COMTSRESULTINDEXMNG
 		WHERE RESULT_INDEX_NM = '${RESULT_INDEX_NM}'
 	</select>
@@ -32,11 +32,11 @@
 		INSERT INTO COMTSRESULTINDEXMNG (
 		ID
 		, RESULT_INDEX_NM
-		, DC
+		, RESULT_INDEX_DC
 		) VALUES (
 		NEXT VALUE FOR Seq_Result
 		, #{RESULT_INDEX_NM}
-		, #{DC}
+		, #{RESULT_INDEX_DC}
 		)
 	</insert>
 
@@ -44,7 +44,7 @@
 		UPDATE COMTSRESULTINDEXMNG
 		SET
 		<if test='RESULT_INDEX_NM != null'>  RESULT_INDEX_NM              	= '${RESULT_INDEX_NM}' </if>
-		<if test='DC != null'> , DC       = '${DC}' </if>
+		<if test='RESULT_INDEX_DC != null'> , RESULT_INDEX_DC       = '${RESULT_INDEX_DC}' </if>
 		WHERE ID           = '${ID}'
 	</update>
 

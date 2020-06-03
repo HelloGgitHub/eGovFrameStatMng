@@ -9,8 +9,8 @@ import lombok.Setter;
 public class UserStatVo {
 
     private String id;
-    private String occrrncDe;
+    private String occrrncDt;
     private String hostName;
-    private String userId;
+    private String usrId;
 
 }

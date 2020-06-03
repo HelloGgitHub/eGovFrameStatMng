@@ -5,7 +5,7 @@
 	<!-- Maria -->
     <select id="selectResourceUseDayList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		OCCRRNC_DE as "occrrncDe",
+		OCCRRNC_DT as "occrrncDt",
 		HOSTNAME as "hostName",
 		CPU_AVG as "cpuAvg",
 		MERY_AVG as "meryAvg",
@@ -16,7 +16,7 @@
 
 	<select id="selectResourceUseMonthList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		LEFT(OCCRRNC_DE,6) as "occrrncDe",
+		LEFT(OCCRRNC_DT,6) as "occrrncMonth",
 		HOSTNAME as "hostName",
 		TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
 		TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
@@ -29,7 +29,7 @@
 
 	<select id="selectResourceUseYearList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		LEFT(OCCRRNC_DE,4) as "occrrncDe",
+		LEFT(OCCRRNC_DT,4) as "occrrncYear",
 		HOSTNAME as "hostName",
 		TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
 		TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",

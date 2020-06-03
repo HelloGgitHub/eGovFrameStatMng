@@ -6,9 +6,10 @@
     <select id="selectServerInfoList"  parameterType="Map" resultType="hashMap">
 
 		SELECT 	ID as "id",
+				PROJECT_ID as "projectId",
+				HOSTNAME as "hostName",
 			   	SERVER_NM as "serverNm",
 			 	SERVER_KND as "serverKnd",
-				HOSTNAME as "hostName",
 				RGSDE as "rgsDe",
 				OPERSYSM_INFO as "opersysmInfo",
 				CPU_INFO as "cpuInfo",
@@ -28,9 +29,10 @@
 	<select id="selectServerDetailInfo"  parameterType="Map" resultType="hashMap">
 
 		SELECT 	ID as "id",
+				PROJECT_ID as "projectId",
+				HOSTNAME as "hostName",
 				SERVER_NM as "serverNm",
 				SERVER_KND as "serverKnd",
-				HOSTNAME as "hostName",
 				RGSDE as "rgsDe",
 				OPERSYSM_INFO as "opersysmInfo",
 				CPU_INFO as "cpuInfo",
@@ -44,16 +46,43 @@
 				LAST_UPDUSR_ID as "lastUpdusrId",
 				LAST_UPDT_PNTTM  as "lastUpdtPnttm"
 		FROM COMTNSERVERINFO
-		WHERE ID = '${ID}'
+		WHERE 1=1
+		AND ID = '${ID}'
+
+	</select>
+
+	<select id="selectServerDetail"  parameterType="Map" resultType="hashMap">
+
+		SELECT 	ID as "id",
+				PROJECT_ID as "projectId",
+				HOSTNAME as "hostName",
+				SERVER_NM as "serverNm",
+				SERVER_KND as "serverKnd",
+				RGSDE as "rgsDe",
+				OPERSYSM_INFO as "opersysmInfo",
+				CPU_INFO as "cpuInfo",
+				MORY_INFO as "moryInfo",
+				HDDISK as "hdDisk",
+				ETC_INFO as "etcInfo",
+				CHARGER_NM as "chargerNm",
+				SERVER_DC as "serverDc",
+				FRST_REGISTER_ID as "frstRegisterId",
+				FRST_REGIST_PNTTM as "frstRegistPnttm",
+				LAST_UPDUSR_ID as "lastUpdusrId",
+				LAST_UPDT_PNTTM  as "lastUpdtPnttm"
+		FROM COMTNSERVERINFO
+		WHERE 1=1
+		AND HOSTNAME = '${HOSTNAME}'
 
 	</select>
 
 	<insert id="insertServerDetailInfo" parameterType="hashMap">
 	INSERT INTO COMTNSERVERINFO (
 		ID
+		,PROJECT_ID
+		,HOSTNAME
 		,SERVER_NM
 		,SERVER_KND
-		,HOSTNAME
 		,RGSDE
 		,OPERSYSM_INFO
 		,CPU_INFO
@@ -68,9 +97,10 @@
 		,LAST_UPDT_PNTTM
 	) VALUES (
 		NEXT VALUE FOR Seq_SerInfo
+		, #{PROJECT_ID}
+		, #{HOSTNAME}
 		, #{SERVER_NM}
 		, #{SERVER_KND}
-		, #{HOSTNAME}
 		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 		, #{OPERSYSM_INFO}
 		, #{CPU_INFO}
@@ -89,16 +119,17 @@
 	<update id="updateServerDetailInfo" parameterType="hashMap">
 	UPDATE COMTNSERVERINFO
 		SET LAST_UPDT_PNTTM = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		<if test='PROJECT_ID != null'> , PROJECT_ID             = '${PROJECT_ID}' </if>
+		<if test='HOSTNAME != null'> , HOSTNAME              	= '${HOSTNAME}' </if>
 		<if test='SERVER_NM != null'> , SERVER_NM               = '${SERVER_NM}' </if>
 		<if test='SERVER_KND != null'> , SERVER_KND             = '${SERVER_KND}' </if>
-		<if test='HOSTNAME != null'> , HOSTNAME              	= '${HOSTNAME}' </if>
 		<if test='OPERSYSM_INFO != null'> , OPERSYSM_INFO       = '${OPERSYSM_INFO}' </if>
 		<if test='CPU_INFO != null'> , CPU_INFO            		= '${CPU_INFO}' </if>
 		<if test='MORY_INFO != null'> , MORY_INFO              	= '${MORY_INFO}' </if>
 		<if test='HDDISK != null'> , HDDISK              		= '${HDDISK}' </if>
 		<if test='ETC_INFO != null'> , ETC_INFO              	= '${ETC_INFO}' </if>
 		<if test='CHARGER_NM != null'> , CHARGER_NM             = '${CHARGER_NM}' </if>
-		<if test='SERVER_DC != null'> , SERVER_DC             = '${SERVER_DC}' </if>
+		<if test='SERVER_DC != null'> , SERVER_DC             	= '${SERVER_DC}' </if>
 		WHERE ID           = '${ID}'
 	</update>
 

@@ -6,36 +6,36 @@
     <select id="selectUserStatList"  parameterType="Map" resultType="hashMap">
 
 		SELECT 	ID as "id"
-				, OCCRRNC_DE as "occrrncDe"
+				, OCCRRNC_DT as "occrrncDt"
 				, HOSTNAME as "hostName"
-				, USER_ID as "userId"
+				, USR_ID as "usrId"
 		FROM COMTSUSERSTAT
 
 	</select>
 
 	<select id="selectActiveUserList"  parameterType="Map" resultType="hashMap">
 
-		SELECT OCCRRNC_DE as "occrrncDe"
+		SELECT OCCRRNC_DT as "occrrncDt"
 		, HOSTNAME as "hostname"
-		, COUNT(USER_ID) as "userCnt"
+		, COUNT(USR_ID) as "usrCnt"
 		FROM COMTSUSERSTAT
 		WHERE 1=1
 		AND OCCRRNC_DE BETWEEN '${STARTDT}' AND '${ENDDT}'
-		GROUP BY OCCRRNC_DE, HOSTNAME
+		GROUP BY OCCRRNC_DT, HOSTNAME
 
 	</select>
 
 	<insert id="insertUserStat" parameterType="hashMap">
 		INSERT INTO COMTSUSERSTAT (
 			ID
-			, OCCRRNC_DE
+			, OCCRRNC_DT
 			, HOSTNAME
-			, USER_ID
+			, USR_ID
 		) VALUES (
 			NEXT VALUE FOR Seq_UserStat
-			, #{OCCRRNC_DE}
+			, #{OCCRRNC_DT}
 			, #{HOSTNAME}
-			, #{USER_ID}
+			, #{USR_ID}
 		)
 	</insert>
 

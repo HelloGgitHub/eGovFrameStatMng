@@ -8,9 +8,10 @@ import lombok.Setter;
 public class ServerInfoVo {
 
     private String id;
+    private String projectId;
+    private String hostName;
     private String serverNm;
     private String serverKnd;
-    private String hostName;
     private String rgsDe;
     private String operSysmInfo;
     private String cpuInfo;

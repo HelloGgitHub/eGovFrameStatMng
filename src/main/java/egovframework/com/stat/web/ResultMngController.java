@@ -93,7 +93,7 @@ public class ResultMngController {
         sqlInpt.put("ID", param.getId());
 
         sqlInpt.put("RESULT_INDEX_NM", param.getResultIndexNm());
-        sqlInpt.put("DC", param.getDc());
+        sqlInpt.put("RESULT_INDEX_DC", param.getResultIndexDc());
 
 
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
@@ -136,7 +136,7 @@ public class ResultMngController {
         sqlInpt.put("ID", param.getId());
 
         sqlInpt.put("RESULT_INDEX_NM", param.getResultIndexNm());
-        sqlInpt.put("DC", param.getDc());
+        sqlInpt.put("RESULT_INDEX_DC", param.getResultIndexDc());
 
 
         int inputCnt = resultMngService.updateResultIndex(sqlInpt);

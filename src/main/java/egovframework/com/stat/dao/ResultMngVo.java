@@ -10,6 +10,6 @@ public class ResultMngVo {
 
     private String id;
     private String resultIndexNm;
-    private String dc;
+    private String resultIndexDc;
 
 }

@@ -93,9 +93,11 @@ public class ServerInfoController {
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
         sqlInpt.put("ID", param.getId());
+        sqlInpt.put("PROJECT_ID", param.getProjectId());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("SERVER_NM", param.getServerNm());
         sqlInpt.put("SERVER_KND", param.getServerKnd());
-        sqlInpt.put("HOSTNAME", param.getHostName());
+
         sqlInpt.put("RGSDE", param.getRgsDe());
         sqlInpt.put("OPERSYSM_INFO", param.getOperSysmInfo());
 
@@ -148,9 +150,10 @@ public class ServerInfoController {
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
         sqlInpt.put("ID", param.getId());
+        sqlInpt.put("PROJECT_ID", param.getProjectId());
+        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("SERVER_NM", param.getServerNm());
         sqlInpt.put("SERVER_KND", param.getServerKnd());
-        sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("RGSDE", param.getRgsDe());
         sqlInpt.put("OPERSYSM_INFO", param.getOperSysmInfo());
 

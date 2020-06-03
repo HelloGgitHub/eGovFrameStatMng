@@ -39,9 +39,9 @@ public class UserStatController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-        sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
+        sqlInpt.put("OCCRRNC_DE", param.getOccrrncDt());
         sqlInpt.put("HOSTNAME", param.getHostName());
-        sqlInpt.put("USER_ID", param.getUserId());
+        sqlInpt.put("USR_ID", param.getUsrId());
 
         ObjectMapper om = new ObjectMapper();
         Map<Object, Object> rtnMap = new HashMap<Object, Object>();
