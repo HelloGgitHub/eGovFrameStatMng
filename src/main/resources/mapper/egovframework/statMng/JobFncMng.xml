@@ -101,7 +101,7 @@
 
 	<select id="selectJobFncStatList"  parameterType="Map" resultType="hashMap">
 		SELECT
-			B.OCCRRNC_DE as "occrrncDe"
+			B.OCCRRNC_DT as "occrrncDt"
 			, A.HOSTNAME as "hostname"
 			, A.LFNC_NM as "lfncNm"
 			, A.MFNC_NM as "mfncNm"
@@ -118,13 +118,13 @@
 		WHERE 1=1
 		AND A.HOSTNAME = B.HOSTNAME
 		AND A.METHOD_NM = B.METHOD_NM
-		ORDER BY B.OCCRRNC_DE DESC
+		ORDER BY B.OCCRRNC_DT DESC
 
 	</select>
 
 	<select id="selectJobFncUseList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		B.OCCRRNC_DE as "occrrncDe"
+		B.OCCRRNC_DT as "occrrncDt"
 		, A.HOSTNAME as "hostname"
 		, SUM(B.CREAT_CO) as "creatCo"
 		, SUM(B.UPDT_CO) as "updtCo"
@@ -136,8 +136,8 @@
 		WHERE 1=1
 		AND A.HOSTNAME = B.HOSTNAME
 		AND A.METHOD_NM = B.METHOD_NM
-		GROUP BY B.OCCRRNC_DE, A.HOSTNAME
-		ORDER BY B.OCCRRNC_DE DESC
+		GROUP BY B.OCCRRNC_DT, A.HOSTNAME
+		ORDER BY B.OCCRRNC_DT DESC
 
 	</select>
 

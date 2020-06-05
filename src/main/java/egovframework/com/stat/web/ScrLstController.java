@@ -232,4 +232,6 @@ public class ScrLstController {
 
         return rtn;
     }
+
+    //미등록 화면 조회
 }

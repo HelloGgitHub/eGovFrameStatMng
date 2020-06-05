@@ -249,4 +249,6 @@ public class JobFncController {
         return rtn;
     }
 
+
+    //미등록업무기능 조회
 }
