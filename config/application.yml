@@ -1,6 +1,6 @@
 spring:
   profiles: 
-    active: maria
+    active: local
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -33,7 +33,7 @@ mybatis:
     mapUnderscoreToCamelCase: true
 ---
 spring:
-  profiles: maria 
+  profiles: local
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://192.168.33.10:3306/EGOVCLDDEV

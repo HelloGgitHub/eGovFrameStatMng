@@ -3,8 +3,7 @@ package egovframework.com.stat.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.dao.SysLogVo;
-import egovframework.com.stat.dao.WebLogService;
+import egovframework.com.stat.service.WebLogService;
 import egovframework.com.stat.dao.WebLogVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

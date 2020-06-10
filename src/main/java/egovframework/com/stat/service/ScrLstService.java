@@ -1,5 +1,6 @@
-package egovframework.com.stat.dao;
+package egovframework.com.stat.service;
 
+import egovframework.com.stat.dao.ScrLstDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +43,10 @@ public class ScrLstService {
     //화면 조회 통계(기간별)
     public List<HashMap<Object, Object>> selectScrStatlist(Map<Object, Object> param) {
         return mapper.selectScrStatlist(param);
+    }
+    //미등록 화면 조회
+    public List<HashMap<Object, Object>> selectNonRegScrlist(Map<Object, Object> param) {
+        return mapper.selectNonRegScrlist(param);
     }
 
 }

@@ -103,4 +103,20 @@
 		AND A.OCCRRNC_DT BETWEEN '${STARTDT}' AND '${ENDDT}'
 	</select>
 
+	<select id="selectNonRegScrlist"  parameterType="Map" resultType="hashMap">
+		SELECT HOSTNAME, URL
+		FROM (
+			SELECT HOSTNAME, URL
+			FROM egovclddev.comtsweblogsummary
+			group by HOSTNAME, URL ) A
+		WHERE 1=1
+		AND ( HOSTNAME, URL ) NOT IN (
+									SELECT HOSTNAME, URL
+									FROM egovclddev.comtnscrlist
+									group by HOSTNAME, URL
+									)
+	</select>
+
+
+
 </mapper> 

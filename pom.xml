@@ -8,11 +8,13 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>springBoot</groupId>
-	<artifactId>eGovFrameStatMng</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>eGovFrameStatMng</groupId>
+	<artifactId>eGovFrameStatMng-api</artifactId>
+	<version>1.0</version>
 	<name>eGovFrameStatMng</name>
 	<description>StatManager RESTFUL API Develop</description>
+
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -31,6 +33,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
 		<dependency>
@@ -61,6 +67,8 @@
 	        <artifactId>mybatis-spring-boot-starter</artifactId>
 	        <version>1.1.1</version>
 	    </dependency>
+
+
 
 		<!-- mariaDb -->
 		<dependency>

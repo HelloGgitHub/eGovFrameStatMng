@@ -55,7 +55,7 @@
 	<select id="selectFncReqList"  parameterType="Map" resultType="hashMap">
 
 		SELECT
-			OCCRRNC_DE as "occrrncDe"
+			OCCRRNC_DT as "occrrncDt"
 			, HOSTNAME as "hostname"
 			, SVC_NM as "svcNm"
 			, METHOD_NM as "methodNm"

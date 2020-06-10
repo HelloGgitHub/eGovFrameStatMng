@@ -24,4 +24,6 @@ public interface ScrLstDao {
     int deleteScrDetail(Map<Object, Object> param);
 
     List<HashMap<Object, Object>> selectScrStatlist(Map<Object, Object> param);
+
+    List<HashMap<Object, Object>> selectNonRegScrlist(Map<Object, Object> param);
 }

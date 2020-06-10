@@ -21,5 +21,7 @@ public interface ServerInfoDao {
 
     int deleteServerInfo(Map<Object, Object> param);
 
+    List<HashMap<Object, Object>> selectNonRegServerInfoList(Map<Object, Object> param);
+
 
 }

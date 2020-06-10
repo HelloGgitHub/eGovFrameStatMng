@@ -2,8 +2,7 @@ package egovframework.com.stat.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.dao.JobFncListVo;
-import egovframework.com.stat.dao.ScrLstService;
+import egovframework.com.stat.service.ScrLstService;
 import egovframework.com.stat.dao.ScrLstVo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -234,4 +233,25 @@ public class ScrLstController {
     }
 
     //미등록 화면 조회
+    @ApiOperation(value = "미등록 화면 조회 ")
+    @GetMapping(path = "/nonReglist")
+    public String NonRegScrlist() {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        lst = scrLstService.selectNonRegScrlist(param);
+
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            rtn = om.writeValueAsString(lst);
+        } catch (JsonProcessingException e) {
+            rtn = "json Mapper Error.";
+            e.printStackTrace();
+        }
+
+        return rtn;
+    }
 }

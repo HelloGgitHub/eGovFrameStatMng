@@ -7,6 +7,7 @@
 		ID as "id"
 		, RESULT_INDEX_NM as "resultIndexNm"
 		, RESULT_INDEX_DC as "resultIndexDc"
+		, REG_DTTM as "regDttm"
 		FROM COMTSRESULTINDEXMNG
 	</select>
 
@@ -15,6 +16,7 @@
 		ID as "id"
 		, RESULT_INDEX_NM as "resultIndexNm"
 		, RESULT_INDEX_DC as "resultIndexDc"
+		, REG_DTTM as "regDttm"
 		FROM COMTSRESULTINDEXMNG
 		WHERE ID = '${ID}'
 	</select>
@@ -24,6 +26,7 @@
 		ID as "id"
 		, RESULT_INDEX_NM as "resultIndexNm"
 		, RESULT_INDEX_DC as "resultIndexDc"
+		, REG_DTTM as "regDttm"
 		FROM COMTSRESULTINDEXMNG
 		WHERE RESULT_INDEX_NM = '${RESULT_INDEX_NM}'
 	</select>
@@ -33,10 +36,12 @@
 		ID
 		, RESULT_INDEX_NM
 		, RESULT_INDEX_DC
+		, REG_DTTM
 		) VALUES (
 		NEXT VALUE FOR Seq_Result
 		, #{RESULT_INDEX_NM}
 		, #{RESULT_INDEX_DC}
+		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 		)
 	</insert>
 

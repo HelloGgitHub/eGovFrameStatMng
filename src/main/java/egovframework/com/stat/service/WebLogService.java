@@ -1,5 +1,6 @@
-package egovframework.com.stat.dao;
+package egovframework.com.stat.service;
 
+import egovframework.com.stat.dao.WebLogDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

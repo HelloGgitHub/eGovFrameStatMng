@@ -3,10 +3,9 @@ package egovframework.com.stat.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.dao.ServerInfoService;
+import egovframework.com.stat.service.ServerInfoService;
 
 import egovframework.com.stat.dao.ServerInfoVo;
-import egovframework.com.user.dao.UserModifyInfoVo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -220,4 +219,28 @@ public class ServerInfoController {
     }
 
     //미등록 업무시스템조회
+
+    @ApiOperation(value = "미등록 업무시스템조회")
+    @GetMapping(path = "/nonReglist")
+    public String NonRegServerInfoList() {
+
+        String rtn = "";
+
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        lst = serverInfoService.selectNonRegServerInfoList(param);
+
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            rtn = om.writeValueAsString(lst);
+        } catch (JsonProcessingException e) {
+            rtn = "json Mapper Error.";
+            e.printStackTrace();
+        }
+
+        return rtn;
+    }
+
 }

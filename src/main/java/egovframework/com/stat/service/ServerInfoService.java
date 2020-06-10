@@ -1,6 +1,7 @@
-package egovframework.com.stat.dao;
+package egovframework.com.stat.service;
 
 
+import egovframework.com.stat.dao.ServerInfoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,10 @@ public class ServerInfoService {
         return mapper.deleteServerInfo(param);
     }
 
-
+    //미등록 시스템정보 목록 조회
+    public List<HashMap<Object, Object>> selectNonRegServerInfoList(Map<Object, Object> param) {
+        return mapper.selectNonRegServerInfoList(param);
+    }
 
 
 }
