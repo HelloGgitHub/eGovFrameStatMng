@@ -3,7 +3,7 @@ package egovframework.com.stat.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.dao.JobFncListVo;
+import egovframework.com.stat.dao.JobFncVo;
 import egovframework.com.stat.service.JobFncService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @title : 업무기능관리
+ * @package : egovframework.com.user.web
+ * @filename : JobFncController.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 업무기능관리에 필요한 api를 restful형태로 제공한다.
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
 @RestController
 @Api(value = "JobFncController", description = "업무기능관리 REST API")
 @RequestMapping("/api/jobFnc")
@@ -23,9 +39,16 @@ public class JobFncController {
     @Autowired
     JobFncService jobFncService;
 
+    /**
+     * @name : JobFncList(업무기능 목록조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무기능 목록조회
+     */
     @ApiOperation(value = "업무기능 목록조회")
     @GetMapping(path = "/list")
-    public String ServerInfoList() {
+    public String JobFncList() {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
@@ -45,6 +68,13 @@ public class JobFncController {
         return rtn;
     }
 
+    /**
+     * @name : JobFncDetail(업무기능 상세조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무기능 상세조회
+     */
     @ApiOperation(value = "업무기능 상세조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
@@ -74,6 +104,13 @@ public class JobFncController {
         return rtn;
     }
 
+    /**
+     * @name : JobFncCreate(업무기능 등록)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무기능 등록
+     */
     @ApiOperation(value = "업무기능 등록", notes = "업무기능 등록")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -81,7 +118,7 @@ public class JobFncController {
             @ApiResponse(code = 404, message = "Not Found !!")
     })
     @PostMapping(path = "/createJobFnc")
-    public String JobFncCreate(@RequestBody JobFncListVo param) throws Exception {
+    public String JobFncCreate(@RequestBody JobFncVo param) throws Exception {
 
         String rtn = "";
         String data = URLDecoder.decode(rtn,"UTF-8");
@@ -128,9 +165,16 @@ public class JobFncController {
 
     }
 
+    /**
+     * @name : JobFncChangeInfo(업무기능 정보수정)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무기능 정보수정
+     */
     @ApiOperation(value = "업무기능 정보수정")
     @PutMapping(path = "/modifyJobFnc")
-    public String JobFncChangeInfo(@RequestBody JobFncListVo param) throws Exception {
+    public String JobFncChangeInfo(@RequestBody JobFncVo param) throws Exception {
         String rtn = "";
         ObjectMapper om = new ObjectMapper();
         Map<Object, Object> rtnMap = new HashMap<Object, Object>();
@@ -167,6 +211,13 @@ public class JobFncController {
 
     }
 
+    /**
+     * @name : JobFncDelete(업무기능 삭제)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무기능 삭제
+     */
     @ApiOperation(value = "업무기능 삭제", notes = "업무기능를 삭제한다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id"	, value = "ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
@@ -204,6 +255,13 @@ public class JobFncController {
     //업무기능목록 엑셀 업로드
     //업무기능목록 엑셀다운로드
 
+    /**
+     * @name : SelectJobFncStatList(업무기능목록별 사용량 조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무기능목록별 사용량 조회
+     */
     @ApiOperation(value = "업무기능목록별 사용량 조회")
     @GetMapping(path = "/jobFncStatList")
     public String SelectJobFncStatList() {
@@ -225,7 +283,14 @@ public class JobFncController {
 
         return rtn;
     }
-    //기능별 사용량 조회(CRUD)
+
+    /**
+     * @name : SelectJobFncUseList(기능별 사용량 조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 기능별 사용량 조회
+     */
     @ApiOperation(value = "기능별 사용량 조회")
     @GetMapping(path = "/jobFncUseList")
     public String SelectJobFncUseList() {

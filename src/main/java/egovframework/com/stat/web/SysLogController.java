@@ -17,6 +17,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @title : 시스템로그관리
+ * @package : egovframework.com.stat.web
+ * @filename : SysLogController.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 시스템로그관리에 필요한 api를 restful형태로 제공한다.
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
+
 @RestController
 @Api(value = "SysLogController", description = "시스템로그관리 REST API")
 @RequestMapping("/api/sysLog")
@@ -25,6 +42,13 @@ public class SysLogController {
     @Autowired
     SysLogService sysLogService;
 
+    /**
+     * @name : SysLogList(시스템 로그 목록조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 시스템 로그 목록조회
+     */
     @ApiOperation(value = "시스템 로그 목록조회")
     @GetMapping(path = "/list")
     public String SysLogList() {
@@ -47,6 +71,13 @@ public class SysLogController {
         return rtn;
     }
 
+    /**
+     * @name : CreateSysLogCreate(입력 기능 호출 횟수 측정(C))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 입력 기능 호출 횟수 측정(C)
+     */
     @ApiOperation(value = "입력 기능 호출 횟수 측정(C)", notes = "입력 기능 호출 횟수 측정(C)")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -98,6 +129,13 @@ public class SysLogController {
 
     }
 
+    /**
+     * @name : ReadSysLogCreate(조회 기능 호출 횟수 측정(R))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 조회 기능 호출 횟수 측정(R)
+     */
     @ApiOperation(value = "조회 기능 호출 횟수 측정(R)", notes = "조회 기능 호출 횟수 측정(R)")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -148,6 +186,13 @@ public class SysLogController {
         return rtn;
     }
 
+    /**
+     * @name : UpdateSysLogCreate(업데이트기능 호출 횟수 측정(U))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업데이트기능 호출 횟수 측정(U)
+     */
     @ApiOperation(value = "업데이트기능 호출 횟수 측정(U)", notes = "업데이트기능 호출 횟수 측정(U)")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -198,6 +243,13 @@ public class SysLogController {
         return rtn;
     }
 
+    /**
+     * @name : DeleteSysLogCreate(삭제기능 호출 횟수 측정(D))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 삭제기능 호출 횟수 측정(D)
+     */
     @ApiOperation(value = "삭제기능 호출 횟수 측정(D)", notes = "삭제기능 호출 횟수 측정(U)")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -248,8 +300,13 @@ public class SysLogController {
         return rtn;
     }
 
-    //기능별 호출 횟수 목록 조회
-
+    /**
+     * @name : FncReqList(기능별 호출 횟수 목록 조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 기능별 호출 횟수 목록 조회
+     */
     @ApiOperation(value = "기능별 호출 횟수 목록 조회")
     @GetMapping(path = "/fncReqlist")
     public String FncReqList() {

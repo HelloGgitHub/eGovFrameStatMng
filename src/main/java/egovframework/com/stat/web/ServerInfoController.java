@@ -16,6 +16,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @title : 업무시스템관리
+ * @package : egovframework.com.stat.web
+ * @filename : ServerInfoController.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 업무시스템관리에 필요한 api를 restful형태로 제공한다.
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
+
 @RestController
 @Api(value = "ServerInfoController", description = "업무시스템관리 REST API")
 @RequestMapping("/api/serverInfo")
@@ -24,6 +41,13 @@ public class ServerInfoController {
     @Autowired
     ServerInfoService serverInfoService;
 
+    /**
+     * @name : ServerInfoList(업무시스템정보 목록조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무시스템정보 목록조회
+     */
     @ApiOperation(value = "업무시스템정보 목록조회")
     @GetMapping(path = "/list")
     public String ServerInfoList() {
@@ -47,6 +71,13 @@ public class ServerInfoController {
         return rtn;
     }
 
+    /**
+     * @name : ServerDetailInfo(업무시스템정보 상세조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무시스템정보 상세조회
+     */
     @ApiOperation(value = "업무시스템정보 상세조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
@@ -76,6 +107,13 @@ public class ServerInfoController {
         return rtn;
     }
 
+    /**
+     * @name : ServerInfoCreate(업무시스템정보 등록)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무시스템정보 등록
+     */
     @ApiOperation(value = "업무시스템정보 등록", notes = "업무시스템정보 등록")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -138,6 +176,13 @@ public class ServerInfoController {
 
     }
 
+    /**
+     * @name : ServerChangeInfo(업무시스템 정보수정)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무시스템 정보수정
+     */
     @ApiOperation(value = "업무시스템 정보수정")
     @PutMapping(path = "/modifyInfo")
     public String ServerChangeInfo(@RequestBody ServerInfoVo param) throws Exception {
@@ -184,6 +229,13 @@ public class ServerInfoController {
 
     }
 
+    /**
+     * @name : ServerDeleteInfo(업무시스템 정보 삭제)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무시스템 정보 삭제
+     */
     @ApiOperation(value = "업무시스템 정보 삭제", notes = "업무시스템정보를 삭제한다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "serverId"	, value = "서버ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
@@ -218,8 +270,14 @@ public class ServerInfoController {
 
     }
 
-    //미등록 업무시스템조회
-
+    //
+    /**
+     * @name : NonRegServerInfoList(미등록 업무시스템조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 미등록 업무시스템조회
+     */
     @ApiOperation(value = "미등록 업무시스템조회")
     @GetMapping(path = "/nonReglist")
     public String NonRegServerInfoList() {

@@ -1,17 +1,16 @@
 package egovframework.com.stat.dao;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @title : 시스템로그VO
+ * @title : 업무기능관리VO
  * @package : egovframework.com.stat.dao
- * @filename : SysLogVo.java
+ * @filename : JobFncVo.java
  * @author : "egov"
  * @since : 2020. 6. 11.
  * @version : 1.0
- * @desc : 시스템로그VO
+ * @desc : 업무기능관리VO
  *
  *  ======= 변경이력 =======
  *
@@ -20,22 +19,17 @@ import lombok.Setter;
  * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
  *
  */
-@Getter
 @Setter
-public class SysLogVo {
+@Getter
+public class JobFncVo {
 
     private String id;
     private String hostName;
-    private String occrrncDe;
-    private String rqesterId;
-    private String rqesterIp;
-    private String svcNm;
+    private String lFncNm;
+    private String mFncNm;
+    private String sFncNm;
+    private String detailFncNm;
     private String methodNm;
-    private String processSeCode;
-    private String processTime;
-    private String errorSe;
-    private int errorCo;
-    private String errorCode;
-
-
+    private String frstRegisterId;
+    private String lastUpdusrId;
 }

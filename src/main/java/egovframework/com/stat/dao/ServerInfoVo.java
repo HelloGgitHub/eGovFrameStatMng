@@ -3,6 +3,22 @@ package egovframework.com.stat.dao;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * @title : 업무시스템VO
+ * @package : egovframework.com.stat.dao
+ * @filename : ServerInfoVo.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 업무시스템VO
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
 @Setter
 @Getter
 public class ServerInfoVo {

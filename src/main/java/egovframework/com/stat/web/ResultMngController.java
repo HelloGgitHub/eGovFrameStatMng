@@ -15,16 +15,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @title : 성과지표관리
+ * @package : egovframework.com.stat.web
+ * @filename : ResultMngController.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 성과지표관리에 필요한 api를 restful형태로 제공한다.
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
+
 @RestController
-@Api(value = "ResultMngController", description = "성과지표 관리 REST API")
+@Api(value = "ResultMngController", description = "성과지표관리 REST API")
 @RequestMapping("/api/resultMng")
 public class ResultMngController {
 
     @Autowired
     ResultMngService resultMngService;
 
-
-    @ApiOperation(value = "성과지표 목록 조회")
+    /**
+     * @name : ResultIndexList(성과지표 목록조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 성과지표 목록조회
+     */
+    @ApiOperation(value = "성과지표 목록조회")
     @GetMapping(path = "/list")
     public String ResultIndexList() {
 
@@ -46,6 +69,13 @@ public class ResultMngController {
         return rtn;
     }
 
+    /**
+     * @name : ResultIndexDetail(성과지표 상세조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 성과지표 상세조회
+     */
     @ApiOperation(value = "성과지표 상세조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
@@ -75,6 +105,13 @@ public class ResultMngController {
         return rtn;
     }
 
+    /**
+     * @name : ResultIndexCreate(성과지표 등록)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 성과지표 등록
+     */
     @ApiOperation(value = "성과지표 등록", notes = "성과지표 등록")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -122,7 +159,14 @@ public class ResultMngController {
         return rtn;
 
     }
-    //성과측정지표 수정
+
+    /**
+     * @name : ResultIndexUpdate(성과지표 수정)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 성과지표 수정
+     */
     @ApiOperation(value = "성과지표 정보수정")
     @PutMapping(path = "/modifyResultIndex")
     public String ResultIndexUpdate(@RequestBody ResultMngVo param) throws Exception {
@@ -155,7 +199,14 @@ public class ResultMngController {
         return rtn;
 
     }
-    //성과측정지표 삭제
+
+    /**
+     * @name : ResultIndexUpdate(성과지표 삭제)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 성과지표 삭제
+     */
     @ApiOperation(value = "성과지표 삭제", notes = "성과지표를 삭제한다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id"	, value = "ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
@@ -189,9 +240,5 @@ public class ResultMngController {
         return rtn;
 
     }
-    //시스템 별 자원 사용률 조회(일평균)
-    //시스템 별 자원 사용률 조회(분기,년)
-
-
 
 }

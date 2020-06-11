@@ -13,6 +13,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @title : 자원사용 통계
+ * @package : egovframework.com.stat.web
+ * @filename : ResourcesUseController.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 자원사용 통계에 필요한 api를 restful형태로 제공한다.
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
 
 @RestController
 @Api(value = "ResourcesUseController", description = "자원사용 통계 REST API")
@@ -22,7 +38,13 @@ public class ResourcesUseController {
     @Autowired
     ResourceUseService resourceUseService;
 
-    //시스템 별 자원 사용률 조회(일평균)
+    /**
+     * @name : ResourceUseDayList(시스템 별 자원 사용률 조회(일평균))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 시스템 별 자원 사용률 조회(일평균)
+     */
     @ApiOperation(value = "시스템 별 자원 사용률 조회(일)")
     @GetMapping(path = "/dayList")
     public String ResourceUseDayList() {
@@ -45,7 +67,13 @@ public class ResourcesUseController {
         return rtn;
     }
 
-    //시스템 별 자원 사용률 조회(년)
+    /**
+     * @name : ResourceUseMonthList(시스템 별 자원 사용률 조회(월))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 시스템 별 자원 사용률 조회(월)
+     */
     @ApiOperation(value = "시스템 별 자원 사용률 조회(월)")
     @GetMapping(path = "/monthList")
     public String ResourceUseMonthList() {
@@ -68,7 +96,13 @@ public class ResourcesUseController {
         return rtn;
     }
 
-    //시스템 별 자원 사용률 조회(년)
+    /**
+     * @name : ResourceUseYearList(시스템 별 자원 사용률 조회(년))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 시스템 별 자원 사용률 조회(년)
+     */
     @ApiOperation(value = "시스템 별 자원 사용률 조회(년)")
     @GetMapping(path = "/yearList")
     public String ResourceUseYearList() {

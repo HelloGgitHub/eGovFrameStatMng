@@ -16,6 +16,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @title : 이용자통계 관리
+ * @package : egovframework.com.stat.web
+ * @filename : UserStatController.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 이용자통계 관리에 필요한 api를 restful형태로 제공한다.
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
+
 @RestController
 @Api(value = "UserStatController", description = "이용자통계 관리 REST API")
 @RequestMapping("/api/userStat")
@@ -24,7 +41,13 @@ public class UserStatController {
     @Autowired
     UserStatService userStatService;
 
-    //로그인 횟수 측정
+    /**
+     * @name : CreateUserStat( 로그인 횟수 측정)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 로그인 횟수 측정
+     */
     @ApiOperation(value = "로그인 횟수 측정", notes = "로그인 횟수 측정")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -62,6 +85,13 @@ public class UserStatController {
         return rtn;
     }
 
+    /**
+     * @name : UserStatList( 로그인 횟수 목록조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 로그인 횟수 목록조회
+     */
     @ApiOperation(value = "로그인 횟수 목록조회")
     @GetMapping(path = "/userStatList")
     public String UserStatList() {
@@ -84,7 +114,13 @@ public class UserStatController {
         return rtn;
     }
 
-    //이용자수 조회
+    /**
+     * @name : ActiveUserList( 이용자수 조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 이용자수 조회
+     */
     @ApiOperation(value = "이용자수 조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "startDt"	, value = "STARTDT"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),

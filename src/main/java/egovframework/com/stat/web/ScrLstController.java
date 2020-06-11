@@ -15,14 +15,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @title : 화면정보관리
+ * @package : egovframework.com.stat.web
+ * @filename : ScrLstController.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 화면정보관리에 필요한 api를 restful형태로 제공한다.
+ *
+ *  ======= 변경이력 =======
+ *
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ *
+ */
+
 @RestController
-@Api(value = "JobFncController", description = "화면정보관리 REST API")
+@Api(value = "ScrLstController", description = "화면정보관리 REST API")
 @RequestMapping("/api/scrLst")
 public class ScrLstController {
 
     @Autowired
     ScrLstService scrLstService;
 
+    /**
+     * @name : ScrList(화면정보 목록조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면정보 목록조회
+     */
     @ApiOperation(value = "화면정보 목록조회")
     @GetMapping(path = "/list")
     public String ScrList() {
@@ -45,6 +69,13 @@ public class ScrLstController {
         return rtn;
     }
 
+    /**
+     * @name : ScrDetail(화면정보 상세조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면정보 상세조회
+     */
     @ApiOperation(value = "화면정보 상세조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "string", paramType = "path", defaultValue = "")
@@ -74,6 +105,13 @@ public class ScrLstController {
         return rtn;
     }
 
+    /**
+     * @name : ScrCreate(화면정보 등록)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면정보 등록
+     */
     @ApiOperation(value = "화면정보 등록", notes = "화면정보 등록")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -125,6 +163,13 @@ public class ScrLstController {
 
     }
 
+    /**
+     * @name : ScrChangeInfo(화면정보 수정)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면정보 수정
+     */
     @ApiOperation(value = "화면정보 수정")
     @PutMapping(path = "/modifyScr")
     public String ScrChangeInfo(@RequestBody ScrLstVo param) throws Exception {
@@ -162,6 +207,13 @@ public class ScrLstController {
 
     }
 
+    /**
+     * @name : ScrDelete(화면정보 삭제)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면정보 삭제
+     */
     @ApiOperation(value = "화면정보 삭제", notes = "화면정보를 삭제한다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id"	, value = "ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
@@ -197,7 +249,13 @@ public class ScrLstController {
     }
 
 
-    //화면 조회 통계(기간별)
+    /**
+     * @name : ScrStatList(화면 조회 통계(기간별))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면 조회 통계(기간별)
+     */
     @ApiOperation(value = "화면 조회 통계(기간별)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "startDt"	, value = "STARTDT"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
@@ -232,7 +290,13 @@ public class ScrLstController {
         return rtn;
     }
 
-    //미등록 화면 조회
+    /**
+     * @name : NonRegScrlist(미등록 화면 조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 미등록 화면 조회
+     */
     @ApiOperation(value = "미등록 화면 조회 ")
     @GetMapping(path = "/nonReglist")
     public String NonRegScrlist() {
