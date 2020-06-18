@@ -104,15 +104,16 @@
 	</select>
 
 	<select id="selectNonRegScrlist"  parameterType="Map" resultType="hashMap">
-		SELECT HOSTNAME, URL
+		SELECT HOSTNAME as "hostName"
+		       , URL as "url"
 		FROM (
 			SELECT HOSTNAME, URL
-			FROM egovclddev.comtsweblogsummary
+			FROM COMTSWEBLOGSUMMARY
 			group by HOSTNAME, URL ) A
 		WHERE 1=1
 		AND ( HOSTNAME, URL ) NOT IN (
 									SELECT HOSTNAME, URL
-									FROM egovclddev.comtnscrlist
+									FROM COMTNSCRLIST
 									group by HOSTNAME, URL
 									)
 	</select>

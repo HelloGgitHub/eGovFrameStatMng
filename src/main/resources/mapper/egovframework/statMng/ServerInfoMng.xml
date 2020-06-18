@@ -140,7 +140,7 @@
 	</delete>
 
 	<select id="selectNonRegServerInfoList"  parameterType="Map" resultType="hashMap">
-		SELECT HOSTNAME
+		SELECT HOSTNAME as "hostName"
 		FROM (
 			SELECT DISTINCT HOSTNAME
 			FROM COMTSSYSLOGSUMMARY
