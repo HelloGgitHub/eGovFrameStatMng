@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @title : 시스템로그관리
+ * @title : 업무기능로그관리
  * @package : egovframework.com.stat.web
  * @filename : SysLogController.java
  * @author : "egov"
  * @since : 2020. 6. 11.
  * @version : 1.0
- * @desc : 시스템로그관리에 필요한 api를 restful형태로 제공한다.
+ * @desc : 업무기능로그관리에 필요한 api를 restful형태로 제공한다.
  *
  *  ======= 변경이력 =======
  *
@@ -35,7 +35,7 @@ import java.util.Map;
  */
 
 @RestController
-@Api(value = "SysLogController", description = "시스템로그관리 REST API")
+@Api(value = "SysLogController", description = "업무기능로그관리 REST API")
 @RequestMapping("/api/sysLog")
 public class SysLogController {
 
@@ -43,13 +43,13 @@ public class SysLogController {
     SysLogService sysLogService;
 
     /**
-     * @name : SysLogList(시스템 로그 목록조회)
+     * @name : SysLogList(업무기능 로그 목록조회)
      * @date : 2020. 6. 11.
      * @author : "egov"
      * @return_type : String
-     * @desc : 시스템 로그 목록조회
+     * @desc : 업무기능 로그 목록조회
      */
-    @ApiOperation(value = "시스템 로그 목록조회")
+    @ApiOperation(value = "업무기능 로그 목록조회")
     @GetMapping(path = "/list")
     public String SysLogList() {
 

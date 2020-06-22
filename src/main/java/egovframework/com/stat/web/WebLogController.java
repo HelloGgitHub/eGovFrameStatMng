@@ -19,13 +19,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @title : 웹로그관리
+ * @title : 화면접근 로그관리
  * @package : egovframework.com.stat.web
  * @filename : WebLogController.java
  * @author : "egov"
  * @since : 2020. 6. 11.
  * @version : 1.0
- * @desc : 웹로그관리에 필요한 api를 restful형태로 제공한다.
+ * @desc : 화면접근 로그관리에 필요한 api를 restful형태로 제공한다.
  *
  *  ======= 변경이력 =======
  *
@@ -36,7 +36,7 @@ import java.util.Map;
  */
 
 @RestController
-@Api(value = "WebLogController", description = "웹로그관리 REST API")
+@Api(value = "WebLogController", description = "화면접근 로그관리 REST API")
 @RequestMapping("/api/webLog")
 public class WebLogController {
 
@@ -112,7 +112,7 @@ public class WebLogController {
             rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
         } else {
             rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "업무기능 등록에 실패 하였습니다.");
+            rtnMap.put("RESULTMSG", "화면 접근 횟수 측정 등록에 실패 하였습니다.");
         }
 
 
