@@ -41,4 +41,27 @@
 		, b.HOSTNAME
 		, b.URL
 	</insert>
+
+
+	<insert id="insertBatchHistory" parameterType="hashMap">
+		INSERT INTO COMTSBATCHHIS (
+			OCCRRNC_DT
+			,BATCH_NM
+			,STT_DTM
+		) VALUES (
+			#{OCCRRNC_DT}
+			,#{BATCH_NM}
+			,DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		)
+	</insert>
+
+	<update id="updateBatchHistory" parameterType="hashMap">
+	UPDATE COMTSBATCHHIS
+	SET END_DTM = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		, WRK_CNT = #{WRK_CNT}
+		, SCS_YN = #{SCS_YN}
+	WHERE OCCRRNC_DT = #{OCCRRNC_DT}
+	AND BATCH_NM = #{BATCH_NM}
+	</update>
+
 </mapper>

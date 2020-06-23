@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 /**
  * @title : 통계배치 서비스
  * @package : egovframework.com.stat.service
@@ -30,13 +32,12 @@ public class SummaryService {
     private SummaryDao mapper;
 
     //시스템로그 요약
-    public void insertSysLogSummary(){
-        int cnt =  mapper.insertSysLogSummary();
-    }
+    public int insertSysLogSummary(){        return  mapper.insertSysLogSummary();    }
     //웹로그 요약
-    public void insertWebLogSummary(){
-        int cnt =  mapper.insertWebLogSummary();
-    }
+    public int insertWebLogSummary(){        return  mapper.insertWebLogSummary();    }
 
-
+    //배치시작
+    public int insertBatchHistory(Map<Object, Object> param){        return  mapper.insertBatchHistory(param);    }
+    //배치종료
+    public int updateBatchHistory(Map<Object, Object> param){        return  mapper.updateBatchHistory(param);    }
 }

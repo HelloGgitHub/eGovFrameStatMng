@@ -31,4 +31,8 @@ public interface SummaryDao {
 
     int insertWebLogSummary();
 
+    int insertBatchHistory(Map<Object, Object> param);
+
+    int updateBatchHistory(Map<Object, Object> param);
+
 }
