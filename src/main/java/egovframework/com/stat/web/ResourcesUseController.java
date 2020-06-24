@@ -39,7 +39,7 @@ public class ResourcesUseController {
     ResourceUseService resourceUseService;
 
     /**
-     * @name : ResourceUseDayList(시스템 별 자원 사용률 조회(일평균))
+     * @name : ResourceUseDayList(시스템 별 자원 사용률 조회(일))
      * @date : 2020. 6. 11.
      * @author : "egov"
      * @return_type : String
