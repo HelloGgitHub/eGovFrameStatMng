@@ -125,17 +125,17 @@ public class JobFncController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-
-        sqlInpt.put("ID", param.getId());
-
-        sqlInpt.put("HOSTNAME", param.getHostName());
-        sqlInpt.put("LFNC_NM", param.getLFncNm());
-        sqlInpt.put("MFNC_NM", param.getMFncNm());
-        sqlInpt.put("SFNC_NM", param.getSFncNm());
-        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
-        sqlInpt.put("METHOD_NM", param.getMethodNm());
-        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
-        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
+//
+//        sqlInpt.put("ID", param.getId());
+//
+//        sqlInpt.put("HOSTNAME", param.getHostName());
+//        sqlInpt.put("LFNC_NM", param.getLFncNm());
+//        sqlInpt.put("MFNC_NM", param.getMFncNm());
+//        sqlInpt.put("SFNC_NM", param.getSFncNm());
+//        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
+//        sqlInpt.put("METHOD_NM", param.getMethodNm());
+//        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
+//        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
 
         System.out.println(sqlInpt);
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
@@ -182,16 +182,16 @@ public class JobFncController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
-
-        sqlInpt.put("HOSTNAME", param.getHostName());
-        sqlInpt.put("LFNC_NM", param.getLFncNm());
-        sqlInpt.put("MFNC_NM", param.getMFncNm());
-        sqlInpt.put("SFNC_NM", param.getSFncNm());
-        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
-        sqlInpt.put("METHOD_NM", param.getMethodNm());
-        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
-        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
+//        sqlInpt.put("ID", param.getId());
+//
+//        sqlInpt.put("HOSTNAME", param.getHostName());
+//        sqlInpt.put("LFNC_NM", param.getLFncNm());
+//        sqlInpt.put("MFNC_NM", param.getMFncNm());
+//        sqlInpt.put("SFNC_NM", param.getSFncNm());
+//        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
+//        sqlInpt.put("METHOD_NM", param.getMethodNm());
+//        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
+//        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
 
 
         int inputCnt = jobFncService.updateJobFncDetail(sqlInpt);
