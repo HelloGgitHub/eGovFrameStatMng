@@ -21,7 +21,7 @@ public class BatchScheduler {
     @Scheduled(cron ="00 05 01 * * *")
     public void SysLogSummary(){
         String batchDate = DateFormatUtils.format(new Date(),"yyyyMMdd");
-        log.info( "WebLogSummary    " + batchDate);
+//        log.info( "WebLogSummary    " + batchDate);
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
         sqlInpt.put("OCCRRNC_DT", batchDate);
         sqlInpt.put("BATCH_NM", "SysLogSummary");
@@ -33,14 +33,14 @@ public class BatchScheduler {
         sqlInpt.put("SCS_YN", "Y");
         service.updateBatchHistory(sqlInpt);
 
-        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
+//        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
     }
 
     @Scheduled(cron ="00 10 01 * * *")
     public void WebLogSummary() {
 
         String batchDate = DateFormatUtils.format(new Date(),"yyyyMMdd");
-        log.info( "WebLogSummary    " + batchDate);
+//        log.info( "WebLogSummary    " + batchDate);
 
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
         sqlInpt.put("OCCRRNC_DT", batchDate);
@@ -53,7 +53,7 @@ public class BatchScheduler {
         sqlInpt.put("WRK_CNT", cnt);
         sqlInpt.put("SCS_YN", "Y");
         service.updateBatchHistory(sqlInpt);
-        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
+//        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
     }
 
 }
