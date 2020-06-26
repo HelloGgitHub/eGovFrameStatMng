@@ -24,12 +24,12 @@ public class TestAspect {
     @After("execution(* egovframework.com.stat..*Service.select*(..))")
     public void onAfterHandler(JoinPoint joinPoint) {
 
-        log.info("=============== onAfterHandler");
+//        log.info("=============== onAfterHandler");
 
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = joinPoint.getSignature().getName();
         String hostName = System.getenv("HOSTNAME");
-        log.info("=============== className : "+ className +"=============== methodName : "+ methodName +"===============hostName:"+hostName);
+//        log.info("=============== className : "+ className +"=============== methodName : "+ methodName +"===============hostName:"+hostName);
 
     }
 
