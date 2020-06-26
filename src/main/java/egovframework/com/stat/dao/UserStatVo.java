@@ -1,8 +1,5 @@
 package egovframework.com.stat.dao;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * @title : 이용자통계VO
  * @package : egovframework.com.stat.dao
@@ -19,13 +16,38 @@ import lombok.Setter;
  * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
  *
  */
-@Getter
-@Setter
+
 public class UserStatVo {
 
     private String id;
     private String occrrncDt;
     private String hostName;
     private String usrId;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getOccrrncDt() {
+		return occrrncDt;
+	}
+	public void setOccrrncDt(String occrrncDt) {
+		this.occrrncDt = occrrncDt;
+	}
+	public String getHostName() {
+		return hostName;
+	}
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+	public String getUsrId() {
+		return usrId;
+	}
+	public void setUsrId(String usrId) {
+		this.usrId = usrId;
+	}
+    
+    
 
 }
