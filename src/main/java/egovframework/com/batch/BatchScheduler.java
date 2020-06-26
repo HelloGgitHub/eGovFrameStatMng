@@ -1,17 +1,17 @@
 package egovframework.com.batch;
 
-import egovframework.com.stat.service.SummaryService;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import egovframework.com.stat.service.SummaryService;
 
-@Slf4j
+
 @Component
 public class BatchScheduler {
 

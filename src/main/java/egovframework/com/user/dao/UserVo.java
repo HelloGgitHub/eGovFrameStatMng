@@ -2,11 +2,7 @@ package egovframework.com.user.dao;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class UserVo {
 
 	@Value("abcd")

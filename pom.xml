@@ -19,6 +19,46 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Nexus Central Repository</name>
+			<url>https://nexus.mgmt.dev.egovp.kr/repository/maven-central/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>https://nexus.mgmt.dev.egovp.kr/repository/maven-central/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>maven-central</id>
+			<url>https://nexus.mgmt.dev.egovp.kr/repository/maven-central/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>maven2-central</id>
+			<url>https://nexus.mgmt.dev.egovp.kr/repository/maven2-central/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -54,12 +94,6 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.2</version>
 		</dependency>
 
 		<dependency>
