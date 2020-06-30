@@ -16,7 +16,7 @@
 	<select id="selectActiveUserList"  parameterType="Map" resultType="hashMap">
 
 		SELECT OCCRRNC_DT as "occrrncDt"
-		, HOSTNAME as "hostname"
+		, HOSTNAME as "hostName"
 		, COUNT(USR_ID) as "usrCnt"
 		FROM COMTSUSERSTAT
 		WHERE 1=1

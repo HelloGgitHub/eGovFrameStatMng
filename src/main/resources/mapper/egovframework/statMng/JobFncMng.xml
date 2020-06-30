@@ -102,7 +102,7 @@
 	<select id="selectJobFncStatList"  parameterType="Map" resultType="hashMap">
 		SELECT
 			B.OCCRRNC_DT as "occrrncDt"
-			, A.HOSTNAME as "hostname"
+			, A.HOSTNAME as "hostName"
 			, A.LFNC_NM as "lfncNm"
 			, A.MFNC_NM as "mfncNm"
 			, A.SFNC_NM as "sfncNm"
@@ -125,7 +125,7 @@
 	<select id="selectJobFncUseList"  parameterType="Map" resultType="hashMap">
 		SELECT
 		B.OCCRRNC_DT as "occrrncDt"
-		, A.HOSTNAME as "hostname"
+		, A.HOSTNAME as "hostName"
 		, SUM(B.CREAT_CO) as "creatCo"
 		, SUM(B.UPDT_CO) as "updtCo"
 		, SUM(B.RDCNT) as "rdCnt"

@@ -89,7 +89,7 @@
 
 	<select id="selectScrStatlist"  parameterType="Map" resultType="hashMap">
 		SELECT A.OCCRRNC_DT AS "occrrncDt"
-			, A.HOSTNAME AS "hostname"
+			, A.HOSTNAME AS "hostName"
 			, B.SCR_NM AS "scrNm"
 			, A.URL AS "url"
 			, A.RDCNT AS "rdCnt"
