@@ -50,23 +50,31 @@ public class ServerInfoController {
      */
     @ApiOperation(value = "업무시스템정보 목록조회")
     @GetMapping(path = "/list")
-    public String ServerInfoList() {
+    public String ServerInfoList() throws Exception { 
 
         String rtn = "";
-
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         Map<Object, Object> param = new HashMap<Object, Object>();
-        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
-        lst = serverInfoService.selectServerInfoList(param);
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();   
 
 
         ObjectMapper om = new ObjectMapper();
+        
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = serverInfoService.selectServerInfoList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }

@@ -5,22 +5,22 @@
 	<!-- Maria -->
     <select id="selectResourceUseDayList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		OCCRRNC_DT as "occrrncDt",
-		HOSTNAME as "hostName",
-		CPU_AVG as "cpuAvg",
-		MERY_AVG as "meryAvg",
-		DSK_AVG as "dskAvg"
+			OCCRRNC_DT as "occrrncDt",
+			HOSTNAME as "hostName",
+			CPU_AVG as "cpuAvg",
+			MERY_AVG as "meryAvg",
+			DSK_AVG as "dskAvg"
 		FROM COMTSRESOURCESSTAT
 		ORDER BY OCCRRNC_DT DESC
 	</select>
 
 	<select id="selectResourceUseMonthList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		LEFT(OCCRRNC_DT,6) as "occrrncMonth",
-		HOSTNAME as "hostName",
-		TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
-		TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
-		TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
+			LEFT(OCCRRNC_DT,6) as "occrrncMonth",
+			HOSTNAME as "hostName",
+			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
+			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
+			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
 		FROM COMTSRESOURCESSTAT
 		GROUP BY LEFT(OCCRRNC_DT,6), HOSTNAME
 		ORDER BY LEFT(OCCRRNC_DT,6)
@@ -29,11 +29,11 @@
 
 	<select id="selectResourceUseYearList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		LEFT(OCCRRNC_DT,4) as "occrrncYear",
-		HOSTNAME as "hostName",
-		TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
-		TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
-		TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
+			LEFT(OCCRRNC_DT,4) as "occrrncYear",
+			HOSTNAME as "hostName",
+			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
+			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
+			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
 		FROM COMTSRESOURCESSTAT
 		GROUP BY LEFT(OCCRRNC_DT,4), HOSTNAME
 		ORDER BY LEFT(OCCRRNC_DT,4)

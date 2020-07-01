@@ -152,4 +152,33 @@ public class UserStatController {
 
         return rtn;
     }
+    
+    /**
+     * @name : UserMonthStatList( 이용자수 월별 통계)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 로그인 횟수 목록조회
+     */
+    @ApiOperation(value = "이용자수 월별 통계")
+    @GetMapping(path = "/userMonthStatList")
+    public String UserMonthStatList() {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        lst = userStatService.selectUserMonthStatList(param);
+
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            rtn = om.writeValueAsString(lst);
+        } catch (JsonProcessingException e) {
+            rtn = "json Mapper Error.";
+            e.printStackTrace();
+        }
+
+        return rtn;
+    }
 }

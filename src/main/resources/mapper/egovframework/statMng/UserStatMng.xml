@@ -24,6 +24,17 @@
 		GROUP BY OCCRRNC_DT, HOSTNAME
 
 	</select>
+	
+	<select id="selectUserMonthStatList"  parameterType="Map" resultType="hashMap">
+
+		SELECT LEFT(OCCRRNC_DT,6) as "occrrncMonth"
+		, HOSTNAME as "hostName"
+		, COUNT(USR_ID) as "usrCnt"
+		FROM COMTSUSERSTAT
+		WHERE 1=1
+		GROUP BY LEFT(OCCRRNC_DT,6) , HOSTNAME
+
+	</select>
 
 	<insert id="insertUserStat" parameterType="hashMap">
 		INSERT INTO COMTSUSERSTAT (

@@ -7,7 +7,7 @@
 
 		SELECT 	ID as "id"
 				, HOSTNAME as "hostName"
-				, OCCRRNC_DE as "occrrncDe"
+				, DATE_FORMAT(OCCRRNC_DE, '%Y-%m-%d %T')  as "occrrncDe"
 				, URL as "url"
 				, RQESTER_ID as "rqesterId"
 				, RQESTER_IP as "rqesterIP"

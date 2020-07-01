@@ -32,4 +32,6 @@ public interface UserStatDao {
     List<HashMap<Object, Object>> selectActiveUserList(Map<Object, Object> param);
 
     int insertUserStat(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectUserMonthStatList(Map<Object, Object> param);
 }

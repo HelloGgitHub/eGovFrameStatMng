@@ -10,7 +10,7 @@
 				HOSTNAME as "hostName",
 			   	SERVER_NM as "serverNm",
 			 	SERVER_KND as "serverKnd",
-				RGSDE as "rgsDe",
+				DATE_FORMAT(RGSDE, '%Y-%m-%d %T') as "rgsDe",
 				OPERSYSM_INFO as "opersysmInfo",
 				CPU_INFO as "cpuInfo",
 				MORY_INFO as "moryInfo",
@@ -19,9 +19,9 @@
 				CHARGER_NM as "chargerNm",
 				SERVER_DC as "serverDc",
 				FRST_REGISTER_ID as "frstRegisterId",
-				FRST_REGIST_PNTTM as "frstRegistPnttm",
+				DATE_FORMAT(FRST_REGIST_PNTTM, '%Y-%m-%d %T') as "frstRegistPnttm",
 				LAST_UPDUSR_ID as "lastUpdusrId",
-				LAST_UPDT_PNTTM  as "lastUpdtPnttm"
+				DATE_FORMAT(LAST_UPDT_PNTTM, '%Y-%m-%d %T')  as "lastUpdtPnttm"
 		FROM COMTNSERVERINFO
 
 	</select>
@@ -33,7 +33,7 @@
 				HOSTNAME as "hostName",
 				SERVER_NM as "serverNm",
 				SERVER_KND as "serverKnd",
-				RGSDE as "rgsDe",
+				DATE_FORMAT(RGSDE, '%Y-%m-%d %T') as "rgsDe",
 				OPERSYSM_INFO as "opersysmInfo",
 				CPU_INFO as "cpuInfo",
 				MORY_INFO as "moryInfo",
@@ -42,9 +42,9 @@
 				CHARGER_NM as "chargerNm",
 				SERVER_DC as "serverDc",
 				FRST_REGISTER_ID as "frstRegisterId",
-				FRST_REGIST_PNTTM as "frstRegistPnttm",
+				DATE_FORMAT(FRST_REGIST_PNTTM, '%Y-%m-%d %T') as "frstRegistPnttm",
 				LAST_UPDUSR_ID as "lastUpdusrId",
-				LAST_UPDT_PNTTM  as "lastUpdtPnttm"
+				DATE_FORMAT(LAST_UPDT_PNTTM, '%Y-%m-%d %T')  as "lastUpdtPnttm"
 		FROM COMTNSERVERINFO
 		WHERE 1=1
 		AND ID = '${ID}'
@@ -58,7 +58,7 @@
 				HOSTNAME as "hostName",
 				SERVER_NM as "serverNm",
 				SERVER_KND as "serverKnd",
-				RGSDE as "rgsDe",
+				DATE_FORMAT(RGSDE, '%Y-%m-%d %T') as "rgsDe",
 				OPERSYSM_INFO as "opersysmInfo",
 				CPU_INFO as "cpuInfo",
 				MORY_INFO as "moryInfo",
@@ -67,9 +67,9 @@
 				CHARGER_NM as "chargerNm",
 				SERVER_DC as "serverDc",
 				FRST_REGISTER_ID as "frstRegisterId",
-				FRST_REGIST_PNTTM as "frstRegistPnttm",
+				DATE_FORMAT(FRST_REGIST_PNTTM, '%Y-%m-%d %T') as "frstRegistPnttm",
 				LAST_UPDUSR_ID as "lastUpdusrId",
-				LAST_UPDT_PNTTM  as "lastUpdtPnttm"
+				DATE_FORMAT(LAST_UPDT_PNTTM, '%Y-%m-%d %T')  as "lastUpdtPnttm"
 		FROM COMTNSERVERINFO
 		WHERE 1=1
 		AND HOSTNAME = '${HOSTNAME}'

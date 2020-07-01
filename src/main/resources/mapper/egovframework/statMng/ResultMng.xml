@@ -4,44 +4,44 @@
 
 	<select id="selectResultIndexList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		ID as "id"
-		, RESULT_INDEX_NM as "resultIndexNm"
-		, RESULT_INDEX_DC as "resultIndexDc"
-		, REG_DTTM as "regDttm"
+			ID as "id"
+			, RESULT_INDEX_NM as "resultIndexNm"
+			, RESULT_INDEX_DC as "resultIndexDc"
+			, REG_DTTM as "regDttm"
 		FROM COMTSRESULTINDEXMNG
 	</select>
 
 	<select id="selectResultIndexDetail"  parameterType="Map" resultType="hashMap">
 		SELECT
-		ID as "id"
-		, RESULT_INDEX_NM as "resultIndexNm"
-		, RESULT_INDEX_DC as "resultIndexDc"
-		, REG_DTTM as "regDttm"
+			ID as "id"
+			, RESULT_INDEX_NM as "resultIndexNm"
+			, RESULT_INDEX_DC as "resultIndexDc"
+			, REG_DTTM as "regDttm"
 		FROM COMTSRESULTINDEXMNG
 		WHERE ID = '${ID}'
 	</select>
 
 	<select id="selectResultIndexNm"  parameterType="Map" resultType="hashMap">
 		SELECT
-		ID as "id"
-		, RESULT_INDEX_NM as "resultIndexNm"
-		, RESULT_INDEX_DC as "resultIndexDc"
-		, REG_DTTM as "regDttm"
-		FROM COMTSRESULTINDEXMNG
+			ID as "id"
+			, RESULT_INDEX_NM as "resultIndexNm"
+			, RESULT_INDEX_DC as "resultIndexDc"
+			, REG_DTTM as "regDttm"
+			FROM COMTSRESULTINDEXMNG
 		WHERE RESULT_INDEX_NM = '${RESULT_INDEX_NM}'
 	</select>
 
 	<insert id="insertResultIndex" parameterType="hashMap">
 		INSERT INTO COMTSRESULTINDEXMNG (
-		ID
-		, RESULT_INDEX_NM
-		, RESULT_INDEX_DC
-		, REG_DTTM
+			ID
+			, RESULT_INDEX_NM
+			, RESULT_INDEX_DC
+			, REG_DTTM
 		) VALUES (
-		NEXT VALUE FOR Seq_Result
-		, #{RESULT_INDEX_NM}
-		, #{RESULT_INDEX_DC}
-		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+			NEXT VALUE FOR Seq_Result
+			, #{RESULT_INDEX_NM}
+			, #{RESULT_INDEX_DC}
+			, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 		)
 	</insert>
 

@@ -32,17 +32,22 @@ public class UserStatService {
     @Autowired
     private UserStatDao mapper;
 
-    //웹로그 목록 조회
+    //로그인 횟수 목록조회
     public List<HashMap<Object, Object>> selectUserStatList(Map<Object, Object> param) {
         return mapper.selectUserStatList(param);
     }
-    //웹로그 목록 조회
+    //이용자수 조회
     public List<HashMap<Object, Object>> selectActiveUserList(Map<Object, Object> param) {
         return mapper.selectActiveUserList(param);
     }
 
-    //웹로그 등록
+    //로그인 횟수 측정
     public int insertUserStat(Map<Object, Object> param) {
         return mapper.insertUserStat(param);
+    }    
+    
+    //이용자수 월별 통계
+    public List<HashMap<Object, Object>> selectUserMonthStatList(Map<Object, Object> param) {
+        return mapper.selectUserMonthStatList(param);
     }
 }
