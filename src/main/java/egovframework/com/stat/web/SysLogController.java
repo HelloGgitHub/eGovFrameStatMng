@@ -1,21 +1,26 @@
 package egovframework.com.stat.web;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.service.SysLogService;
-import egovframework.com.stat.dao.SysLogVo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import egovframework.com.stat.dao.SysLogVo;
+import egovframework.com.stat.service.SysLogService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * @title : 업무기능로그관리
@@ -51,22 +56,30 @@ public class SysLogController {
      */
     @ApiOperation(value = "업무기능 로그 목록조회")
     @GetMapping(path = "/list")
-    public String SysLogList() {
+    public String SysLogList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = sysLogService.selectSysLogList(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = sysLogService.selectSysLogList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -88,7 +101,7 @@ public class SysLogController {
     public String CreateSysLogCreate(@RequestBody SysLogVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+       // String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
@@ -146,7 +159,7 @@ public class SysLogController {
     public String ReadSysLogCreate(@RequestBody SysLogVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+       // String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
@@ -203,7 +216,7 @@ public class SysLogController {
     public String UpdateSysLogCreate(@RequestBody SysLogVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+        //String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
@@ -260,7 +273,7 @@ public class SysLogController {
     public String DeleteSysLogCreate(@RequestBody SysLogVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+       // String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
@@ -309,22 +322,30 @@ public class SysLogController {
      */
     @ApiOperation(value = "기능별 호출 횟수 목록 조회")
     @GetMapping(path = "/fncReqlist")
-    public String FncReqList() {
+    public String FncReqList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = sysLogService.selectFncReqList(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = sysLogService.selectFncReqList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }

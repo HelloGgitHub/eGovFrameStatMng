@@ -1,19 +1,32 @@
 package egovframework.com.stat.web;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.service.ScrLstService;
-import egovframework.com.stat.dao.ScrLstVo;
-import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import egovframework.com.stat.dao.ScrLstVo;
+import egovframework.com.stat.service.ScrLstService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * @title : 화면정보관리
@@ -49,22 +62,30 @@ public class ScrLstController {
      */
     @ApiOperation(value = "화면정보 목록조회")
     @GetMapping(path = "/list")
-    public String ScrList() {
+    public String ScrList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = scrLstService.selectScrList(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = scrLstService.selectScrList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -84,23 +105,30 @@ public class ScrLstController {
     public String ScrDetail(@PathVariable("id") String id) throws Exception {
 
         String rtn = "";
-
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
 
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
         sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
         //System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
 
-        lst = scrLstService.selectScrDetail(sqlInpt);
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = scrLstService.selectScrDetail(sqlInpt);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -122,7 +150,7 @@ public class ScrLstController {
     public String ScrCreate(@RequestBody ScrLstVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+        //String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
@@ -263,29 +291,37 @@ public class ScrLstController {
     })
     @GetMapping(path = "/scrStatlist")
     public String ScrStatList(@RequestParam(value = "startDt") String startDt
-                            ,@RequestParam(value = "endDt") String endDt) throws UnsupportedEncodingException {
+                            ,@RequestParam(value = "endDt") String endDt) throws Exception {
 
         String rtn = "";
 
         String tmpStartDt 		= URLDecoder.decode(startDt		,"UTF-8");
         String tmpEndDt 	= URLDecoder.decode(endDt	,"UTF-8");
-
+        
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         Map<Object, Object> param = new HashMap<Object, Object>();
         param.put("STARTDT",tmpStartDt);
         param.put("ENDDT",tmpEndDt);
 
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = scrLstService.selectScrStatlist(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	 lst = scrLstService.selectScrStatlist(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -299,23 +335,31 @@ public class ScrLstController {
      */
     @ApiOperation(value = "미등록 화면 조회 ")
     @GetMapping(path = "/nonReglist")
-    public String NonRegScrlist() {
+    public String NonRegScrlist() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = scrLstService.selectNonRegScrlist(param);
-
-
         ObjectMapper om = new ObjectMapper();
-        try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
 
-        return rtn;
+        try {
+        	lst = scrLstService.selectNonRegScrlist(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+       }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+       
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+		
+		return rtn;
     }
 }

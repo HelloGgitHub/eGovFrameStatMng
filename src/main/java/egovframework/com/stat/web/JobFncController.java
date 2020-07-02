@@ -1,19 +1,33 @@
 package egovframework.com.stat.web;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.dao.JobFncVo;
-import egovframework.com.stat.service.JobFncService;
-import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import egovframework.com.stat.dao.JobFncVo;
+import egovframework.com.stat.service.JobFncService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * @title : 업무기능관리
@@ -48,22 +62,30 @@ public class JobFncController {
      */
     @ApiOperation(value = "업무기능 목록조회")
     @GetMapping(path = "/list")
-    public String JobFncList() {
+    public String JobFncList() throws Exception {
 
-        String rtn = "";
+    	String rtn = "";
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         Map<Object, Object> param = new HashMap<Object, Object>();
-        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
-        lst = jobFncService.selectJobFncList(param);
-
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();  
 
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = jobFncService.selectJobFncList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -85,21 +107,30 @@ public class JobFncController {
         String rtn = "";
 
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
-
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
         sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
         //System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
 
-        lst = jobFncService.selectJobFncDetail(sqlInpt);
+        
 
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = jobFncService.selectJobFncDetail(sqlInpt);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -121,21 +152,21 @@ public class JobFncController {
     public String JobFncCreate(@RequestBody JobFncVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+        //String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-//
-//        sqlInpt.put("ID", param.getId());
-//
-//        sqlInpt.put("HOSTNAME", param.getHostName());
-//        sqlInpt.put("LFNC_NM", param.getLFncNm());
-//        sqlInpt.put("MFNC_NM", param.getMFncNm());
-//        sqlInpt.put("SFNC_NM", param.getSFncNm());
-//        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
-//        sqlInpt.put("METHOD_NM", param.getMethodNm());
-//        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
-//        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
+
+        sqlInpt.put("ID", param.getId());
+
+        sqlInpt.put("HOSTNAME", param.getHostName());
+        sqlInpt.put("LFNC_NM", param.getlFncNm());
+        sqlInpt.put("MFNC_NM", param.getmFncNm());
+        sqlInpt.put("SFNC_NM", param.getsFncNm());
+        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
+        sqlInpt.put("METHOD_NM", param.getMethodNm());
+        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
+        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
 
         System.out.println(sqlInpt);
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
@@ -182,16 +213,16 @@ public class JobFncController {
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 
-//        sqlInpt.put("ID", param.getId());
-//
-//        sqlInpt.put("HOSTNAME", param.getHostName());
-//        sqlInpt.put("LFNC_NM", param.getLFncNm());
-//        sqlInpt.put("MFNC_NM", param.getMFncNm());
-//        sqlInpt.put("SFNC_NM", param.getSFncNm());
-//        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
-//        sqlInpt.put("METHOD_NM", param.getMethodNm());
-//        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
-//        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
+        sqlInpt.put("ID", param.getId());
+
+        sqlInpt.put("HOSTNAME", param.getHostName());
+        sqlInpt.put("LFNC_NM", param.getlFncNm());
+        sqlInpt.put("MFNC_NM", param.getmFncNm());
+        sqlInpt.put("SFNC_NM", param.getsFncNm());
+        sqlInpt.put("DETAIL_FNC_NM", param.getDetailFncNm());
+        sqlInpt.put("METHOD_NM", param.getMethodNm());
+        sqlInpt.put("FRST_REGISTER_ID", param.getFrstRegisterId());
+        sqlInpt.put("LAST_UPDUSR_ID", param.getLastUpdusrId());
 
 
         int inputCnt = jobFncService.updateJobFncDetail(sqlInpt);
@@ -264,22 +295,30 @@ public class JobFncController {
      */
     @ApiOperation(value = "업무기능목록별 사용량 조회")
     @GetMapping(path = "/jobFncStatList")
-    public String SelectJobFncStatList() {
+    public String SelectJobFncStatList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = jobFncService.selectJobFncStatList(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = jobFncService.selectJobFncStatList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -293,22 +332,31 @@ public class JobFncController {
      */
     @ApiOperation(value = "기능별 사용량 조회")
     @GetMapping(path = "/jobFncUseList")
-    public String SelectJobFncUseList() {
+    public String SelectJobFncUseList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
-        lst = jobFncService.selectJobFncUseList(param);
 
 
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = jobFncService.selectJobFncUseList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }

@@ -1,22 +1,27 @@
 package egovframework.com.stat.web;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.service.WebLogService;
-import egovframework.com.stat.dao.WebLogVo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import egovframework.com.stat.dao.WebLogVo;
+import egovframework.com.stat.service.WebLogService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * @title : 화면접근 로그관리
@@ -52,22 +57,30 @@ public class WebLogController {
      */
     @ApiOperation(value = "화면 접근 횟수 목록 조회")
     @GetMapping(path = "/list")
-    public String WebLogList() {
+    public String WebLogList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = webLogService.selectWebLogList(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = webLogService.selectWebLogList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -89,7 +102,7 @@ public class WebLogController {
     public String WebLogCreate(@RequestBody WebLogVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+        //String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();

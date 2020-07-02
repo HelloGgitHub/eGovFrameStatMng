@@ -94,22 +94,30 @@ public class UserStatController {
      */
     @ApiOperation(value = "로그인 횟수 목록조회")
     @GetMapping(path = "/userStatList")
-    public String UserStatList() {
+    public String UserStatList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = userStatService.selectUserStatList(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = userStatService.selectUserStatList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -128,27 +136,35 @@ public class UserStatController {
     })
     @GetMapping(path = "/activeUserList")
     public String ActiveUserList(@RequestParam(value = "startDt") String startDt
-            ,@RequestParam(value = "endDt") String endDt) throws UnsupportedEncodingException {
+            ,@RequestParam(value = "endDt") String endDt) throws Exception {
 
         String rtn = "";
         String tmpStartDt 		= URLDecoder.decode(startDt		,"UTF-8");
         String tmpEndDt 	= URLDecoder.decode(endDt	,"UTF-8");
 
         Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         param.put("STARTDT",tmpStartDt);
         param.put("ENDDT",tmpEndDt);
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-        lst = userStatService.selectActiveUserList(param);
-
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = userStatService.selectActiveUserList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -162,22 +178,30 @@ public class UserStatController {
      */
     @ApiOperation(value = "이용자수 월별 통계")
     @GetMapping(path = "/userMonthStatList")
-    public String UserMonthStatList() {
+    public String UserMonthStatList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
-        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
-        lst = userStatService.selectUserMonthStatList(param);
-
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();   
 
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = userStatService.selectUserMonthStatList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }

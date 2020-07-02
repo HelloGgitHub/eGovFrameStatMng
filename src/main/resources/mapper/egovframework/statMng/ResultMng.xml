@@ -7,7 +7,7 @@
 			ID as "id"
 			, RESULT_INDEX_NM as "resultIndexNm"
 			, RESULT_INDEX_DC as "resultIndexDc"
-			, REG_DTTM as "regDttm"
+			, DATE_FORMAT(REG_DTTM, '%Y-%m-%d %T')  as "regDttm"
 		FROM COMTSRESULTINDEXMNG
 	</select>
 
@@ -16,7 +16,7 @@
 			ID as "id"
 			, RESULT_INDEX_NM as "resultIndexNm"
 			, RESULT_INDEX_DC as "resultIndexDc"
-			, REG_DTTM as "regDttm"
+			, DATE_FORMAT(REG_DTTM, '%Y-%m-%d %T') as "regDttm"
 		FROM COMTSRESULTINDEXMNG
 		WHERE ID = '${ID}'
 	</select>
@@ -26,7 +26,7 @@
 			ID as "id"
 			, RESULT_INDEX_NM as "resultIndexNm"
 			, RESULT_INDEX_DC as "resultIndexDc"
-			, REG_DTTM as "regDttm"
+			, DATE_FORMAT(REG_DTTM, '%Y-%m-%d %T')  as "regDttm"
 			FROM COMTSRESULTINDEXMNG
 		WHERE RESULT_INDEX_NM = '${RESULT_INDEX_NM}'
 	</select>

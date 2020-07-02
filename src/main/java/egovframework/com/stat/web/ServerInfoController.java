@@ -1,20 +1,33 @@
 package egovframework.com.stat.web;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import egovframework.com.stat.service.ServerInfoService;
-
-import egovframework.com.stat.dao.ServerInfoVo;
-import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import egovframework.com.stat.dao.ServerInfoVo;
+import egovframework.com.stat.service.ServerInfoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * @title : 업무시스템관리
@@ -93,24 +106,33 @@ public class ServerInfoController {
     @GetMapping(path = "/detailInfo/{id}")
     public String ServerDetailInfo(@PathVariable("id") String id) throws Exception {
 
-        String rtn = "";
-
-        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+    	String rtn = "";
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();  
 
 
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
         sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
         //System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
-
-        lst = serverInfoService.selectServerDetailInfo(sqlInpt);
+       
 
         ObjectMapper om = new ObjectMapper();
+        
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	 lst = serverInfoService.selectServerDetailInfo(sqlInpt);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -132,7 +154,7 @@ public class ServerInfoController {
     public String ServerInfoCreate(@RequestBody ServerInfoVo param) throws Exception {
 
         String rtn = "";
-        String data = URLDecoder.decode(rtn,"UTF-8");
+        //String data = URLDecoder.decode(rtn,"UTF-8");
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
@@ -288,23 +310,29 @@ public class ServerInfoController {
      */
     @ApiOperation(value = "미등록 업무시스템조회")
     @GetMapping(path = "/nonReglist")
-    public String NonRegServerInfoList() {
+    public String NonRegServerInfoList() throws Exception{
 
-        String rtn = "";
-
+    	String rtn = "";
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         Map<Object, Object> param = new HashMap<Object, Object>();
-        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
-        lst = serverInfoService.selectNonRegServerInfoList(param);
-
-
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();   
         ObjectMapper om = new ObjectMapper();
+       
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	 lst = serverInfoService.selectNonRegServerInfoList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }

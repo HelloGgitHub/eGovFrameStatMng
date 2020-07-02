@@ -49,22 +49,30 @@ public class ResultMngController {
      */
     @ApiOperation(value = "성과지표 목록조회")
     @GetMapping(path = "/list")
-    public String ResultIndexList() {
+    public String ResultIndexList() throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
-        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
-        lst = resultMngService.selectResultIndexList(param);
-
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();    
 
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = resultMngService.selectResultIndexList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
@@ -84,23 +92,30 @@ public class ResultMngController {
     public String ResultIndexDetail(@PathVariable("id") String id) throws Exception {
 
         String rtn = "";
-
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-
 
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
         sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
         //System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
 
-        lst = resultMngService.selectResultIndexDetail(sqlInpt);
-
         ObjectMapper om = new ObjectMapper();
+
         try {
-            rtn = om.writeValueAsString(lst);
-        } catch (JsonProcessingException e) {
-            rtn = "json Mapper Error.";
-            e.printStackTrace();
-        }
+        	lst = resultMngService.selectResultIndexDetail(sqlInpt);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 
         return rtn;
     }
