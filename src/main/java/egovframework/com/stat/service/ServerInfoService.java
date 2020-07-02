@@ -38,9 +38,13 @@ public class ServerInfoService {
     public List<HashMap<Object, Object>> selectServerInfoList(Map<Object, Object> param) {
         return mapper.selectServerInfoList(param);
     }
-    //시스템정보 조회
+    //시스템정보 상세조회
     public List<HashMap<Object, Object>> selectServerDetailInfo(Map<Object, Object> param) {
         return mapper.selectServerDetailInfo(param);
+    }
+    //시스템정보 조회
+    public List<HashMap<Object, Object>> selectServerInfo(Map<Object, Object> param) {
+        return mapper.selectServerInfo(param);
     }
     //시스템정보 등록
     public int insertServerDetailInfo(Map<Object, Object> param) {

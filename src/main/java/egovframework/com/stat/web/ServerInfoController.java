@@ -136,7 +136,58 @@ public class ServerInfoController {
 
         return rtn;
     }
+    
+    /**
+     * @name : ServerDetailInfo(업무시스템정보 상세조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 업무시스템정보 상세조회
+     */
+    @ApiOperation(value = "업무시스템정보 조회")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "serverNm", value = "시스템명", required = false, dataType = "string", paramType = "path", defaultValue = "")
+    })
+    @GetMapping(path = "/serverInfo/{serverNm}")
+    public String ServerInfo(@PathVariable("serverNm") String serverNm) throws Exception {
 
+    	String rtn = "";
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();  
+
+
+        Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        
+        
+        String inputParam  = URLDecoder.decode(serverNm		,"UTF-8");
+        if(inputParam.equals("undefined")) {
+        	inputParam = "";
+        }
+        sqlInpt.put("SERVER_NM", inputParam);
+        //System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
+       
+
+        ObjectMapper om = new ObjectMapper();
+        
+        try {
+        	 lst = serverInfoService.selectServerInfo(sqlInpt);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
+    
     /**
      * @name : ServerInfoCreate(업무시스템정보 등록)
      * @date : 2020. 6. 11.
@@ -268,7 +319,7 @@ public class ServerInfoController {
      */
     @ApiOperation(value = "업무시스템 정보 삭제", notes = "업무시스템정보를 삭제한다")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serverId"	, value = "서버ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+            @ApiImplicitParam(name = "serverId"	, value = "시스템ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),

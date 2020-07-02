@@ -27,7 +27,6 @@
 	</select>
 
 	<select id="selectServerDetailInfo"  parameterType="Map" resultType="hashMap">
-
 		SELECT 	ID as "id",
 				PROJECT_ID as "projectId",
 				HOSTNAME as "hostName",
@@ -48,7 +47,31 @@
 		FROM COMTNSERVERINFO
 		WHERE 1=1
 		AND ID = '${ID}'
-
+	</select>
+	
+	
+	<select id="selectServerInfo"  parameterType="Map" resultType="hashMap">
+		SELECT 	ID as "id",
+				PROJECT_ID as "projectId",
+				HOSTNAME as "hostName",
+				SERVER_NM as "serverNm",
+				SERVER_KND as "serverKnd",
+				DATE_FORMAT(RGSDE, '%Y-%m-%d %T') as "rgsDe",
+				OPERSYSM_INFO as "opersysmInfo",
+				CPU_INFO as "cpuInfo",
+				MORY_INFO as "moryInfo",
+				HDDISK as "hdDisk",
+				ETC_INFO as "etcInfo",
+				CHARGER_NM as "chargerNm",
+				SERVER_DC as "serverDc",
+				FRST_REGISTER_ID as "frstRegisterId",
+				DATE_FORMAT(FRST_REGIST_PNTTM, '%Y-%m-%d %T') as "frstRegistPnttm",
+				LAST_UPDUSR_ID as "lastUpdusrId",
+				DATE_FORMAT(LAST_UPDT_PNTTM, '%Y-%m-%d %T')  as "lastUpdtPnttm"
+		FROM COMTNSERVERINFO
+		WHERE 1=1
+		<if test='!SERVER_NM.equals("") and SERVER_NM != null'>AND SERVER_NM LIKE '%${SERVER_NM}%' </if>
+		
 	</select>
 
 	<select id="selectServerDetail"  parameterType="Map" resultType="hashMap">
@@ -119,7 +142,7 @@
 	<update id="updateServerDetailInfo" parameterType="hashMap">
 	UPDATE COMTNSERVERINFO
 		SET LAST_UPDT_PNTTM = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
-		<if test='PROJECT_ID != null'> , PROJECT_ID             = '${PROJECT_ID}' </if>
+		<if test='!PROJECT_ID.equals("") and PROJECT_ID != null'  > , PROJECT_ID             = '${PROJECT_ID}' </if>
 		<if test='HOSTNAME != null'> , HOSTNAME              	= '${HOSTNAME}' </if>
 		<if test='SERVER_NM != null'> , SERVER_NM               = '${SERVER_NM}' </if>
 		<if test='SERVER_KND != null'> , SERVER_KND             = '${SERVER_KND}' </if>
