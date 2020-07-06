@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.com.stat.dao.ResourceUseDao">
 
-	<!-- Maria -->
+	<!-- 일별 -->
     <select id="selectResourceUseDayList"  parameterType="Map" resultType="hashMap">
 		SELECT
 			OCCRRNC_DT as "occrrncDt",
@@ -11,9 +11,12 @@
 			MERY_AVG as "meryAvg",
 			DSK_AVG as "dskAvg"
 		FROM COMTSRESOURCESSTAT
+		WHERE 1=1
+		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
 		ORDER BY OCCRRNC_DT DESC
 	</select>
-
+	
+	<!-- 월별 -->
 	<select id="selectResourceUseMonthList"  parameterType="Map" resultType="hashMap">
 		SELECT
 			LEFT(OCCRRNC_DT,6) as "occrrncMonth",
@@ -22,11 +25,14 @@
 			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
 			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
 		FROM COMTSRESOURCESSTAT
+		WHERE 1=1
+		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
 		GROUP BY LEFT(OCCRRNC_DT,6), HOSTNAME
 		ORDER BY LEFT(OCCRRNC_DT,6)
 
 	</select>
-
+	
+	<!-- 년별 -->
 	<select id="selectResourceUseYearList"  parameterType="Map" resultType="hashMap">
 		SELECT
 			LEFT(OCCRRNC_DT,4) as "occrrncYear",
@@ -35,6 +41,8 @@
 			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
 			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
 		FROM COMTSRESOURCESSTAT
+		WHERE 1=1
+		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
 		GROUP BY LEFT(OCCRRNC_DT,4), HOSTNAME
 		ORDER BY LEFT(OCCRRNC_DT,4)
 	</select>

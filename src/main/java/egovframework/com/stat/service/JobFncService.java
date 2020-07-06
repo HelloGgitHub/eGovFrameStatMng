@@ -36,7 +36,7 @@ public class JobFncService {
     public List<HashMap<Object, Object>> selectJobFncList(Map<Object, Object> param) {
         return mapper.selectJobFncList(param);
     }
-    //업무기능 조회
+    //업무기능 상세조회
     public List<HashMap<Object, Object>> selectJobFncDetail(Map<Object, Object> param) {
         return mapper.selectJobFncDetail(param);
     }

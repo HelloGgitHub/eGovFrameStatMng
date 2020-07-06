@@ -26,11 +26,18 @@ public class BatchScheduler {
         sqlInpt.put("OCCRRNC_DT", batchDate);
         sqlInpt.put("BATCH_NM", "SysLogSummary");
         service.insertBatchHistory(sqlInpt);
+        
+        
+        try {
+        	int cnt = service.insertSysLogSummary();
+        	sqlInpt.put("WRK_CNT", cnt);
+            sqlInpt.put("SCS_YN", "Y");
+        }catch(Exception e) {
+        	sqlInpt.put("WRK_CNT", 0);
+            sqlInpt.put("SCS_YN", "N");
+        }
 
-        int cnt = service.insertSysLogSummary();
-
-        sqlInpt.put("WRK_CNT", cnt);
-        sqlInpt.put("SCS_YN", "Y");
+        
         service.updateBatchHistory(sqlInpt);
 
 //        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
@@ -46,12 +53,16 @@ public class BatchScheduler {
         sqlInpt.put("OCCRRNC_DT", batchDate);
         sqlInpt.put("BATCH_NM", "WebLogSummary");
         service.insertBatchHistory(sqlInpt);
+        
+        try {
+        	int cnt = service.insertWebLogSummary();
+        	sqlInpt.put("WRK_CNT", cnt);
+            sqlInpt.put("SCS_YN", "Y");
+        }catch(Exception e) {
+        	sqlInpt.put("WRK_CNT", 0);
+            sqlInpt.put("SCS_YN", "N");
+        }
 
-        int cnt = service.insertWebLogSummary();
-
-
-        sqlInpt.put("WRK_CNT", cnt);
-        sqlInpt.put("SCS_YN", "Y");
         service.updateBatchHistory(sqlInpt);
 //        log.info(DateFormatUtils.format(new Date(),"yyyy-MM-dd'T'HH:mm:ssZZ"));
     }
