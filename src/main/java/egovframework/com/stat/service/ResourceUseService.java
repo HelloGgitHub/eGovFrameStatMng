@@ -37,15 +37,29 @@ public class ResourceUseService {
     public List<HashMap<Object, Object>> selectResourceUseDayList(Map<Object, Object> param) {
         return mapper.selectResourceUseDayList(param);
     }
+    
+  //시스템 별 자원 사용률 조회(일)그래프
+    public List<HashMap<Object, Object>> selectResourceUseDayHostList(Map<Object, Object> param) {
+        return mapper.selectResourceUseDayHostList(param);
+    }
 
-    //시스템 별 자원 사용률 조회(년)
+    //시스템 별 자원 사용률 조회(월)
     public List<HashMap<Object, Object>> selectResourceUseMonthList(Map<Object, Object> param) {
         return mapper.selectResourceUseMonthList(param);
+    }
+    
+  //시스템 별 자원 사용률 조회(월)그래프
+    public List<HashMap<Object, Object>> selectResourceUseMonthHostList(Map<Object, Object> param) {
+        return mapper.selectResourceUseMonthHostList(param);
     }
     //시스템 별 자원 사용률 조회(년)
     public List<HashMap<Object, Object>> selectResourceUseYearList(Map<Object, Object> param) {
         return mapper.selectResourceUseYearList(param);
     }
-
+    
+  //시스템 별 자원 사용률 조회(년)
+    public List<HashMap<Object, Object>> selectResourceUseYearHostList(Map<Object, Object> param) {
+        return mapper.selectResourceUseYearHostList(param);
+    }
 
 }

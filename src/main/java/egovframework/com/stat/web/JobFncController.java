@@ -324,14 +324,14 @@ public class JobFncController {
     }
 
     /**
-     * @name : SelectJobFncUseList(기능별 사용량 조회)
+     * @name : SelectJobFncUseList(기능별 사용량 조회(일))
      * @date : 2020. 6. 11.
      * @author : "egov"
      * @return_type : String
      * @desc : 기능별 사용량 조회
      */
-    @ApiOperation(value = "기능별 사용량 조회")
-    @GetMapping(path = "/jobFncUseList")
+    @ApiOperation(value = "기능별 사용량 조회(일)")
+    @GetMapping(path = "/jobFncUseDayList")
     public String SelectJobFncUseList() throws Exception {
 
         String rtn = "";
@@ -343,7 +343,7 @@ public class JobFncController {
         ObjectMapper om = new ObjectMapper();
 
         try {
-        	lst = jobFncService.selectJobFncUseList(param);
+        	lst = jobFncService.selectJobFncUseDayList(param);
         	rtnMap.put("list", lst);
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");

@@ -16,6 +16,21 @@
 		ORDER BY OCCRRNC_DT DESC
 	</select>
 	
+	<!-- 일별그래프 -->
+    <select id="selectResourceUseDayHostList"  parameterType="Map" resultType="hashMap">
+		SELECT
+			OCCRRNC_DT as "occrrncDt",
+			HOSTNAME as "hostName",
+			CPU_AVG as "cpuAvg",
+			MERY_AVG as "meryAvg",
+			DSK_AVG as "dskAvg"
+		FROM COMTSRESOURCESSTAT
+		WHERE 1=1
+		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
+		AND  OCCRRNC_DT BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 DAY),'%Y%m%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y%m%d')
+		ORDER BY OCCRRNC_DT DESC
+	</select>
+	
 	<!-- 월별 -->
 	<select id="selectResourceUseMonthList"  parameterType="Map" resultType="hashMap">
 		SELECT
@@ -29,7 +44,22 @@
 		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
 		GROUP BY LEFT(OCCRRNC_DT,6), HOSTNAME
 		ORDER BY LEFT(OCCRRNC_DT,6)
-
+	</select>
+	
+	<!-- 월별그래프 -->
+	<select id="selectResourceUseMonthHostList"  parameterType="Map" resultType="hashMap">
+		SELECT
+			LEFT(OCCRRNC_DT,6) as "occrrncMonth",
+			HOSTNAME as "hostName",
+			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
+			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
+			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
+		FROM COMTSRESOURCESSTAT
+		WHERE 1=1
+		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
+		AND LEFT(OCCRRNC_DT,6) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH),'%Y%m') AND DATE_FORMAT(NOW(), '%Y%m')
+		GROUP BY LEFT(OCCRRNC_DT,6), HOSTNAME
+		ORDER BY LEFT(OCCRRNC_DT,6)
 	</select>
 	
 	<!-- 년별 -->
@@ -43,6 +73,22 @@
 		FROM COMTSRESOURCESSTAT
 		WHERE 1=1
 		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
+		GROUP BY LEFT(OCCRRNC_DT,4), HOSTNAME
+		ORDER BY LEFT(OCCRRNC_DT,4)
+	</select>
+	
+	<!-- 년별그래프 -->
+	<select id="selectResourceUseYearHostList"  parameterType="Map" resultType="hashMap">
+		SELECT
+			LEFT(OCCRRNC_DT,4) as "occrrncYear",
+			HOSTNAME as "hostName",
+			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
+			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
+			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
+		FROM COMTSRESOURCESSTAT
+		WHERE 1=1
+		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
+		AND LEFT(OCCRRNC_DT,4) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 YEAR),'%Y') AND DATE_FORMAT(NOW(), '%Y') 
 		GROUP BY LEFT(OCCRRNC_DT,4), HOSTNAME
 		ORDER BY LEFT(OCCRRNC_DT,4)
 	</select>

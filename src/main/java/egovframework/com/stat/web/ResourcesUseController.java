@@ -79,13 +79,13 @@ public class ResourcesUseController {
     }
     
     /**
-     * @name : ResourceUseDayHostList(시스템 별 자원 사용률 조회(일))
+     * @name : ResourceUseDayHostList(시스템 별 자원 사용률 조회(일)그래프)
      * @date : 2020. 6. 11.
      * @author : "egov"
      * @return_type : String
-     * @desc : 시스템 별 자원 사용률 조회(일평균)
+     * @desc : 시스템 별 자원 사용률 조회(일)그래프
      */
-    @ApiOperation(value = "시스템 별 자원 사용률 조회(일)")
+    @ApiOperation(value = "시스템 별 자원 사용률 조회(일)그래프")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
@@ -102,7 +102,7 @@ public class ResourcesUseController {
         ObjectMapper om = new ObjectMapper();
 
         try {
-        	lst = resourceUseService.selectResourceUseDayList(param);
+        	lst = resourceUseService.selectResourceUseDayHostList(param);
         	rtnMap.put("list", lst);
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
@@ -159,13 +159,13 @@ public class ResourcesUseController {
     }
     
     /**
-     * @name : ResourceUseMonthHostList(시스템 별 자원 사용률 조회(월))
+     * @name : ResourceUseMonthHostList(시스템 별 자원 사용률 조회(월)그래프)
      * @date : 2020. 6. 11.
      * @author : "egov"
      * @return_type : String
-     * @desc : 시스템 별 자원 사용률 조회(월)
+     * @desc : 시스템 별 자원 사용률 조회(월그래프)
      */
-    @ApiOperation(value = "시스템 별 자원 사용률 조회(월)")
+    @ApiOperation(value = "시스템 별 자원 사용률 조회(월)그래프")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
@@ -181,7 +181,7 @@ public class ResourcesUseController {
         ObjectMapper om = new ObjectMapper();
 
         try {
-        	lst = resourceUseService.selectResourceUseMonthList(param);
+        	lst = resourceUseService.selectResourceUseMonthHostList(param);
         	rtnMap.put("list", lst);
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
@@ -238,13 +238,13 @@ public class ResourcesUseController {
     }
     
     /**
-     * @name : ResourceUseYearHostList(시스템 별 자원 사용률 조회(년))
+     * @name : ResourceUseYearHostList(시스템 별 자원 사용률 조회(년)그래프)
      * @date : 2020. 6. 11.
      * @author : "egov"
      * @return_type : String
-     * @desc : 시스템 별 자원 사용률 조회(년)
+     * @desc : 시스템 별 자원 사용률 조회(년그래프)
      */
-    @ApiOperation(value = "시스템 별 자원 사용률 조회(년)")
+    @ApiOperation(value = "시스템 별 자원 사용률 조회(년)그래프")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
@@ -260,7 +260,7 @@ public class ResourcesUseController {
         ObjectMapper om = new ObjectMapper();
 
         try {
-        	lst = resourceUseService.selectResourceUseYearList(param);
+        	lst = resourceUseService.selectResourceUseYearHostList(param);
         	rtnMap.put("list", lst);
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");

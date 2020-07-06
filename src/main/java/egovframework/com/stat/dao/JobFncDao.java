@@ -41,7 +41,7 @@ public interface JobFncDao {
 
     List<HashMap<Object, Object>> selectJobFncStatList(Map<Object, Object> param);
 
-    List<HashMap<Object, Object>> selectJobFncUseList(Map<Object, Object> param);
+    List<HashMap<Object, Object>> selectJobFncUseDayList(Map<Object, Object> param);
 
 
 }

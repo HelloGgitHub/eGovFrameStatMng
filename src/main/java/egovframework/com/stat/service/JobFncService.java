@@ -61,7 +61,7 @@ public class JobFncService {
         return mapper.selectJobFncStatList(param);
     }
     //기능별 사용량 조회(CRUD)
-    public List<HashMap<Object, Object>> selectJobFncUseList(Map<Object, Object> param) {
-        return mapper.selectJobFncUseList(param);
+    public List<HashMap<Object, Object>> selectJobFncUseDayList(Map<Object, Object> param) {
+        return mapper.selectJobFncUseDayList(param);
     }
 }

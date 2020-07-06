@@ -28,10 +28,15 @@ import java.util.Map;
 public interface ResourceUseDao {
 
     List<HashMap<Object, Object>> selectResourceUseDayList(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectResourceUseDayHostList(Map<Object, Object> param);    
 
     List<HashMap<Object, Object>> selectResourceUseMonthList(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectResourceUseMonthHostList(Map<Object, Object> param);
 
     List<HashMap<Object, Object>> selectResourceUseYearList(Map<Object, Object> param);
-
+    
+    List<HashMap<Object, Object>> selectResourceUseYearHostList(Map<Object, Object> param);
 
 }
