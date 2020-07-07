@@ -18,17 +18,35 @@
 	
 	<!-- 일별그래프 -->
     <select id="selectResourceUseDayHostList"  parameterType="Map" resultType="hashMap">
-		SELECT
-			OCCRRNC_DT as "occrrncDt",
-			HOSTNAME as "hostName",
-			CPU_AVG as "cpuAvg",
-			MERY_AVG as "meryAvg",
-			DSK_AVG as "dskAvg"
-		FROM COMTSRESOURCESSTAT
-		WHERE 1=1
-		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
-		AND  OCCRRNC_DT BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 DAY),'%Y%m%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y%m%d')
-		ORDER BY OCCRRNC_DT DESC
+<!-- 		SELECT -->
+<!-- 			OCCRRNC_DT as "occrrncDt", -->
+<!-- 			HOSTNAME as "hostName", -->
+<!-- 			CPU_AVG as "cpuAvg", -->
+<!-- 			MERY_AVG as "meryAvg", -->
+<!-- 			DSK_AVG as "dskAvg" -->
+<!-- 		FROM COMTSRESOURCESSTAT -->
+<!-- 		WHERE 1=1 -->
+<!-- 		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if> -->
+<!-- 		AND  OCCRRNC_DT BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 DAY),'%Y%m%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y%m%d') -->
+<!-- 		ORDER BY OCCRRNC_DT DESC -->
+			<![CDATA[
+			SELECT
+				B.OCCRRNC_DT as "occrrncDt",
+				TRUNCATE(AVG(IFNULL(CPU_AVG,0)),1) as "cpuAvg",
+				TRUNCATE(AVG(IFNULL(MERY_AVG,0)),1) as "meryAvg",
+				TRUNCATE(AVG(IFNULL(DSK_AVG,0)),1) as "dskAvg"
+			FROM (SELECT * FROM COMTSRESOURCESSTAT 
+				  WHERE HOSTNAME = '${HOSTNAME}' ) A
+				  RIGHT OUTER JOIN  ( WITH recursive cte as (
+											    SELECT NOW() - interval 7 day dt
+											    UNION ALL 
+											    SELECT dt + interval 1 day FROM cte where dt < NOW() - interval 1 day
+											)
+											SELECT
+											    DATE_FORMAT(date(dt),'%Y%m%d') AS OCCRRNC_DT
+											FROM cte) B ON B.OCCRRNC_DT = A.OCCRRNC_DT
+			GROUP BY B.OCCRRNC_DT
+			]]>
 	</select>
 	
 	<!-- 월별 -->
@@ -48,18 +66,36 @@
 	
 	<!-- 월별그래프 -->
 	<select id="selectResourceUseMonthHostList"  parameterType="Map" resultType="hashMap">
-		SELECT
-			LEFT(OCCRRNC_DT,6) as "occrrncMonth",
-			HOSTNAME as "hostName",
-			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
-			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
-			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
-		FROM COMTSRESOURCESSTAT
-		WHERE 1=1
-		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
-		AND LEFT(OCCRRNC_DT,6) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH),'%Y%m') AND DATE_FORMAT(NOW(), '%Y%m')
-		GROUP BY LEFT(OCCRRNC_DT,6), HOSTNAME
-		ORDER BY LEFT(OCCRRNC_DT,6)
+<!-- 		SELECT -->
+<!-- 			LEFT(OCCRRNC_DT,6) as "occrrncMonth", -->
+<!-- 			HOSTNAME as "hostName", -->
+<!-- 			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg", -->
+<!-- 			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg", -->
+<!-- 			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg" -->
+<!-- 		FROM COMTSRESOURCESSTAT -->
+<!-- 		WHERE 1=1 -->
+<!-- 		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if> -->
+<!-- 		AND LEFT(OCCRRNC_DT,6) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH),'%Y%m') AND DATE_FORMAT(NOW(), '%Y%m') -->
+<!-- 		GROUP BY LEFT(OCCRRNC_DT,6), HOSTNAME -->
+<!-- 		ORDER BY LEFT(OCCRRNC_DT,6) -->
+		<![CDATA[
+			SELECT
+				B.OCCRRNC_DT as "occrrncMonth",
+				TRUNCATE(AVG(IFNULL(CPU_AVG,0)),1) as "cpuAvg",
+				TRUNCATE(AVG(IFNULL(MERY_AVG,0)),1) as "meryAvg",
+				TRUNCATE(AVG(IFNULL(DSK_AVG,0)),1) as "dskAvg"
+			FROM (SELECT * FROM COMTSRESOURCESSTAT 
+				  WHERE HOSTNAME = 'testserver') A
+				  RIGHT OUTER JOIN  ( WITH recursive cte as (
+											    SELECT NOW() - interval 5 MONTH dt
+											    UNION ALL 
+											    SELECT dt + interval 1 MONTH FROM cte where dt < NOW()
+											)
+											SELECT
+											    DATE_FORMAT(date(dt),'%Y%m') AS OCCRRNC_DT
+											FROM cte) B ON B.OCCRRNC_DT = LEFT(A.OCCRRNC_DT,6)
+			GROUP BY B.OCCRRNC_DT
+		]]>
 	</select>
 	
 	<!-- 년별 -->
@@ -79,18 +115,36 @@
 	
 	<!-- 년별그래프 -->
 	<select id="selectResourceUseYearHostList"  parameterType="Map" resultType="hashMap">
-		SELECT
-			LEFT(OCCRRNC_DT,4) as "occrrncYear",
-			HOSTNAME as "hostName",
-			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg",
-			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg",
-			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg"
-		FROM COMTSRESOURCESSTAT
-		WHERE 1=1
-		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
-		AND LEFT(OCCRRNC_DT,4) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 YEAR),'%Y') AND DATE_FORMAT(NOW(), '%Y') 
-		GROUP BY LEFT(OCCRRNC_DT,4), HOSTNAME
-		ORDER BY LEFT(OCCRRNC_DT,4)
+<!-- 		SELECT -->
+<!-- 			LEFT(OCCRRNC_DT,4) as "occrrncYear", -->
+<!-- 			HOSTNAME as "hostName", -->
+<!-- 			TRUNCATE(AVG(CPU_AVG),1) as "cpuAvg", -->
+<!-- 			TRUNCATE(AVG(MERY_AVG),1) as "meryAvg", -->
+<!-- 			TRUNCATE(AVG(DSK_AVG),1) as "dskAvg" -->
+<!-- 		FROM COMTSRESOURCESSTAT -->
+<!-- 		WHERE 1=1 -->
+<!-- 		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if> -->
+<!-- 		AND LEFT(OCCRRNC_DT,4) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 YEAR),'%Y') AND DATE_FORMAT(NOW(), '%Y')  -->
+<!-- 		GROUP BY LEFT(OCCRRNC_DT,4), HOSTNAME -->
+<!-- 		ORDER BY LEFT(OCCRRNC_DT,4) -->
+		<![CDATA[	
+			SELECT
+				B.OCCRRNC_DT as "occrrncMonth",
+				TRUNCATE(AVG(IFNULL(CPU_AVG,0)),1) as "cpuAvg",
+				TRUNCATE(AVG(IFNULL(MERY_AVG,0)),1) as "meryAvg",
+				TRUNCATE(AVG(IFNULL(DSK_AVG,0)),1) as "dskAvg"
+			FROM (SELECT * FROM COMTSRESOURCESSTAT 
+				  WHERE HOSTNAME = 'testserver') A
+				  RIGHT OUTER JOIN  ( WITH recursive cte as (
+											    SELECT NOW() - interval 2 YEAR dt
+											    UNION ALL 
+											    SELECT dt + interval 1 YEAR FROM cte where dt < NOW()
+											)
+											SELECT
+											    DATE_FORMAT(date(dt),'%Y') AS OCCRRNC_DT
+											FROM cte) B ON B.OCCRRNC_DT = LEFT(A.OCCRRNC_DT,4)
+			GROUP BY B.OCCRRNC_DT
+		]]>
 	</select>
 
 

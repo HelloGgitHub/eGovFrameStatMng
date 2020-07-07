@@ -322,6 +322,44 @@ public class JobFncController {
 
         return rtn;
     }
+    
+    /**
+     * @name : SelectJobFncUseList(기능별 사용량 조회)
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 기능별 사용량 조회
+     */
+    @ApiOperation(value = "기능별 사용량 조회")
+    @GetMapping(path = "/jobFncUseList")
+    public String SelectJobFncUseList() throws Exception {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	lst = jobFncService.selectJobFncUseList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
 
     /**
      * @name : SelectJobFncUseList(기능별 사용량 조회(일))
@@ -331,15 +369,18 @@ public class JobFncController {
      * @desc : 기능별 사용량 조회
      */
     @ApiOperation(value = "기능별 사용량 조회(일)")
-    @GetMapping(path = "/jobFncUseDayList")
-    public String SelectJobFncUseList() throws Exception {
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
+    })
+    @GetMapping(path = "/jobFncUseDayList/{hostName}")
+    public String SelectJobFncUseDayList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
         Map<Object, Object> param = new HashMap<Object, Object>();
         Map<String, Object> rtnMap = new HashMap<String, Object>();
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
-
+        param.put("HOSTNAME",URLDecoder.decode(hostName		,"UTF-8"));
         ObjectMapper om = new ObjectMapper();
 
         try {
@@ -360,7 +401,88 @@ public class JobFncController {
 
         return rtn;
     }
+    
+    
+    /**
+     * @name : SelectJobFncUseList(기능별 사용량 조회(일))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 기능별 사용량 조회
+     */
+    @ApiOperation(value = "기능별 사용량 조회(월)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
+    })
+    @GetMapping(path = "/jobFncUseMonthList/{hostName}")
+    public String SelectJobFncUseMonthList(@PathVariable("hostName") String hostName) throws Exception {
 
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 
+        param.put("HOSTNAME",URLDecoder.decode(hostName		,"UTF-8"));
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	lst = jobFncService.selectJobFncUseMonthList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
+
+    /**
+     * @name : SelectJobFncUseList(기능별 사용량 조회(일))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 기능별 사용량 조회
+     */
+    @ApiOperation(value = "기능별 사용량 조회(년)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
+    })
+    @GetMapping(path = "/jobFncUseYearList/{hostName}")
+    public String SelectJobFncUseYearList(@PathVariable("hostName") String hostName) throws Exception {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        param.put("HOSTNAME",URLDecoder.decode(hostName		,"UTF-8"));
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	lst = jobFncService.selectJobFncUseYearList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
     //미등록업무기능 조회
 }

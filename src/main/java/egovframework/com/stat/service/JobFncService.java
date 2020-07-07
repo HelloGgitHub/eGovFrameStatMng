@@ -60,8 +60,20 @@ public class JobFncService {
     public List<HashMap<Object, Object>> selectJobFncStatList(Map<Object, Object> param) {
         return mapper.selectJobFncStatList(param);
     }
-    //기능별 사용량 조회(CRUD)
+    //기능별 사용량 조회(CRUD)    
+    public List<HashMap<Object, Object>> selectJobFncUseList(Map<Object, Object> param) {
+        return mapper.selectJobFncUseList(param);
+    }
+    //기능별 사용량 조회(일그래프)
     public List<HashMap<Object, Object>> selectJobFncUseDayList(Map<Object, Object> param) {
         return mapper.selectJobFncUseDayList(param);
+    }
+    //기능별 사용량 조회(월그래프)
+    public List<HashMap<Object, Object>> selectJobFncUseMonthList(Map<Object, Object> param) {
+        return mapper.selectJobFncUseMonthList(param);
+    }
+    //기능별 사용량 조회(년그래프)
+    public List<HashMap<Object, Object>> selectJobFncUseYearList(Map<Object, Object> param) {
+        return mapper.selectJobFncUseYearList(param);
     }
 }

@@ -40,8 +40,15 @@ public interface JobFncDao {
     int updateJobFncDetail(Map<Object, Object> param);
 
     List<HashMap<Object, Object>> selectJobFncStatList(Map<Object, Object> param);
-
+    
+    List<HashMap<Object, Object>> selectJobFncUseList(Map<Object, Object> param);
+    
     List<HashMap<Object, Object>> selectJobFncUseDayList(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectJobFncUseMonthList(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectJobFncUseYearList(Map<Object, Object> param);
+    
 
 
 }

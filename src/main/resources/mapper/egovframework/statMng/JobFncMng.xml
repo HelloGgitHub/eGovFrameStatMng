@@ -121,25 +121,143 @@
 		ORDER BY B.OCCRRNC_DT DESC
 
 	</select>
-
-	<select id="selectJobFncUseDayList"  parameterType="Map" resultType="hashMap">
+	
+	<select id="selectJobFncUseList"  parameterType="Map" resultType="hashMap">
 		SELECT
-		B.OCCRRNC_DT as "occrrncDt"
-		, A.HOSTNAME as "hostName"
-		, SUM(B.CREAT_CO) as "creatCo"
-		, SUM(B.UPDT_CO) as "updtCo"
-		, SUM(B.RDCNT) as "rdCnt"
-		, SUM(B.DELETE_CO) as "deleteCo"
-		, SUM(B.ERROR_CO) as "errorCo"
+			B.OCCRRNC_DT as "occrrncDt"
+			, A.HOSTNAME as "hostName"
+			, SUM(B.CREAT_CO) as "creatCo"
+			, SUM(B.UPDT_CO) as "updtCo"
+			, SUM(B.RDCNT) as "rdCnt"
+			, SUM(B.DELETE_CO) as "deleteCo"
+			, SUM(B.ERROR_CO) as "errorCo"
 		FROM COMTJOBFNCLIST A,
 		COMTSSYSLOGSUMMARY B
 		WHERE 1=1
 		AND A.HOSTNAME = B.HOSTNAME
 		AND A.METHOD_NM = B.METHOD_NM
-		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND HOSTNAME = '${HOSTNAME}' </if>
-		AND  OCCRRNC_DT BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 DAY),'%Y%m%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y%m%d')
 		GROUP BY B.OCCRRNC_DT, A.HOSTNAME
-		ORDER BY B.OCCRRNC_DT DESC
+		ORDER BY B.OCCRRNC_DT,A.HOSTNAME DESC
+
 	</select>
 
+	<select id="selectJobFncUseDayList"  parameterType="Map" resultType="hashMap">
+<!-- 		SELECT -->
+<!-- 			B.OCCRRNC_DT as "occrrncDt" -->
+<!-- 			, A.HOSTNAME as "hostName" -->
+<!-- 			, SUM(B.CREAT_CO) as "creatCo" -->
+<!-- 			, SUM(B.UPDT_CO) as "updtCo" -->
+<!-- 			, SUM(B.RDCNT) as "rdCnt" -->
+<!-- 			, SUM(B.DELETE_CO) as "deleteCo" -->
+<!-- 			, SUM(B.ERROR_CO) as "errorCo" -->
+<!-- 		FROM COMTJOBFNCLIST A, -->
+<!-- 		COMTSSYSLOGSUMMARY B -->
+<!-- 		WHERE 1=1 -->
+<!-- 		AND A.HOSTNAME = B.HOSTNAME -->
+<!-- 		AND A.METHOD_NM = B.METHOD_NM -->
+<!-- 		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND A.HOSTNAME = '${HOSTNAME}' </if> -->
+<!-- 		AND  B.OCCRRNC_DT BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 DAY),'%Y%m%d') AND DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y%m%d') -->
+<!-- 		GROUP BY B.OCCRRNC_DT, A.HOSTNAME -->
+<!-- 		ORDER BY B.OCCRRNC_DT DESC -->
+		
+		<![CDATA[
+			SELECT C.OCCRRNC_DT AS occrrncDt
+				 , IFNULL(SUM(CREAT_CO),0) AS creatCnt
+				 , IFNULL(SUM(UPDT_CO),0) AS updtCnt
+				 , IFNULL(SUM(RDCNT),0) AS rdCnt
+				 , IFNULL(SUM(DELETE_CO),0)	AS deleteCnt 
+			FROM (
+			SELECT * FROM COMTSSYSLOGSUMMARY
+			WHERE HOSTNAME = '${HOSTNAME}') B
+			 	 RIGHT OUTER JOIN  ( WITH recursive cte as (
+								    SELECT NOW() - interval 7 day dt
+								    UNION ALL 
+								    SELECT dt + interval 1 day FROM cte where dt < NOW() - interval 1 day
+								)
+								SELECT
+								    DATE_FORMAT(date(dt),'%Y%m%d') AS OCCRRNC_DT
+								FROM cte) C ON B.OCCRRNC_DT = C.OCCRRNC_DT
+			GROUP BY C.OCCRRNC_DT
+			]]>
+	</select>
+	
+	<select id="selectJobFncUseMonthList"  parameterType="Map" resultType="hashMap">
+<!-- 		SELECT -->
+<!-- 			LEFT(B.OCCRRNC_DT,6) as "occrrncDt" -->
+<!-- 			, A.HOSTNAME as "hostName" -->
+<!-- 			, SUM(B.CREAT_CO) as "creatCo" -->
+<!-- 			, SUM(B.UPDT_CO) as "updtCo" -->
+<!-- 			, SUM(B.RDCNT) as "rdCnt" -->
+<!-- 			, SUM(B.DELETE_CO) as "deleteCo" -->
+<!-- 			, SUM(B.ERROR_CO) as "errorCo" -->
+<!-- 	FROM COMTJOBFNCLIST A, -->
+<!-- 	COMTSSYSLOGSUMMARY B -->
+<!-- 	WHERE 1=1 -->
+<!-- 	AND A.HOSTNAME = B.HOSTNAME -->
+<!-- 	AND A.METHOD_NM = B.METHOD_NM -->
+<!-- 	<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND A.HOSTNAME = '${HOSTNAME}' </if> -->
+<!-- 	AND LEFT(B.OCCRRNC_DT,6) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH),'%Y%m') AND DATE_FORMAT(NOW(), '%Y%m') -->
+<!-- 	GROUP BY LEFT(B.OCCRRNC_DT,6), A.HOSTNAME -->
+<!-- 	ORDER BY LEFT(B.OCCRRNC_DT,6) DESC	 -->
+			<![CDATA[
+			SELECT C.OCCRRNC_DT AS occrrncDt
+				 , IFNULL(SUM(CREAT_CO),0) AS creatCnt
+				 , IFNULL(SUM(UPDT_CO),0) AS updtCnt
+				 , IFNULL(SUM(RDCNT),0) AS rdCnt
+				 , IFNULL(SUM(DELETE_CO),0)	AS deleteCnt 
+			FROM (
+			SELECT * FROM COMTSSYSLOGSUMMARY
+			WHERE HOSTNAME = '${HOSTNAME}') B
+			 	 RIGHT OUTER JOIN  ( WITH recursive cte as (
+								    SELECT NOW() - interval 5 MONTH dt
+								    UNION ALL 
+								    SELECT dt + interval 1 MONTH FROM cte where dt < NOW() 
+								)
+								SELECT
+								    DATE_FORMAT(date(dt),'%Y%m') AS OCCRRNC_DT
+								FROM cte) C ON LEFT(B.OCCRRNC_DT,6) = C.OCCRRNC_DT
+			GROUP BY C.OCCRRNC_DT
+			]]>
+	</select>
+	
+	<select id="selectJobFncUseYearList"  parameterType="Map" resultType="hashMap">
+<!-- 		SELECT -->
+<!-- 				LEFT(B.OCCRRNC_DT,4) as "occrrncDt" -->
+<!-- 				, A.HOSTNAME as "hostName" -->
+<!-- 				, SUM(B.CREAT_CO) as "creatCo" -->
+<!-- 				, SUM(B.UPDT_CO) as "updtCo" -->
+<!-- 				, SUM(B.RDCNT) as "rdCnt" -->
+<!-- 				, SUM(B.DELETE_CO) as "deleteCo" -->
+<!-- 				, SUM(B.ERROR_CO) as "errorCo" -->
+<!-- 		FROM COMTJOBFNCLIST A, -->
+<!-- 		COMTSSYSLOGSUMMARY B -->
+<!-- 		WHERE 1=1 -->
+<!-- 		AND A.HOSTNAME = B.HOSTNAME -->
+<!-- 		AND A.METHOD_NM = B.METHOD_NM -->
+<!-- 		<if test='!HOSTNAME.equals("") and HOSTNAME != null'>AND A.HOSTNAME = '${HOSTNAME}' </if> -->
+<!-- 		AND LEFT(OCCRRNC_DT,4) BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 YEAR),'%Y') AND DATE_FORMAT(NOW(), '%Y')  -->
+<!-- 		GROUP BY LEFT(B.OCCRRNC_DT,4), A.HOSTNAME -->
+<!-- 		ORDER BY LEFT(B.OCCRRNC_DT,4) DESC	 -->
+	
+	<![CDATA[
+			SELECT C.OCCRRNC_DT AS occrrncDt
+				 , IFNULL(SUM(CREAT_CO),0) AS creatCnt
+				 , IFNULL(SUM(UPDT_CO),0) AS updtCnt
+				 , IFNULL(SUM(RDCNT),0) AS rdCnt
+				 , IFNULL(SUM(DELETE_CO),0)	AS deleteCnt 
+			FROM (
+			SELECT * FROM COMTSSYSLOGSUMMARY
+			WHERE HOSTNAME =  '${HOSTNAME}') B
+			 	 RIGHT OUTER JOIN  ( WITH recursive cte as (
+								    SELECT NOW() - interval 2 YEAR dt
+								    UNION ALL 
+								    SELECT dt + interval 1 YEAR FROM cte where dt < NOW() 
+								)
+								SELECT
+								    DATE_FORMAT(date(dt),'%Y') AS OCCRRNC_DT
+								FROM cte) C ON LEFT(B.OCCRRNC_DT,4) = C.OCCRRNC_DT
+			GROUP BY C.OCCRRNC_DT
+			]]>
+	</select>
+	
 </mapper> 
