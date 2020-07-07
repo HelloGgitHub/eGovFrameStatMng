@@ -44,7 +44,7 @@
 			, USR_ID
 		) VALUES (
 			NEXT VALUE FOR Seq_UserStat
-			, #{OCCRRNC_DT}
+			, DATE_FORMAT(NOW(),'%Y%m%d')
 			, #{HOSTNAME}
 			, #{USR_ID}
 		)
