@@ -174,7 +174,7 @@ public class UserStatController {
      * @date : 2020. 6. 11.
      * @author : "egov"
      * @return_type : String
-     * @desc : 로그인 횟수 목록조회
+     * @desc : 이용자수 월별 통계
      */
     @ApiOperation(value = "이용자수 월별 통계")
     @GetMapping(path = "/userMonthStatList")
@@ -189,6 +189,132 @@ public class UserStatController {
 
         try {
         	lst = userStatService.selectUserMonthStatList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
+    
+    /**
+     * @name : UserStatDayList( 이용자 통계(일))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 이용자 통계(일)
+     */
+    @ApiOperation(value = "이용자 통계(일)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
+    })
+    @GetMapping(path = "/userStatdayList/{hostName}")
+    public String UserStatDayList(@PathVariable("hostName") String hostName) throws Exception {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();   
+        
+        param.put("HOSTNAME",URLDecoder.decode(hostName		,"UTF-8"));
+
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	lst = userStatService.selectUserStatDayList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
+    
+    /**
+     * @name : UserStatDayList( 이용자 통계(월))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 이용자 통계(월)
+     */
+    @ApiOperation(value = "이용자 통계(월)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
+    })
+    @GetMapping(path = "/userStatMonthList/{hostName}")
+    public String UserStatMonthList(@PathVariable("hostName") String hostName) throws Exception {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();   
+        
+        param.put("HOSTNAME",URLDecoder.decode(hostName		,"UTF-8"));
+
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	lst = userStatService.selectUserStatMonthList(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
+    
+    /**
+     * @name : UserStatDayList( 이용자 통계(년))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 이용자 통계(년)
+     */
+    @ApiOperation(value = "이용자 통계(년)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
+    })
+    @GetMapping(path = "/userStatYearList/{hostName}")
+    public String UserStatYearList(@PathVariable("hostName") String hostName) throws Exception {
+
+        String rtn = "";
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();   
+        
+        param.put("HOSTNAME",URLDecoder.decode(hostName		,"UTF-8"));
+
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	lst = userStatService.selectUserStatYearList(param);
         	rtnMap.put("list", lst);
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");

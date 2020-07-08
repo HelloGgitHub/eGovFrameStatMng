@@ -94,9 +94,10 @@
 			, A.URL AS "url"
 			, A.RDCNT AS "rdCnt"
 		FROM (SELECT OCCRRNC_DT, HOSTNAME, URL, SUM(RDCNT) AS RDCNT
-		FROM COMTSWEBLOGSUMMARY
-		WHERE 1=1
-		GROUP BY OCCRRNC_DT, HOSTNAME, URL) A, COMTNSCRLIST B
+				FROM COMTSWEBLOGSUMMARY
+				WHERE 1=1
+				GROUP BY OCCRRNC_DT, HOSTNAME, URL) A
+				, COMTNSCRLIST B
 		WHERE 1=1
 		AND A.HOSTNAME = B.HOSTNAME
 		AND A.URL = B.URL
@@ -117,7 +118,95 @@
 									group by HOSTNAME, URL
 									)
 	</select>
-
-
+	
+	<select id="selectScrStatDaylist"  parameterType="Map" resultType="hashMap">
+		<![CDATA[
+		SELECT D.OCCRRNC_DT AS "occrrncDt" , IFNULL(C.RDCNT,0) AS "rdCnt"
+		FROM 
+			(SELECT A.OCCRRNC_DT 
+				, B.SCR_NM 
+				, A.RDCNT 
+			FROM (SELECT OCCRRNC_DT, HOSTNAME, URL, SUM(RDCNT) AS RDCNT
+					FROM COMTSWEBLOGSUMMARY
+					WHERE 1=1
+					GROUP BY OCCRRNC_DT, HOSTNAME, URL) A
+					, COMTNSCRLIST B
+			WHERE 1=1
+			AND A.HOSTNAME = B.HOSTNAME
+			AND A.URL = B.URL
+			AND A.HOSTNAME = '${HOSTNAME}'
+			AND A.URL = '${URL}'
+			) C
+			RIGHT OUTER JOIN  ( WITH recursive cte as (
+											    SELECT NOW() - INTERVAL 6 DAY dt
+											    UNION ALL 
+											    SELECT dt + INTERVAL 1 DAY FROM cte WHERE dt < NOW()
+												)
+												SELECT
+												    DATE_FORMAT(date(dt),'%Y%m%d') AS OCCRRNC_DT
+												FROM cte) D ON D.OCCRRNC_DT = C.OCCRRNC_DT
+		GROUP BY D.OCCRRNC_DT
+		]]>
+	</select>
+	
+	<select id="selectScrStatMonthlist"  parameterType="Map" resultType="hashMap">
+		<![CDATA[
+			SELECT D.OCCRRNC_DT AS "occrrncMonth" , IFNULL(C.RDCNT,0) AS "rdCnt"
+			FROM 
+				(SELECT A.OCCRRNC_DT 
+					, B.SCR_NM 
+					, A.RDCNT 
+				FROM (SELECT OCCRRNC_DT, HOSTNAME, URL, SUM(RDCNT) AS RDCNT
+						FROM COMTSWEBLOGSUMMARY
+						WHERE 1=1
+						GROUP BY OCCRRNC_DT, HOSTNAME, URL) A
+						, COMTNSCRLIST B
+				WHERE 1=1
+				AND A.HOSTNAME = B.HOSTNAME
+				AND A.URL = B.URL
+				AND A.HOSTNAME = '${HOSTNAME}'
+				AND A.URL = '${URL}'
+				) C
+				RIGHT OUTER JOIN  ( WITH recursive cte as (
+												    SELECT NOW() - INTERVAL 5 MONTH dt
+												    UNION ALL 
+												    SELECT dt + INTERVAL 1 MONTH FROM cte WHERE dt < NOW()
+													)
+													SELECT
+													    DATE_FORMAT(date(dt),'%Y%m') AS OCCRRNC_DT
+													FROM cte) D ON D.OCCRRNC_DT = LEFT(C.OCCRRNC_DT,6)
+			GROUP BY D.OCCRRNC_DT
+		]]>
+	</select>
+	
+	<select id="selectScrStatYearlist"  parameterType="Map" resultType="hashMap">
+		<![CDATA[
+			SELECT D.OCCRRNC_DT AS "occrrncYear" , IFNULL(C.RDCNT,0) AS "rdCnt"
+			FROM 
+				(SELECT A.OCCRRNC_DT 
+					, B.SCR_NM 
+					, A.RDCNT 
+				FROM (SELECT OCCRRNC_DT, HOSTNAME, URL, SUM(RDCNT) AS RDCNT
+						FROM COMTSWEBLOGSUMMARY
+						WHERE 1=1
+						GROUP BY OCCRRNC_DT, HOSTNAME, URL) A
+						, COMTNSCRLIST B
+				WHERE 1=1
+				AND A.HOSTNAME = B.HOSTNAME
+				AND A.URL = B.URL
+				AND A.HOSTNAME = '${HOSTNAME}'
+				AND A.URL = '${URL}'
+				) C
+				RIGHT OUTER JOIN  ( WITH recursive cte as (
+												    SELECT NOW() - INTERVAL 2 YEAR dt
+												    UNION ALL 
+												    SELECT dt + INTERVAL 1 YEAR FROM cte WHERE dt < NOW()
+													)
+													SELECT
+													    DATE_FORMAT(date(dt),'%Y') AS OCCRRNC_DT
+													FROM cte) D ON D.OCCRRNC_DT = LEFT(C.OCCRRNC_DT,4)
+			GROUP BY D.OCCRRNC_DT
+		]]>
+	</select>
 
 </mapper> 

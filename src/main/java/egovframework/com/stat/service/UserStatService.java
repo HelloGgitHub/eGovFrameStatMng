@@ -40,14 +40,24 @@ public class UserStatService {
     public List<HashMap<Object, Object>> selectActiveUserList(Map<Object, Object> param) {
         return mapper.selectActiveUserList(param);
     }
-
     //로그인 횟수 측정
     public int insertUserStat(Map<Object, Object> param) {
         return mapper.insertUserStat(param);
-    }    
-    
+    }     
     //이용자수 월별 통계
     public List<HashMap<Object, Object>> selectUserMonthStatList(Map<Object, Object> param) {
         return mapper.selectUserMonthStatList(param);
+    }
+    
+    public List<HashMap<Object, Object>> selectUserStatDayList(Map<Object, Object> param) {
+        return mapper.selectUserStatDayList(param);
+    }
+    
+    public List<HashMap<Object, Object>> selectUserStatMonthList(Map<Object, Object> param) {
+        return mapper.selectUserStatMonthList(param);
+    }
+    
+    public List<HashMap<Object, Object>> selectUserStatYearList(Map<Object, Object> param) {
+        return mapper.selectUserStatYearList(param);
     }
 }

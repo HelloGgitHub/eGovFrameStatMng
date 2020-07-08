@@ -42,4 +42,11 @@ public interface ScrLstDao {
     List<HashMap<Object, Object>> selectScrStatlist(Map<Object, Object> param);
 
     List<HashMap<Object, Object>> selectNonRegScrlist(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectScrStatDaylist(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectScrStatMonthlist(Map<Object, Object> param);
+    
+    List<HashMap<Object, Object>> selectScrStatYearlist(Map<Object, Object> param);
+    
 }

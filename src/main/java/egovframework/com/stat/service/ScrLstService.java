@@ -65,5 +65,17 @@ public class ScrLstService {
     public List<HashMap<Object, Object>> selectNonRegScrlist(Map<Object, Object> param) {
         return mapper.selectNonRegScrlist(param);
     }
+    
+    public List<HashMap<Object, Object>> selectScrStatDaylist(Map<Object, Object> param) {
+        return mapper.selectScrStatDaylist(param);
+    }
+    
+    public List<HashMap<Object, Object>> selectScrStatMonthlist(Map<Object, Object> param) {
+        return mapper.selectScrStatMonthlist(param);
+    }
+    
+    public List<HashMap<Object, Object>> selectScrStatYearlist(Map<Object, Object> param) {
+        return mapper.selectScrStatYearlist(param);
+    }
 
 }

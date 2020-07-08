@@ -362,4 +362,151 @@ public class ScrLstController {
 		
 		return rtn;
     }
+    
+    /**
+     * @name : ScrStatList(화면 조회 통계(일별그래프))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면 조회 통계(일별그래프)
+     */
+    @ApiOperation(value = "화면 조회 통계(일별그래프)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "hostName"	, value = "HOSTNAME"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
+            @ApiImplicitParam(name = "url"	, value = "URL"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+    })
+    @GetMapping(path = "/scrStatDaylist")
+    public String ScrStatDayList(@RequestParam(value = "hostName") String hostName
+                            ,@RequestParam(value = "url") String url) throws Exception {
+
+        String rtn = "";
+
+        String tmpHostName 		= URLDecoder.decode(hostName		,"UTF-8");
+        String tmpUrl 	= URLDecoder.decode(url	,"UTF-8");
+        
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        param.put("HOSTNAME",tmpHostName);
+        param.put("URL",tmpUrl);
+
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	 lst = scrLstService.selectScrStatDaylist(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
+    
+    /**
+     * @name : ScrStatList(화면 조회 통계(월별그래프))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면 조회 통계(월별그래프)
+     */
+    @ApiOperation(value = "화면 조회 통계(월별그래프)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "hostName"	, value = "HOSTNAME"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
+            @ApiImplicitParam(name = "url"	, value = "URL"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+    })
+    @GetMapping(path = "/scrStatMonthlist")
+    public String ScrStatMonthList(@RequestParam(value = "hostName") String hostName
+                            ,@RequestParam(value = "url") String url) throws Exception {
+
+        String rtn = "";
+
+        String tmpHostName 		= URLDecoder.decode(hostName		,"UTF-8");
+        String tmpUrl 	= URLDecoder.decode(url	,"UTF-8");
+        
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        param.put("HOSTNAME",tmpHostName);
+        param.put("URL",tmpUrl);
+
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	 lst = scrLstService.selectScrStatMonthlist(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
+    
+    /**
+     * @name : ScrStatList(화면 조회 통계(년별그래프))
+     * @date : 2020. 6. 11.
+     * @author : "egov"
+     * @return_type : String
+     * @desc : 화면 조회 통계(월별그래프)
+     */
+    @ApiOperation(value = "화면 조회 통계(년별그래프)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "hostName"	, value = "HOSTNAME"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
+            @ApiImplicitParam(name = "url"	, value = "URL"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+    })
+    @GetMapping(path = "/scrStatYearlist")
+    public String ScrStatYearList(@RequestParam(value = "hostName") String hostName
+                            ,@RequestParam(value = "url") String url) throws Exception {
+
+        String rtn = "";
+
+        String tmpHostName 		= URLDecoder.decode(hostName		,"UTF-8");
+        String tmpUrl 	= URLDecoder.decode(url	,"UTF-8");
+        
+        Map<String, Object> rtnMap = new HashMap<String, Object>();
+        Map<Object, Object> param = new HashMap<Object, Object>();
+        param.put("HOSTNAME",tmpHostName);
+        param.put("URL",tmpUrl);
+
+        List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+
+        ObjectMapper om = new ObjectMapper();
+
+        try {
+        	 lst = scrLstService.selectScrStatYearlist(param);
+        	rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+
+        }catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
+			e.printStackTrace();
+		}
+        
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
+
+        return rtn;
+    }
 }

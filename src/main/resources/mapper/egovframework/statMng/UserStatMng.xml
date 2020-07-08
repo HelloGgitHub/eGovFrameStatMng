@@ -15,10 +15,11 @@
 
 	<select id="selectActiveUserList"  parameterType="Map" resultType="hashMap">
 
-		SELECT OCCRRNC_DT as "occrrncDt"
-		, HOSTNAME as "hostName"
-		, COUNT(USR_ID) as "usrCnt"
-		FROM COMTSUSERSTAT
+		SELECT A.OCCRRNC_DT as "occrrncDt"
+		, A.HOSTNAME as "hostName"
+		, COUNT(A.USR_ID) as "usrCnt"
+		FROM (SELECT OCCRRNC_DT, HOSTNAME, USR_ID FROM COMTSUSERSTAT
+				GROUP BY OCCRRNC_DT, HOSTNAME, USR_ID)  A
 		WHERE 1=1
 		AND OCCRRNC_DT BETWEEN '${STARTDT}' AND '${ENDDT}'
 		GROUP BY OCCRRNC_DT, HOSTNAME
@@ -27,10 +28,11 @@
 	
 	<select id="selectUserMonthStatList"  parameterType="Map" resultType="hashMap">
 
-		SELECT LEFT(OCCRRNC_DT,6) as "occrrncMonth"
-		, HOSTNAME as "hostName"
-		, COUNT(USR_ID) as "usrCnt"
-		FROM COMTSUSERSTAT
+		SELECT LEFT(A.OCCRRNC_DT,6) as "occrrncMonth"
+		, A.HOSTNAME as "hostName"
+		, COUNT(A.USR_ID) as "usrCnt"
+		FROM (SELECT OCCRRNC_DT, HOSTNAME, USR_ID FROM COMTSUSERSTAT
+				GROUP BY OCCRRNC_DT, HOSTNAME, USR_ID)  A
 		WHERE 1=1
 		GROUP BY LEFT(OCCRRNC_DT,6) , HOSTNAME
 
@@ -49,5 +51,61 @@
 			, #{USR_ID}
 		)
 	</insert>
-
+	
+	<select id="selectUserStatDayList"  parameterType="Map" resultType="hashMap">
+	<![CDATA[
+		SELECT B.OCCRRNC_DT AS "occrrncDt", 
+			   COUNT(A.USR_ID) AS "usrCnt" 
+		FROM (SELECT OCCRRNC_DT, USR_ID FROM COMTSUSERSTAT
+				 WHERE HOSTNAME =  '${HOSTNAME}'
+				 GROUP BY OCCRRNC_DT, USR_ID) A
+			 RIGHT OUTER JOIN  ( WITH recursive cte as (
+									    SELECT NOW() - INTERVAL 6 DAY dt
+									    UNION ALL 
+									    SELECT dt + INTERVAL 1 DAY FROM cte WHERE dt < NOW()
+										)
+										SELECT
+										    DATE_FORMAT(date(dt),'%Y%m%d') AS OCCRRNC_DT
+										FROM cte) B ON B.OCCRRNC_DT = A.OCCRRNC_DT
+		GROUP BY B.OCCRRNC_DT
+		]]>
+	</select>
+	
+	<select id="selectUserStatMonthList"  parameterType="Map" resultType="hashMap">
+	<![CDATA[
+		SELECT B.OCCRRNC_DT AS "occrrncMonth", 
+			   COUNT(A.USR_ID) AS "usrCnt" 
+		FROM (SELECT OCCRRNC_DT, USR_ID FROM COMTSUSERSTAT
+				 WHERE HOSTNAME =  '${HOSTNAME}'
+				 GROUP BY OCCRRNC_DT, USR_ID) A
+			 RIGHT OUTER JOIN  ( WITH recursive cte as (
+										    SELECT NOW() - interval 5 MONTH dt
+										    UNION ALL 
+										    SELECT dt + interval 1 MONTH FROM cte where dt < NOW()
+										)
+										SELECT
+										    DATE_FORMAT(date(dt),'%Y%m') AS OCCRRNC_DT
+										FROM cte) B ON B.OCCRRNC_DT = LEFT(A.OCCRRNC_DT,6)
+		GROUP BY B.OCCRRNC_DT
+		]]>
+	</select>
+	
+	<select id="selectUserStatYearList"  parameterType="Map" resultType="hashMap">
+	<![CDATA[
+			SELECT B.OCCRRNC_DT AS "occrrncYear", 
+				   COUNT(A.USR_ID) AS "usrCnt" 
+			FROM (SELECT OCCRRNC_DT, USR_ID FROM COMTSUSERSTAT
+					 WHERE HOSTNAME =  '${HOSTNAME}'
+					 GROUP BY OCCRRNC_DT, USR_ID) A
+				 RIGHT OUTER JOIN  ( WITH recursive cte as (
+											    SELECT NOW() - INTERVAL 2 YEAR dt
+											    UNION ALL 
+											    SELECT dt + INTERVAL 1 YEAR FROM cte WHERE dt < NOW()
+											)
+											SELECT
+											    DATE_FORMAT(date(dt),'%Y') AS OCCRRNC_DT
+											FROM cte) B ON B.OCCRRNC_DT = LEFT(A.OCCRRNC_DT,4)
+			GROUP BY B.OCCRRNC_DT	
+		]]>
+	</select>
 </mapper> 
