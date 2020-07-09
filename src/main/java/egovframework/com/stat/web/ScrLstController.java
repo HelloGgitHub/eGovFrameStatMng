@@ -286,8 +286,8 @@ public class ScrLstController {
      */
     @ApiOperation(value = "화면 조회 통계(기간별)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "startDt"	, value = "STARTDT"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
-            @ApiImplicitParam(name = "endDt"	, value = "ENDDT"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+            @ApiImplicitParam(name = "startDt"	, value = "시작일자"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
+            @ApiImplicitParam(name = "endDt"	, value = "종료일자"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @GetMapping(path = "/scrStatlist")
     public String ScrStatList(@RequestParam(value = "startDt") String startDt
@@ -333,8 +333,8 @@ public class ScrLstController {
      * @return_type : String
      * @desc : 미등록 화면 조회
      */
-    @ApiOperation(value = "미등록 화면 조회 ")
-    @GetMapping(path = "/nonReglist")
+    //@ApiOperation(value = "미등록 화면 조회 ")
+    //@GetMapping(path = "/nonReglist")
     public String NonRegScrlist() throws Exception {
 
         String rtn = "";

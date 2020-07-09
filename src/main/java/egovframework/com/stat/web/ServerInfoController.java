@@ -231,7 +231,7 @@ public class ServerInfoController {
 
 
         List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-        lst = serverInfoService.selectServerDetailInfo(sqlInpt);
+        lst = serverInfoService.selectServerDetail(sqlInpt);
         int usrCnt = lst.size();
 
         ObjectMapper om = new ObjectMapper();
@@ -319,7 +319,7 @@ public class ServerInfoController {
      */
     @ApiOperation(value = "업무시스템 정보 삭제", notes = "업무시스템정보를 삭제한다")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serverId"	, value = "시스템ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+            @ApiImplicitParam(name = "id"	, value = "시스템ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK !!"),
@@ -334,7 +334,7 @@ public class ServerInfoController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-        sqlInpt.put("iD", URLDecoder.decode(id		,"UTF-8"));
+        sqlInpt.put("ID", URLDecoder.decode(id		,"UTF-8"));
 
         int inputCnt = serverInfoService.deleteServerInfo(sqlInpt);
         if(inputCnt > 0) {
@@ -359,8 +359,8 @@ public class ServerInfoController {
      * @return_type : String
      * @desc : 미등록 업무시스템조회
      */
-    @ApiOperation(value = "미등록 업무시스템조회")
-    @GetMapping(path = "/nonReglist")
+   // @ApiOperation(value = "미등록 업무시스템조회")
+   // @GetMapping(path = "/nonReglist")
     public String NonRegServerInfoList() throws Exception{
 
     	String rtn = "";

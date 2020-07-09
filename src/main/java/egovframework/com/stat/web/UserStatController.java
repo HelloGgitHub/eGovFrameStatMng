@@ -131,8 +131,8 @@ public class UserStatController {
      */
     @ApiOperation(value = "이용자수 조회")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "startDt"	, value = "STARTDT"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
-            @ApiImplicitParam(name = "endDt"	, value = "ENDDT"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
+            @ApiImplicitParam(name = "startDt"	, value = "시작일자"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
+            @ApiImplicitParam(name = "endDt"	, value = "종료일자"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @GetMapping(path = "/activeUserList")
     public String ActiveUserList(@RequestParam(value = "startDt") String startDt
