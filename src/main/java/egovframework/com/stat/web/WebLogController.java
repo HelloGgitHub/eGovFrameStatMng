@@ -130,6 +130,24 @@ public class WebLogController {
             return rtn;
         }
         
+        if( StringUtils.isEmpty(param.getRqesterId()) || StringUtils.isBlank(param.getRqesterId()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "요청자ID(rqesterId)는 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getRqesterIp()) || StringUtils.isBlank(param.getRqesterIp()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "요청자IP(rqesterIp)는 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());

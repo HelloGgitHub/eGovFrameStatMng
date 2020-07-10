@@ -349,6 +349,33 @@ public class SysLogController {
             System.out.println(rtnMap);
             return rtn;
         }
+        
+        if( StringUtils.isEmpty(param.getSvcNm()) || StringUtils.isBlank(param.getSvcNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "서비스명(svcNm)은 필수입력항목입니다. 개발소스상의 영문패키지명으로 입력하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getRqesterId()) || StringUtils.isBlank(param.getRqesterId()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "요청자ID(rqesterId)는 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getRqesterIp()) || StringUtils.isBlank(param.getRqesterIp()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "요청자IP(rqesterIp)는 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
 
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
