@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -156,10 +157,30 @@ public class JobFncController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
-
-        sqlInpt.put("HOSTNAME", param.getHostName());
+        //sqlInpt.put("ID", param.getId());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getMethodNm()) || StringUtils.isBlank(param.getMethodNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "메소드명(methodNm)은 필수입력항목입니다. 개발소스상의 영문기능명으로 입력하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        sqlInpt.put("HOSTNAME", param.getHostName());     
         sqlInpt.put("LFNC_NM", param.getlFncNm());
         sqlInpt.put("MFNC_NM", param.getmFncNm());
         sqlInpt.put("SFNC_NM", param.getsFncNm());
@@ -173,8 +194,7 @@ public class JobFncController {
         lst = jobFncService.selectJobFncMethod(sqlInpt);
         int tCnt = lst.size();
 
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+        
         if(tCnt == 0) {
             int inputCnt = jobFncService.insertJobFncDetail(sqlInpt);
             if (inputCnt > 0) {
@@ -409,12 +429,13 @@ public class JobFncController {
      * @author : "egov"
      * @return_type : String
      * @desc : 기능별 사용량 조회
-     */
+     
     @ApiOperation(value = "기능별 사용량 조회(월)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/jobFncUseMonthList/{hostName}")
+    */
     public String SelectJobFncUseMonthList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
@@ -450,12 +471,13 @@ public class JobFncController {
      * @author : "egov"
      * @return_type : String
      * @desc : 기능별 사용량 조회
-     */
+     
     @ApiOperation(value = "기능별 사용량 조회(년)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/jobFncUseYearList/{hostName}")
+    */
     public String SelectJobFncUseYearList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";

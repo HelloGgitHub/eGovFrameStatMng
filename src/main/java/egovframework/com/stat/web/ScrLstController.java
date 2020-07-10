@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -154,9 +155,38 @@ public class ScrLstController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
-
+        //sqlInpt.put("ID", param.getId());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getScrNm()) || StringUtils.isBlank(param.getScrNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "화면명(scrNm)은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getUrl()) || StringUtils.isBlank(param.getUrl()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "URL(url)은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("SCR_NM", param.getScrNm());
         sqlInpt.put("SCR_DC", param.getScrDc());
@@ -168,8 +198,7 @@ public class ScrLstController {
         lst = scrLstService.selectScrUrl(sqlInpt);
         int tCnt = lst.size();
 
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+        
         if(tCnt == 0) {
             int inputCnt = scrLstService.insertScrDetail(sqlInpt);
             if (inputCnt > 0) {
@@ -332,9 +361,10 @@ public class ScrLstController {
      * @author : "egov"
      * @return_type : String
      * @desc : 미등록 화면 조회
-     */
-    //@ApiOperation(value = "미등록 화면 조회 ")
-    //@GetMapping(path = "/nonReglist")
+     
+    @ApiOperation(value = "미등록 화면 조회 ")
+    @GetMapping(path = "/nonReglist")
+    */
     public String NonRegScrlist() throws Exception {
 
         String rtn = "";
@@ -369,13 +399,14 @@ public class ScrLstController {
      * @author : "egov"
      * @return_type : String
      * @desc : 화면 조회 통계(일별그래프)
-     */
+     
     @ApiOperation(value = "화면 조회 통계(일별그래프)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "hostName"	, value = "HOSTNAME"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
             @ApiImplicitParam(name = "url"	, value = "URL"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @GetMapping(path = "/scrStatDaylist")
+    */
     public String ScrStatDayList(@RequestParam(value = "hostName") String hostName
                             ,@RequestParam(value = "url") String url) throws Exception {
 
@@ -418,13 +449,14 @@ public class ScrLstController {
      * @author : "egov"
      * @return_type : String
      * @desc : 화면 조회 통계(월별그래프)
-     */
+     
     @ApiOperation(value = "화면 조회 통계(월별그래프)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "hostName"	, value = "HOSTNAME"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
             @ApiImplicitParam(name = "url"	, value = "URL"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @GetMapping(path = "/scrStatMonthlist")
+    */
     public String ScrStatMonthList(@RequestParam(value = "hostName") String hostName
                             ,@RequestParam(value = "url") String url) throws Exception {
 
@@ -467,13 +499,14 @@ public class ScrLstController {
      * @author : "egov"
      * @return_type : String
      * @desc : 화면 조회 통계(월별그래프)
-     */
+     
     @ApiOperation(value = "화면 조회 통계(년별그래프)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "hostName"	, value = "HOSTNAME"	, required = true, dataType = "string", paramType = "query", defaultValue = ""),
             @ApiImplicitParam(name = "url"	, value = "URL"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
     @GetMapping(path = "/scrStatYearlist")
+    */
     public String ScrStatYearList(@RequestParam(value = "hostName") String hostName
                             ,@RequestParam(value = "url") String url) throws Exception {
 

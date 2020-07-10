@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import egovframework.com.stat.service.UserStatService;
 import egovframework.com.stat.dao.UserStatVo;
 import io.swagger.annotations.*;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,14 +63,23 @@ public class UserStatController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
 
         sqlInpt.put("OCCRRNC_DT", param.getOccrrncDt());
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("USR_ID", param.getUsrId());
 
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
-
+        
         int inputCnt = userStatService.insertUserStat(sqlInpt);
         if (inputCnt > 0) {
             rtnMap.put("RESULTCD", "0");
@@ -212,12 +223,13 @@ public class UserStatController {
      * @author : "egov"
      * @return_type : String
      * @desc : 이용자 통계(일)
-     */
+     
     @ApiOperation(value = "이용자 통계(일)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/userStatdayList/{hostName}")
+    */
     public String UserStatDayList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
@@ -254,12 +266,13 @@ public class UserStatController {
      * @author : "egov"
      * @return_type : String
      * @desc : 이용자 통계(월)
-     */
+     
     @ApiOperation(value = "이용자 통계(월)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/userStatMonthList/{hostName}")
+    */
     public String UserStatMonthList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
@@ -296,12 +309,13 @@ public class UserStatController {
      * @author : "egov"
      * @return_type : String
      * @desc : 이용자 통계(년)
-     */
+     
     @ApiOperation(value = "이용자 통계(년)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/userStatYearList/{hostName}")
+    */
     public String UserStatYearList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";

@@ -217,17 +217,17 @@ public class ServerInfoController {
         
         ObjectMapper om = new ObjectMapper();
         
-        
-        int cnt = ComUtil.getByteLength(param.getServerKnd());
+        System.out.println(param.getServerKnd().getBytes().length);
+        int cnt = param.getServerKnd().getBytes().length;
         if( cnt > 2) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "서버종류는 2Byte입니다. 코드(Ex: A or 1)" );
+            rtnMap.put("RESULTMSG", "서버종류(serverKnd)는 2Byte입니다. 코드(Ex: A or 1)형태로 입력하세요." );
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
             return rtn;
         }
-        //System.out.println(rtnMap);
+        
         
         if( StringUtils.isEmpty(param.getProjectId()) || StringUtils.isBlank(param.getProjectId()) ) {
         	rtnMap.put("RESULTCD", "1");
