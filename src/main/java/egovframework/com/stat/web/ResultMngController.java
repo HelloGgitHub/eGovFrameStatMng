@@ -150,7 +150,7 @@ public class ResultMngController {
         
         if( StringUtils.isEmpty(param.getResultIndexNm()) || StringUtils.isBlank(param.getResultIndexNm()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "성과지표명(resultIndexNm)은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "성과지표명(resultIndexNm)은 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
@@ -159,7 +159,7 @@ public class ResultMngController {
         
         if( StringUtils.isEmpty(param.getResultIndexDc()) || StringUtils.isBlank(param.getResultIndexDc()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "성과지표설명(getResultIndexDc)은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "성과지표설명(getResultIndexDc)은 필수입력항목입니다. 입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);

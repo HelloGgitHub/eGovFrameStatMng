@@ -162,7 +162,7 @@ public class ScrLstController {
         
         if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다. 입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
@@ -171,7 +171,7 @@ public class ScrLstController {
         
         if( StringUtils.isEmpty(param.getScrNm()) || StringUtils.isBlank(param.getScrNm()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "화면명(scrNm)은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "화면명(scrNm)은 필수입력항목입니다. 입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
@@ -180,7 +180,7 @@ public class ScrLstController {
         
         if( StringUtils.isEmpty(param.getUrl()) || StringUtils.isBlank(param.getUrl()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "URL(url)은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "URL(url)은 필수입력항목입니다. 입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);

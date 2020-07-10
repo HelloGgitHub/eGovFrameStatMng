@@ -113,7 +113,7 @@ public class SysLogController {
         
         if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다. 입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
@@ -188,7 +188,7 @@ public class SysLogController {
         
         if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
@@ -261,7 +261,7 @@ public class SysLogController {
         
         if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
@@ -334,7 +334,7 @@ public class SysLogController {
         
         if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.  입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);

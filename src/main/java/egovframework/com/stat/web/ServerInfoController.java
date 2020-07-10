@@ -231,7 +231,7 @@ public class ServerInfoController {
         
         if( StringUtils.isEmpty(param.getProjectId()) || StringUtils.isBlank(param.getProjectId()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "프로젝트ID는 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "프로젝트ID는 필수입력항목입니다. 입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
@@ -243,7 +243,7 @@ public class ServerInfoController {
         
         if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
         	rtnMap.put("RESULTCD", "1");
-            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다. 입력값 확인 후 다시 요청하세요.");
             
             rtn = om.writeValueAsString(rtnMap);
             System.out.println(rtnMap);
