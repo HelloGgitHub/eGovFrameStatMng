@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -105,9 +106,29 @@ public class SysLogController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
-
+        //sqlInpt.put("ID", param.getId());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getMethodNm()) || StringUtils.isBlank(param.getMethodNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "메소드명(methodNm)은 필수입력항목입니다. 개발소스상의 영문기능명으로 입력하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());
@@ -121,9 +142,6 @@ public class SysLogController {
         sqlInpt.put("ERROR_CO", param.getErrorCo());
         sqlInpt.put("ERROR_CODE", param.getErrorCode());
 
-
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         int inputCnt = sysLogService.insertSysLog(sqlInpt);
         if (inputCnt > 0) {
@@ -163,8 +181,28 @@ public class SysLogController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
+       // sqlInpt.put("ID", param.getId());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getMethodNm()) || StringUtils.isBlank(param.getMethodNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "메소드명(methodNm)은 필수입력항목입니다. 개발소스상의 영문기능명으로 입력하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
 
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
@@ -178,10 +216,6 @@ public class SysLogController {
         sqlInpt.put("ERROR_SE", param.getErrorSe());
         sqlInpt.put("ERROR_CO", param.getErrorCo());
         sqlInpt.put("ERROR_CODE", param.getErrorCode());
-
-
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         int inputCnt = sysLogService.insertSysLog(sqlInpt);
         if (inputCnt > 0) {
@@ -220,8 +254,28 @@ public class SysLogController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
+        //sqlInpt.put("ID", param.getId());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getMethodNm()) || StringUtils.isBlank(param.getMethodNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "메소드명(methodNm)은 필수입력항목입니다. 개발소스상의 영문기능명으로 입력하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
 
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
@@ -235,10 +289,6 @@ public class SysLogController {
         sqlInpt.put("ERROR_SE", param.getErrorSe());
         sqlInpt.put("ERROR_CO", param.getErrorCo());
         sqlInpt.put("ERROR_CODE", param.getErrorCode());
-
-
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         int inputCnt = sysLogService.insertSysLog(sqlInpt);
         if (inputCnt > 0) {
@@ -277,8 +327,28 @@ public class SysLogController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
+        //sqlInpt.put("ID", param.getId());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getMethodNm()) || StringUtils.isBlank(param.getMethodNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "메소드명(methodNm)은 필수입력항목입니다. 개발소스상의 영문기능명으로 입력하세요.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
 
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
@@ -293,9 +363,6 @@ public class SysLogController {
         sqlInpt.put("ERROR_CO", param.getErrorCo());
         sqlInpt.put("ERROR_CODE", param.getErrorCode());
 
-
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         int inputCnt = sysLogService.insertSysLog(sqlInpt);
         if (inputCnt > 0) {

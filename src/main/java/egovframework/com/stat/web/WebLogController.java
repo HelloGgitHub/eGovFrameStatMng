@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -106,18 +107,34 @@ public class WebLogController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
-
+        //sqlInpt.put("ID", param.getId());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getUrl()) || StringUtils.isBlank(param.getUrl()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "URL(url)은 필수입력항목입니다. ");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
         sqlInpt.put("HOSTNAME", param.getHostName());
         sqlInpt.put("OCCRRNC_DE", param.getOccrrncDe());
         sqlInpt.put("RQESTER_ID", param.getRqesterId());
         sqlInpt.put("RQESTER_IP", param.getRqesterIp());
         sqlInpt.put("URL", param.getUrl());
-
-
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         int inputCnt = webLogService.insertWebLog(sqlInpt);
         if (inputCnt > 0) {

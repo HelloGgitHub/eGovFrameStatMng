@@ -74,6 +74,15 @@ public class UserStatController {
             System.out.println(rtnMap);
             return rtn;
         }
+        
+        if( StringUtils.isEmpty(param.getUsrId()) || StringUtils.isBlank(param.getUsrId()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "사용자ID(usrId)는 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
 
         sqlInpt.put("OCCRRNC_DT", param.getOccrrncDt());
         sqlInpt.put("HOSTNAME", param.getHostName());
