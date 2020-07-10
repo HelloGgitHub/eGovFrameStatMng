@@ -84,12 +84,13 @@ public class ResourcesUseController {
      * @author : "egov"
      * @return_type : String
      * @desc : 시스템 별 자원 사용률 조회(일)그래프
-     */
+     
     @ApiOperation(value = "시스템 별 자원 사용률 조회(일)그래프")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/dayList/{hostName}")
+    */
     public String ResourceUseDayHostList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
@@ -164,12 +165,13 @@ public class ResourcesUseController {
      * @author : "egov"
      * @return_type : String
      * @desc : 시스템 별 자원 사용률 조회(월그래프)
-     */
+     
     @ApiOperation(value = "시스템 별 자원 사용률 조회(월)그래프")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/monthList/{hostName}")
+    */
     public String ResourceUseMonthHostList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
@@ -208,6 +210,7 @@ public class ResourcesUseController {
      */
     @ApiOperation(value = "시스템 별 자원 사용률 조회(년)")
     @GetMapping(path = "/yearList")
+    
     public String ResourceUseYearList() throws Exception {
 
         String rtn = "";
@@ -243,12 +246,13 @@ public class ResourcesUseController {
      * @author : "egov"
      * @return_type : String
      * @desc : 시스템 별 자원 사용률 조회(년그래프)
-     */
+     
     @ApiOperation(value = "시스템 별 자원 사용률 조회(년)그래프")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/yearList/{hostName}")
+    */
     public String ResourceUseYearHostList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
