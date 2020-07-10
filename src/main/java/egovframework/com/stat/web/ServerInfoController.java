@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import egovframework.com.cmm.ComUtil;
 import egovframework.com.stat.dao.ServerInfoVo;
 import egovframework.com.stat.service.ServerInfoService;
 import io.swagger.annotations.Api;
@@ -209,10 +211,45 @@ public class ServerInfoController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
-        sqlInpt.put("ID", param.getId());
+        //sqlInpt.put("ID", param.getId());
+        
+        ObjectMapper om = new ObjectMapper();
+        
+        
+        int cnt = ComUtil.getByteLength(param.getServerKnd());
+        if( cnt > 2) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "서버종류는 2Byte입니다. 코드(Ex: A or 1)" );
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        //System.out.println(rtnMap);
+        
+        if( StringUtils.isEmpty(param.getProjectId()) || StringUtils.isBlank(param.getProjectId()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "프로젝트ID는 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
         sqlInpt.put("PROJECT_ID", param.getProjectId());
         sqlInpt.put("HOSTNAME", param.getHostName());
+        
+        if( StringUtils.isEmpty(param.getHostName()) || StringUtils.isBlank(param.getHostName()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "HOSTNAME은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
         sqlInpt.put("SERVER_NM", param.getServerNm());
         sqlInpt.put("SERVER_KND", param.getServerKnd());
 
@@ -234,8 +271,8 @@ public class ServerInfoController {
         lst = serverInfoService.selectServerDetail(sqlInpt);
         int usrCnt = lst.size();
 
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+        
+        
         if(usrCnt == 0) {
             int inputCnt = serverInfoService.insertServerDetailInfo(sqlInpt);
             if (inputCnt > 0) {

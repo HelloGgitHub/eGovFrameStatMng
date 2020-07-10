@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import egovframework.com.stat.service.ResultMngService;
 import egovframework.com.stat.dao.ResultMngVo;
 import io.swagger.annotations.*;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -141,9 +143,29 @@ public class ResultMngController {
 
         //입력값 파라미터 정의
         Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+        ObjectMapper om = new ObjectMapper();
+        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 
         sqlInpt.put("ID", param.getId());
-
+        
+        if( StringUtils.isEmpty(param.getResultIndexNm()) || StringUtils.isBlank(param.getResultIndexNm()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "성과지표명(resultIndexNm)은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
+        if( StringUtils.isEmpty(param.getResultIndexDc()) || StringUtils.isBlank(param.getResultIndexDc()) ) {
+        	rtnMap.put("RESULTCD", "1");
+            rtnMap.put("RESULTMSG", "성과지표설명(getResultIndexDc)은 필수입력항목입니다.");
+            
+            rtn = om.writeValueAsString(rtnMap);
+            System.out.println(rtnMap);
+            return rtn;
+        }
+        
         sqlInpt.put("RESULT_INDEX_NM", param.getResultIndexNm());
         sqlInpt.put("RESULT_INDEX_DC", param.getResultIndexDc());
 
@@ -152,8 +174,7 @@ public class ResultMngController {
         lst = resultMngService.selectResultIndexNm(sqlInpt);
         int tCnt = lst.size();
 
-        ObjectMapper om = new ObjectMapper();
-        Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+       
         if(tCnt == 0) {
             int inputCnt = resultMngService.insertResultIndex(sqlInpt);
             if (inputCnt > 0) {
