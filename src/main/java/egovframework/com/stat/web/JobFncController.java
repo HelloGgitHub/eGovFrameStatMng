@@ -387,12 +387,13 @@ public class JobFncController {
      * @author : "egov"
      * @return_type : String
      * @desc : 기능별 사용량 조회
-     */
+     
     @ApiOperation(value = "기능별 사용량 조회(일)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "hostName", value = "HOSTNAME", required = true, dataType = "string", paramType = "path", defaultValue = "")
     })
     @GetMapping(path = "/jobFncUseDayList/{hostName}")
+    */
     public String SelectJobFncUseDayList(@PathVariable("hostName") String hostName) throws Exception {
 
         String rtn = "";
