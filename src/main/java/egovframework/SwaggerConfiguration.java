@@ -40,7 +40,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo(String title, String version) {
         return new ApiInfo(
                 title,
-                "전자정보 클라우드 개발 환경[공통지원 통계관리] API 테스트",
+                "Base URL + API path 결합이 API서비스 호출 경로입니다. ex) Base URL(localhost:8080)+API path(/api/jobFnc/list)",
                 version,
                 null,
                 null,
