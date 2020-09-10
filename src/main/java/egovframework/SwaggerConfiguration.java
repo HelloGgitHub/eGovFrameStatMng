@@ -22,7 +22,7 @@ public class SwaggerConfiguration {
 	@Bean
     public Docket api() {
 	    version = "V1";
-	    title = "전자정부 클라우드 플랫폼 공통지원 통계관리 API " + version;
+	    title = "전자정부 클라우드 플랫폼 업무시스템 이용통계 API " + version;
 		
         return new Docket(DocumentationType.SWAGGER_2)
         		.useDefaultResponseMessages(false)
